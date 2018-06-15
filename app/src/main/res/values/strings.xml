@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Cleanpro</string>
+
+    <!--Main-->
+    <string name="main_bottom_nav_home">Home</string>
+    <string name="main_bottom_nav_orders">Orders</string>
+    <string name="main_bottom_nav_my">My account</string>
+
+    <!--Home-->
+    <string name="home_laundry">Laundry</string>
+    <string name="home_dryer">Dryer</string>
+    <string name="home_service">Service</string>
+    <string name="home_location">Location</string>
+    <string name="home_price">Price</string>
+    <string name="home_promotion">Promotion</string>
 </resources>

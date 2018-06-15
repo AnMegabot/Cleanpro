@@ -4,8 +4,24 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.SplashTheme">
+        <!--设置window背景为启动页背景，实现秒启动效果-->
+        <item name="android:windowBackground">@drawable/layerlist_splash_bg</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+    </style>
+
+    <style name="Toolbar_TextAppearance_Black">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>
