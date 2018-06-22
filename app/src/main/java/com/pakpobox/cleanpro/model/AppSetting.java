@@ -24,6 +24,8 @@ public class AppSetting {
 
     private GlobalData.Location mLocation = null;
 
+    private boolean hasLogin = false;
+
     /** 秘钥 */
     public static final String RANDOM_STR = "CN#.r$#uJ#~@";
 
@@ -55,6 +57,13 @@ public class AppSetting {
 
     /*==================== 全局保存 ======================*/
 
+    public boolean isHasLogin() {
+        return hasLogin;
+    }
+
+    public void setHasLogin(boolean hasLogin) {
+        this.hasLogin = hasLogin;
+    }
 
     /*==================== 本地存储 ======================*/
 

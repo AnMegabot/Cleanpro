@@ -14,9 +14,9 @@ import butterknife.ButterKnife;
  * Time:14:27
  */
 
-public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
+public abstract class BaseListDataHolder<T> extends RecyclerView.ViewHolder {
 
-    public BaseViewHolder(Context context, ViewGroup parent, @LayoutRes int layoutRes) {
+    public BaseListDataHolder(Context context, ViewGroup parent, @LayoutRes int layoutRes) {
         super(LayoutInflater.from(context).inflate(layoutRes, parent, false));
         ButterKnife.bind(this, itemView);
     }

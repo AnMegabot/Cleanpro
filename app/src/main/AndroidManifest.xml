@@ -13,9 +13,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--相机权限-->
+    <!-- 相机权限 -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
@@ -28,29 +29,28 @@
 
     <application
         android:name=".base.MyApplication"
-        android:largeHeap="true"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
             android:name=".ui.main.StartActivity"
-            android:theme="@style/AppTheme.NoActionBar.SplashTheme"
+            android:configChanges="layoutDirection|locale|screenSize|keyboardHidden|orientation|keyboard"
             android:screenOrientation="portrait"
-            android:configChanges="layoutDirection|locale|screenSize|keyboardHidden|orientation|keyboard">
+            android:theme="@style/AppTheme.NoActionBar.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.login.LoginActivity"></activity>
     </application>
 
 </manifest>

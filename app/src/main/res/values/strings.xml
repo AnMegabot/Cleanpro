@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Cleanpro</string>
+    <string name="app_complete">Complete</string>
+    <string name="tip_no_data">没有数据哦</string>
+    <string name="tip_load_data">数据加载中&#8230;</string>
+    <string name="tip_load_error">加载出错</string>
 
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>
@@ -13,4 +17,27 @@
     <string name="home_location">Location</string>
     <string name="home_price">Price</string>
     <string name="home_promotion">Promotion</string>
+
+    <!--0rders-->
+    <string name="orders">0rders</string>
+
+    <!-- my -->
+    <string name="my_wallet">My Wallet</string>
+    <string name="my_settings">Settings</string>
+
+    <!-- login -->
+    <string name="login_signIn">Sign in</string>
+    <string name="login_register">注册</string>
+    <string name="login_mobile_hint">Mobile No.</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_forgetPassword">Forget password?</string>
+    <string name="login_getCode">Get code</string>
+    <string name="login_verifycation">Verifycation</string>
+    <string name="login_next">Next step</string>
+    <string name="login_change_psw_tips">Please set your login password</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

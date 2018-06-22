@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
+public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseListDataHolder<T>> {
     protected List<T> mItemList = new ArrayList<>();
 
     @Override
-    public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
+    public void onBindViewHolder(BaseListDataHolder<T> holder, int position) {
         if (position < mItemList.size()) {
             holder.bindTo(mItemList.get(position));//防止 loadingViewHolder 进行 bindTo
         }

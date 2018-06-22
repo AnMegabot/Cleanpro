@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.timmy.tdialog.TDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -20,7 +23,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Time:11:21
  */
 
-public class BaseFragment extends SupportFragment {
+public abstract class BaseFragment extends SupportFragment {
     private TDialog mLoadingDialog;
     private TDialog mMsgDialog;
     private Toast mToast;
@@ -36,10 +39,22 @@ public class BaseFragment extends SupportFragment {
 
     }
 
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = null;
+        int layoutId = getLayoutId();
+        if (layoutId != 0) {
+            view = inflater.inflate(getLayoutId(), container, false);
+            ButterKnife.bind(this, view);
+            initViews(view);
+        }
+        return view;
     }
+
+    protected abstract void initViews(View view);
+
+    protected abstract int getLayoutId();
 
     @Override
     public void onDestroy() {

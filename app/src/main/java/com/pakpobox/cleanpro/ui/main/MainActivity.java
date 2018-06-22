@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragmentActivity;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
+import com.pakpobox.cleanpro.ui.my.MyFragment;
+import com.pakpobox.cleanpro.ui.order.OrdersFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -37,8 +39,8 @@ public class MainActivity extends BaseFragmentActivity {
         SupportFragment homeFragment = findFragment(HomeFragment.class);
         if (homeFragment == null) {
             mFragments[0] = HomeFragment.newInstance();
-            mFragments[1] = HomeFragment.newInstance();
-            mFragments[2] = HomeFragment.newInstance();
+            mFragments[1] = OrdersFragment.newInstance();
+            mFragments[2] = MyFragment.newInstance();
 
             loadMultipleRootFragment(R.id.main_container, 0, mFragments);
         } else {
@@ -46,9 +48,11 @@ public class MainActivity extends BaseFragmentActivity {
 
             // 这里我们需要拿到mFragments的引用
             mFragments[0] = homeFragment;
-            mFragments[1] = homeFragment;
-            mFragments[2] = homeFragment;
+            mFragments[1] = findFragment(OrdersFragment.class);
+            mFragments[2] = findFragment(MyFragment.class);
         }
+
+        initView();
     }
 
     private void initView() {
