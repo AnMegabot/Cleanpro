@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--密码输入控件-->
+    <declare-styleable name="PswInputView">
+        <attr name="count" format="integer"/>
+        <attr name="border_color" format="color"/>
+        <attr name="dot_color" format="color"/>
+    </declare-styleable>
+</resources>

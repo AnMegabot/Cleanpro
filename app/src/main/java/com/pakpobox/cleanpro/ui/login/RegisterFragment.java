@@ -65,7 +65,7 @@ public class RegisterFragment extends BaseFragment {
             case R.id.forget_psw_verifycation_btn:
                 break;
             case R.id.forget_psw_next_btn:
-                start(ChangePSWFragment.newInstance());
+                start(SetPSWFragment.newInstance());
                 break;
         }
     }

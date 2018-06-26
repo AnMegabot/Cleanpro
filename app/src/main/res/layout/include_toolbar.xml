@@ -19,7 +19,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/app_toolbar_title_textsize"
         tools:text="标题" />
 
 </android.support.v7.widget.Toolbar>

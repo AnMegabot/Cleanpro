@@ -124,7 +124,7 @@
         android:background="@drawable/selector_app_blue_btn"
         android:foreground="?attr/selectableItemBackground"
         android:enabled="true"
-        android:text="@string/login_next"
+        android:text="@string/login_next_step"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"

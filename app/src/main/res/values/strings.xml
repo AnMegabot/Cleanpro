@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Cleanpro</string>
     <string name="app_complete">Complete</string>
+    <string name="app_success">Success!</string>
+    <string name="app_press_again_exit">Press again to exit</string>
     <string name="tip_no_data">没有数据哦</string>
     <string name="tip_load_data">数据加载中&#8230;</string>
     <string name="tip_load_error">加载出错</string>
@@ -27,14 +29,38 @@
 
     <!-- login -->
     <string name="login_signIn">Sign in</string>
+    <string name="login_signUn">Sign un</string>
     <string name="login_register">注册</string>
     <string name="login_mobile_hint">Mobile No.</string>
     <string name="login_password_hint">Password</string>
     <string name="login_forgetPassword">Forget password?</string>
     <string name="login_getCode">Get code</string>
     <string name="login_verifycation">Verifycation</string>
-    <string name="login_next">Next step</string>
+    <string name="login_next_step">Next step</string>
+    <string name="login_next">Next</string>
     <string name="login_change_psw_tips">Please set your login password</string>
+    <string name="login_set_password_title">Set login password</string>
+    <string name="login_set_password">Login password</string>
+    <string name="login_set_password_enter">Enter again</string>
+    <string name="login_set_password_hint">At least 6 numbers</string>
+    <string name="login_set_payment_password_title">Set payment password</string>
+    <string name="login_set_payment_password">Payment password</string>
+    <string name="login_set_payment_password_enter">Enter again</string>
+
+    <!-- booking -->
+    <string name="booking_choose_temperature">Choose water temperature</string>
+    <string name="booking_choose_time">Choose time</string>
+    <string name="booking_cold">Cold</string>
+    <string name="booking_warm">Warm</string>
+    <string name="booking_hot">Hot</string>
+    <string name="booking_payment_unit">RM</string>
+    <string name="booking_time_unit">MIN</string>
+    <string name="booking_machine_no">Machine No. :</string>
+    <string name="booking_temperature">Temperature :</string>
+    <string name="booking_price">Price :</string>
+    <string name="booking_pay">Pay</string>
+    <string name="booking_pay_tips">Please enter payment password</string>
+    <string name="booking_success_tips">Please click start on the machine!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

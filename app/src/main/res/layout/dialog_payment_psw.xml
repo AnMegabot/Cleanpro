@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dialog_payment_psw_close_btn"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="right"
+            app:srcCompat="@mipmap/icon_close_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/textColorPrimaryDark"
+            android:textSize="15sp"
+            android:text="@string/booking_pay_tips"/>
+
+        <com.tuo.customview.VerificationCodeView
+            android:id="@+id/dialog_payment_psw_et"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:layout_centerHorizontal="true"
+            app:icv_et_bg_focus="@drawable/shape_icv_psw_et_bg_focus"
+            app:icv_et_bg_normal="@drawable/shape_icv_psw_et_bg_normal"
+            app:icv_et_divider_drawable="@drawable/shape_set_psw_divider"
+            app:icv_et_number="6"
+            app:icv_et_pwd="true"
+            app:icv_et_pwd_radius="5dp"
+            app:icv_et_text_color="@color/colorPrimary"
+            app:icv_et_text_size="1sp"
+            app:icv_et_width="40dp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

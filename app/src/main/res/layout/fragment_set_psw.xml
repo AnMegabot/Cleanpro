@@ -1,13 +1,250 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context="com.pakpobox.cleanpro.ui.login.SetPSWFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/set_psw_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-</FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorLine_1"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:padding="@dimen/app_pading_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/login_set_password_title"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/login_set_password"
+                        android:textColor="@color/textColorSetPassworTitle"
+                        android:textSize="13sp"/>
+
+                    <EditText
+                        android:id="@+id/set_psw_login_psw_et"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/login_set_password_hint"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/textColorPrimaryDark"
+                        android:textColorHint="@color/textColorEditHint"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorLine_1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16sp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/login_set_password_enter"
+                        android:textColor="@color/textColorSetPassworTitle"
+                        android:textSize="13sp"/>
+
+                    <EditText
+                        android:id="@+id/set_psw_enter_login_psw_et"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/login_set_password_hint"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/textColorPrimaryDark"
+                        android:textColorHint="@color/textColorEditHint"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/windowBackground"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:padding="@dimen/app_pading_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/login_set_payment_password_title"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/login_set_payment_password"
+                        android:textColor="@color/textColorSetPassworTitle"
+                        android:textSize="13sp"/>
+
+                    <com.tuo.customview.VerificationCodeView
+                        android:id="@+id/set_psw_payment_psw_et"
+                        android:layout_width="200dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        app:icv_et_bg_focus="@drawable/shape_icv_psw_et_bg_focus"
+                        app:icv_et_bg_normal="@drawable/shape_icv_psw_et_bg_normal"
+                        app:icv_et_divider_drawable="@drawable/shape_set_psw_divider"
+                        app:icv_et_number="6"
+                        app:icv_et_pwd="true"
+                        app:icv_et_pwd_radius="5dp"
+                        app:icv_et_text_color="@color/colorPrimary"
+                        app:icv_et_text_size="1sp"
+                        app:icv_et_width="32dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorLine_1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16sp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/login_set_payment_password_enter"
+                        android:textColor="@color/textColorSetPassworTitle"
+                        android:textSize="13sp"/>
+
+                    <com.tuo.customview.VerificationCodeView
+                        android:id="@+id/set_psw_enter_payment_psw_et"
+                        android:layout_width="200dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        app:icv_et_bg_focus="@drawable/shape_icv_psw_et_bg_focus"
+                        app:icv_et_bg_normal="@drawable/shape_icv_psw_et_bg_normal"
+                        app:icv_et_divider_drawable="@drawable/shape_set_psw_divider"
+                        app:icv_et_number="6"
+                        app:icv_et_pwd="true"
+                        app:icv_et_pwd_radius="5dp"
+                        app:icv_et_text_color="@color/textColorPrimaryDark"
+                        app:icv_et_text_size="1sp"
+                        app:icv_et_width="32dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLine_1"/>
+
+                <Button
+                    android:id="@+id/set_psw_sign_up_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/selector_app_blue_btn"
+                    android:enabled="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/login_signUn"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="@string/login_set_password_hint"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textColorHint="@color/textColorEditHint"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
