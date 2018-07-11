@@ -1,0 +1,161 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.pakpobox.cleanpro.ui.wallet.CreditCardRcFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/wallet_amount"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarLayout
+        android:id="@+id/credit_card_rc_tabbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:itemText="@string/wallet_amount_10"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintEnd_toStartOf="@+id/credit_card_rc_tabbar_item_20"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg" />
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:itemText="@string/wallet_amount_20"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_10"
+            app:layout_constraintEnd_toStartOf="@+id/credit_card_rc_tabbar_item_30"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/credit_card_rc_tabbar_item_10"
+            app:layout_constraintTop_toTopOf="@+id/credit_card_rc_tabbar_item_10"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg" />
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_30"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:itemText="@string/wallet_amount_30"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/credit_card_rc_tabbar_item_20"
+            app:layout_constraintTop_toTopOf="@+id/credit_card_rc_tabbar_item_10"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg" />
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="0dp"
+            app:itemText="@string/wallet_amount_50"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/credit_card_rc_tabbar_item_100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/credit_card_rc_tabbar_item_10"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg" />
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_100"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:itemText="@string/wallet_amount_100"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_50"
+            app:layout_constraintEnd_toStartOf="@+id/credit_card_rc_tabbar_item_200"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/credit_card_rc_tabbar_item_50"
+            app:layout_constraintTop_toTopOf="@+id/credit_card_rc_tabbar_item_50"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg" />
+
+        <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
+            android:id="@+id/credit_card_rc_tabbar_item_200"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:itemText="@string/wallet_amount_200"
+            app:itemTextSize="@dimen/app_tabbar_item_textsize"
+            app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/credit_card_rc_tabbar_item_100"
+            app:layout_constraintTop_toTopOf="@+id/credit_card_rc_tabbar_item_50"
+            app:textColorNormal="@color/textColorPrimaryDark"
+            app:textColorSelected="@android:color/white"
+            app:textNormalBg="@drawable/shape_rc_baritem_normal_bg"
+            app:textSelectedBg="@drawable/shape_rc_baritem_select_bg"
+            android:visibility="invisible"/>
+
+    </com.pakpobox.cleanpro.ui.widget.tabbar.TabBarLayout>
+
+    <Button
+        android:id="@+id/credit_card_rc_pay_btn"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="@dimen/app_pading_horizontal"
+        android:layout_marginStart="@dimen/app_pading_horizontal"
+        android:background="@drawable/selector_app_blue_btn"
+        android:enabled="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/booking_pay"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

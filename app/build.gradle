@@ -7,7 +7,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0.0_dev"
+        versionName "1.0.4_dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -89,4 +89,6 @@ dependencies {
     implementation 'com.jacktuotuo.customview:verificationcodeview:1.0.3'
     /*扫码框架*/
     implementation project(':zxinglib')
+    /*ViewPager动画*/
+    implementation 'com.zhy:magic-viewpager:1.0.1'
 }

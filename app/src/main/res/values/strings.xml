@@ -22,6 +22,13 @@
 
     <!--0rders-->
     <string name="orders">0rders</string>
+    <string name="orders_no">Order No. :</string>
+    <string name="orders_Location">Location :</string>
+    <string name="orders_MachineNo">Machine No. :</string>
+    <string name="orders_Temperature">Temperature :</string>
+    <string name="orders_Time">Time :</string>
+    <string name="orders_Price">Price :</string>
+    <string name="orders_unpaid_scan_tips">Please scan the QR code  on the machine</string>
 
     <!-- my -->
     <string name="my_wallet">My Wallet</string>
@@ -61,6 +68,31 @@
     <string name="booking_pay">Pay</string>
     <string name="booking_pay_tips">Please enter payment password</string>
     <string name="booking_success_tips">Please click start on the machine!</string>
+
+    <!-- Wallet -->
+    <string name="wallet_my">My Wallet</string>
+    <string name="wallet_details">Details</string>
+    <string name="wallet_balance">Account balance</string>
+    <string name="wallet_rc_creditcard">Recharge by credit card</string>
+    <string name="wallet_rc_scan">Scan to recharge</string>
+    <string name="wallet_amount">Amount</string>
+    <string name="wallet_recharge">Recharge</string>
+    <string name="wallet_amount_10">RM10</string>
+    <string name="wallet_amount_20">RM20</string>
+    <string name="wallet_amount_30">RM30</string>
+    <string name="wallet_amount_50">RM50</string>
+    <string name="wallet_amount_100">RM100</string>
+    <string name="wallet_amount_200">RM200</string>
+    <string name="wallet_scan_rc_tips">Please show this QR code to the staff</string>
+
+    <!-- Setting -->
+    <string name="setting">Setting</string>
+    <string name="setting_modify_pay_psw">Modify payment password</string>
+    <string name="setting_forget_pay_psw">Forget payment password</string>
+    <string name="setting_logout">Log out</string>
+    <string name="setting_enter_payment_psw">Enter your payment password\nto verify your identity</string>
+    <string name="setting_new_psw">Please set a new payment password</string>
+    <string name="setting_comfirm_new_psw">Please enter again to confirm</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

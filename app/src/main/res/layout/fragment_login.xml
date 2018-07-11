@@ -36,6 +36,7 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/login_scrollview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -45,7 +46,6 @@
         app:layout_constraintTop_toBottomOf="@+id/login_toolbar">
 
         <LinearLayout
-            android:id="@+id/login_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

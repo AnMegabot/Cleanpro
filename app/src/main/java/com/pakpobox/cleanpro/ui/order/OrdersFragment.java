@@ -12,6 +12,10 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.ui.main.MainFragment;
+import com.pakpobox.cleanpro.ui.order.detail.OrderDetailFragment;
+import com.pakpobox.cleanpro.ui.order.unpaid.UnpaidScanFragment;
+import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -67,7 +71,12 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
         return new OrderListAdapter(new OnOrderItemClickListener() {
             @Override
             public void onItemClick(Order order) {
-
+                if (getParentFragment() instanceof MainFragment) {
+                    if (order.getPaymentStatus().equals("PAID"))
+                        ((MainFragment) getParentFragment()).start(OrderDetailFragment.newInstance());
+                    else
+                        ((MainFragment) getParentFragment()).start(UnpaidScanFragment.newInstance());
+                }
             }
         });
     }

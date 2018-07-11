@@ -22,4 +22,19 @@
         android:textSize="@dimen/app_toolbar_title_textsize"
         tools:text="标题" />
 
+    <TextView
+        android:id="@+id/toolbar_action_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:clickable="true"
+        android:text="@string/login_register"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
 </android.support.v7.widget.Toolbar>

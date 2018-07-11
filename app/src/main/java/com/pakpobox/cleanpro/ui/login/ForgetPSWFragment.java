@@ -2,13 +2,17 @@ package com.pakpobox.cleanpro.ui.login;
 
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -20,18 +24,20 @@ import butterknife.Unbinder;
  */
 public class ForgetPSWFragment extends BaseFragment {
 
-
-    @BindView(R.id.forget_psw_toolbar)
+    @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.forget_psw_mobile_et)
+    @BindView(R.id.register_mobile_et)
     EditText mMobileEt;
-    @BindView(R.id.forget_psw_verifycation_et)
+    @BindView(R.id.register_verifycation_et)
     EditText mVerifycationEt;
-    @BindView(R.id.forget_psw_verifycation_btn)
+    @BindView(R.id.register_verifycation_btn)
     Button mVerifycationBtn;
-    @BindView(R.id.forget_psw_next_btn)
+    @BindView(R.id.register_next_btn)
     Button mNextBtn;
-    Unbinder unbinder;
+    @BindView(R.id.register_content_llt)
+    ScrollView mContentLlt;
+
+    private KeyBoardHelper keyBoardHelper;
 
     public static ForgetPSWFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,18 +60,27 @@ public class ForgetPSWFragment extends BaseFragment {
                 pop();
             }
         });
+
+        keyBoardHelper = new KeyBoardHelper(getActivity());
+        keyBoardHelper.setKeyboardListener(mContentLlt, null);
     }
 
-    @OnClick({R.id.forget_psw_country_code_btn, R.id.forget_psw_verifycation_btn, R.id.forget_psw_next_btn})
+    @OnClick({R.id.register_country_code_btn, R.id.register_verifycation_btn, R.id.register_next_btn})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.forget_psw_country_code_btn:
+            case R.id.register_country_code_btn:
                 break;
-            case R.id.forget_psw_verifycation_btn:
+            case R.id.register_verifycation_btn:
                 break;
-            case R.id.forget_psw_next_btn:
+            case R.id.register_next_btn:
                 start(ChangePSWFragment.newInstance());
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        keyBoardHelper.removeKeyboardListener();
     }
 }

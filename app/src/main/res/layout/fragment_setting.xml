@@ -1,0 +1,122 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.pakpobox.cleanpro.ui.wallet.WalletFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/line_1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/windowBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/setting_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_1">
+
+        <LinearLayout
+            android:id="@+id/setting_modify_pay_psw_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="@string/setting_modify_pay_psw"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/app_pading_horizontal"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_lcome" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/app_pading_horizontal"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/setting_forget_pay_psw_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="@string/setting_forget_pay_psw"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/app_pading_horizontal"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_lcome" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/app_pading_horizontal"
+            android:background="@color/colorLine" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/setting_logout_btn"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="@dimen/app_pading_horizontal"
+        android:layout_marginStart="@dimen/app_pading_horizontal"
+        android:background="@drawable/selector_app_blue_btn"
+        android:enabled="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/setting_logout"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

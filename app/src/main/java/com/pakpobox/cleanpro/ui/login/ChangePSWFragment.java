@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -31,7 +34,9 @@ public class ChangePSWFragment extends BaseFragment {
     EditText mPswEt;
     @BindView(R.id.change_psw_complete_btn)
     Button mCompleteBtn;
-    Unbinder unbinder;
+    @BindView(R.id.change_psw_scrollview)
+    ScrollView mContentLlt;
+    private KeyBoardHelper keyBoardHelper;
 
     public static ChangePSWFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,9 +59,18 @@ public class ChangePSWFragment extends BaseFragment {
                 pop();
             }
         });
+
+        keyBoardHelper = new KeyBoardHelper(getActivity());
+        keyBoardHelper.setKeyboardListener(mContentLlt, null);
     }
 
     @OnClick(R.id.change_psw_complete_btn)
     public void onClick() {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        keyBoardHelper.removeKeyboardListener();
     }
 }

@@ -1,14 +1,11 @@
 package com.pakpobox.cleanpro.base;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.EditText;
 
-import com.pakpobox.cleanpro.utils.SoftInputUtil;
+import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.language.LanguageUtil;
 import com.pakpobox.cleanpro.utils.language.MyContextWrapper;
 
@@ -24,28 +21,19 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 
 public class BaseFragmentActivity extends SupportActivity {
+    private KeyBoardHelper keyBoardHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        keyBoardHelper = new KeyBoardHelper(this);
     }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹球或者实体案件会移动焦点）
-            View v = getCurrentFocus();
-            if (null != v && (v instanceof EditText)) {
-                View mRootView = v.getRootView();
-                mRootView.setClickable(true);
-                mRootView.setFocusable(true);
-                mRootView.setFocusableInTouchMode(true);
-                mRootView.requestFocusFromTouch();
-            }
-
-            SoftInputUtil.hideSoftInput(this,v, ev);
-        }
+        //设置点击非EditText区域时隐藏软键盘
+        keyBoardHelper.hideKeyboardByTouchOutsize(ev, true);
         return super.dispatchTouchEvent(ev);
     }
 

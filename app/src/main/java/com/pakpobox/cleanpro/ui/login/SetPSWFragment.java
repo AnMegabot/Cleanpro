@@ -2,22 +2,19 @@ package com.pakpobox.cleanpro.ui.login;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.ui.widget.PswInputView;
+import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.tuo.customview.VerificationCodeView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 设置密码
@@ -34,6 +31,10 @@ public class SetPSWFragment extends BaseFragment {
     VerificationCodeView mPaymentPswEt;
     @BindView(R.id.set_psw_enter_payment_psw_et)
     VerificationCodeView mEnterPaymentPswEt;
+    @BindView(R.id.set_psw_llt)
+    LinearLayout mRootLayout;
+
+    private KeyBoardHelper keyBoardHelper;
 
     public static SetPSWFragment newInstance() {
         Bundle args = new Bundle();
@@ -56,6 +57,14 @@ public class SetPSWFragment extends BaseFragment {
                 pop();
             }
         });
+
+        keyBoardHelper = new KeyBoardHelper(getActivity());
+        keyBoardHelper.setKeyboardListener(mRootLayout, null);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        keyBoardHelper.removeKeyboardListener();
+    }
 }

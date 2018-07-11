@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.bean.CreateOrderRequest;
+import com.pakpobox.cleanpro.model.net.NetDataModel;
+import com.pakpobox.cleanpro.model.net.OnDataCallback;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -22,6 +25,11 @@ import com.timmy.tdialog.base.BindViewHolder;
 import com.timmy.tdialog.listener.OnBindViewListener;
 import com.timmy.tdialog.listener.OnViewClickListener;
 import com.tuo.customview.VerificationCodeView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,7 +111,42 @@ public class CreateOrderFragment extends BaseFragment {
                             public void inputComplete() {
                                 if (pswView.getInputContent().length() >= 6) {
                                     closeView.callOnClick();
-                                    start(BookSuccessFragment.newInstance(mType));
+
+                                    CreateOrderRequest createOrderRequest = new CreateOrderRequest();
+                                    JSONObject goodsObj = new JSONObject();
+                                    switch (mType) {
+                                        case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+                                            createOrderRequest.setOrder_type("LAUNDRY");
+                                            try {
+                                                goodsObj.put("temperature", "Warm");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
+                                        case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+                                            createOrderRequest.setOrder_type("DRYER");
+                                            try {
+                                                goodsObj.put("time", "30m");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
+                                    }
+                                    createOrderRequest.setMachine_no("P2018070401");
+                                    createOrderRequest.setClient_type("ANDROID");
+                                    createOrderRequest.setTotal_amount(3);
+                                    createOrderRequest.setGoods_info(goodsObj.toString());
+                                    NetDataModel.getInstance().createOrder(createOrderRequest, new OnDataCallback() {
+                                        @Override
+                                        public void onError(int responseCode, String errMsg) {
+
+                                        }
+
+                                        @Override
+                                        public void onData(int statusCode, String msg, Object data, List datas) {
+                                            start(BookSuccessFragment.newInstance(mType));
+                                        }
+                                    });
                                 }
                             }
 

@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/set_psw_llt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -25,6 +26,7 @@
         android:background="@color/colorLine_1"/>
 
     <ScrollView
+        android:id="@+id/set_psw_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -215,36 +217,24 @@
                     android:layout_height="1dp"
                     android:background="@color/colorLine_1"/>
 
-                <Button
-                    android:id="@+id/set_psw_sign_up_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/selector_app_blue_btn"
-                    android:enabled="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="@string/login_signUn"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:hint="@string/login_set_password_hint"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:textColor="@color/textColorPrimaryDark"
-                    android:textColorHint="@color/textColorEditHint"
-                    android:textSize="16sp"/>
-
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/set_psw_sign_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/selector_app_blue_btn"
+        android:enabled="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/login_signUn"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
 
 </LinearLayout>

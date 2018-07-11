@@ -1,0 +1,53 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/set_payment_psw_tips_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="@string/setting_enter_payment_psw"
+        android:textColor="@color/textColorPrimaryDark"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.tuo.customview.VerificationCodeView
+        android:id="@+id/set_payment_psw_view"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        app:icv_et_bg_focus="@drawable/shape_icv_psw_et_bg_focus"
+        app:icv_et_bg_normal="@drawable/shape_icv_psw_et_bg_normal"
+        app:icv_et_divider_drawable="@drawable/shape_set_psw_divider"
+        app:icv_et_number="6"
+        app:icv_et_pwd="true"
+        app:icv_et_pwd_radius="5dp"
+        app:icv_et_text_color="@color/colorPrimary"
+        app:icv_et_text_size="1sp"
+        app:icv_et_width="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_payment_psw_tips_tv" />
+
+</android.support.constraint.ConstraintLayout>

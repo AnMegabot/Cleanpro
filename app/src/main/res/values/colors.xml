@@ -14,8 +14,9 @@
     <color name="boolbarBackgroundBlack">#222222</color>
     <color name="colorLine">#E6E6E6</color>
     <color name="colorLine_1">#E1E1E1</color>
+    <color name="colorLine_list">#DDDDDD</color>
 
-    <color name="orderPaidTextColor">#1CC23B</color>
+    <color name="orderPaidTextColor">#1cc23b</color>
     <color name="orderUnpaidTextColor">#E02872</color>
     <color name="textColorSetPassworTitle">#666666</color>
     <color name="colorTemperatureSelected">#EE5475</color>

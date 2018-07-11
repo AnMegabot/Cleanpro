@@ -49,7 +49,6 @@
                 android:id="@+id/home_banner"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@mipmap/hp_banner"
                 app:image_scale_type="fit_xy"
                 app:layout_constraintDimensionRatio="h,375:161"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -254,10 +253,23 @@
                 android:id="@+id/home_comment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:background="@mipmap/hp_img"
+                android:clipChildren="false"
+                android:layout_centerInParent="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
+                <com.pakpobox.cleanpro.ui.widget.viewpager.LoopViewPager
+                    android:id="@+id/comment_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="42dp"
+                    android:layout_marginRight="42dp"
+                    android:clipChildren="false"
+                    android:layout_gravity="center"/>
 
             </RelativeLayout>
 
