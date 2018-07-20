@@ -1,53 +1,50 @@
-package com.pakpobox.cleanpro.ui.login;
+package com.pakpobox.cleanpro.ui.logon;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.tuo.customview.VerificationCodeView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
- * 修改登录密码
+ * 设置密码
  */
-public class ChangePSWFragment extends BaseFragment {
+public class SetPSWFragment extends BaseFragment {
 
-
-    @BindView(R.id.change_psw_toolbar)
+    @BindView(R.id.set_psw_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.change_psw_et)
-    EditText mPswEt;
-    @BindView(R.id.change_psw_complete_btn)
-    Button mCompleteBtn;
-    @BindView(R.id.change_psw_scrollview)
-    ScrollView mContentLlt;
+    @BindView(R.id.set_psw_login_psw_et)
+    EditText mLoginPswEt;
+    @BindView(R.id.set_psw_enter_login_psw_et)
+    EditText mEnterLoginPswEt;
+    @BindView(R.id.set_psw_payment_psw_et)
+    VerificationCodeView mPaymentPswEt;
+    @BindView(R.id.set_psw_enter_payment_psw_et)
+    VerificationCodeView mEnterPaymentPswEt;
+    @BindView(R.id.set_psw_llt)
+    LinearLayout mRootLayout;
+
     private KeyBoardHelper keyBoardHelper;
 
-    public static ChangePSWFragment newInstance() {
+    public static SetPSWFragment newInstance() {
         Bundle args = new Bundle();
-        ChangePSWFragment fragment = new ChangePSWFragment();
+        SetPSWFragment fragment = new SetPSWFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_change_psw;
+        return R.layout.fragment_set_psw;
     }
 
     @Override
@@ -61,11 +58,7 @@ public class ChangePSWFragment extends BaseFragment {
         });
 
         keyBoardHelper = new KeyBoardHelper(getActivity());
-        keyBoardHelper.setKeyboardListener(mContentLlt, null);
-    }
-
-    @OnClick(R.id.change_psw_complete_btn)
-    public void onClick() {
+        keyBoardHelper.setKeyboardListener(mRootLayout, null);
     }
 
     @Override

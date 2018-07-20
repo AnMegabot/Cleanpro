@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.login;
+package com.pakpobox.cleanpro.ui.logon.login;
 
 
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.ScrollView;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.model.AppSetting;
+import com.pakpobox.cleanpro.ui.logon.ForgetPSWFragment;
+import com.pakpobox.cleanpro.ui.logon.RegisterFragment;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 

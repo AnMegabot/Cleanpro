@@ -4,26 +4,20 @@ package com.pakpobox.cleanpro.ui.my;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.model.AppSetting;
-import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
-import com.pakpobox.cleanpro.ui.login.LoginActivity;
+import com.pakpobox.cleanpro.ui.logon.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
-import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 我的

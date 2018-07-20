@@ -2,19 +2,14 @@ package com.pakpobox.cleanpro.ui.setting.forgetpsw;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.ui.login.RegisterFragment;
-import com.pakpobox.cleanpro.ui.login.SetPSWFragment;
 import com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 

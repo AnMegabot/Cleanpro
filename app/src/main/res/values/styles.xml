@@ -33,4 +33,12 @@
         <item name="android:maxHeight">20dp</item>
     </style>
 
+    <style name="AppButtonBlue" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_app_blue_btn</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

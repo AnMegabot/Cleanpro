@@ -76,14 +76,11 @@
 
     <Button
         android:id="@+id/forget_payment_psw_verifycation_btn"
+        style="@style/AppButtonBlue"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:background="@drawable/selector_app_blue_btn"
         android:enabled="true"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/login_getCode"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/forget_payment_psw_verifycation_et"
         app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_1"
@@ -101,16 +98,12 @@
 
     <Button
         android:id="@+id/forget_payment_psw_next_btn"
+        style="@style/AppButtonBlue"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="80dp"
-        android:background="@drawable/selector_app_blue_btn"
         android:enabled="true"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/login_next_step"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_2"
         app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_line_2"
         app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_line_2" />

@@ -1,15 +1,11 @@
-package com.pakpobox.cleanpro.ui.login;
+package com.pakpobox.cleanpro.ui.logon;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragmentActivity;
+import com.pakpobox.cleanpro.ui.logon.login.LoginFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LoginActivity extends BaseFragmentActivity {
 

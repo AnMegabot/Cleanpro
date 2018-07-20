@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.login.ForgetPSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.logon.ForgetPSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/register_toolbar"
@@ -108,14 +108,11 @@
 
             <Button
                 android:id="@+id/register_verifycation_btn"
+                style="@style/AppButtonBlue"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:background="@drawable/selector_app_blue_btn"
                 android:enabled="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/login_getCode"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/register_verifycation_et"
                 app:layout_constraintEnd_toEndOf="@+id/register_line_1"
@@ -133,16 +130,12 @@
 
             <Button
                 android:id="@+id/register_next_btn"
+                style="@style/AppButtonBlue"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/selector_app_blue_btn"
                 android:enabled="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:text="@string/login_next_step"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/register_line_2"
                 app:layout_constraintStart_toStartOf="@+id/register_line_2"
                 app:layout_constraintTop_toBottomOf="@+id/register_line_2" />

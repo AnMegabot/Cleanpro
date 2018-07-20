@@ -1,16 +1,11 @@
-package com.pakpobox.cleanpro.ui.login;
+package com.pakpobox.cleanpro.ui.logon;
 
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
@@ -20,12 +15,11 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
- * 注册
+ * 忘记登录密码
  */
-public class RegisterFragment extends BaseFragment {
+public class ForgetPSWFragment extends BaseFragment {
 
     @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
@@ -42,9 +36,9 @@ public class RegisterFragment extends BaseFragment {
 
     private KeyBoardHelper keyBoardHelper;
 
-    public static RegisterFragment newInstance() {
+    public static ForgetPSWFragment newInstance() {
         Bundle args = new Bundle();
-        RegisterFragment fragment = new RegisterFragment();
+        ForgetPSWFragment fragment = new ForgetPSWFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,7 +70,7 @@ public class RegisterFragment extends BaseFragment {
             case R.id.register_verifycation_btn:
                 break;
             case R.id.register_next_btn:
-                start(SetPSWFragment.newInstance());
+                start(ChangePSWFragment.newInstance());
                 break;
         }
     }

@@ -1,6 +1,16 @@
 package com.pakpobox.cleanpro.model.net;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.pakpobox.cleanpro.base.MyApplication;
+import com.pakpobox.cleanpro.bean.BaseBean;
+import com.pakpobox.cleanpro.bean.CreateOrderRequest;
+import com.pakpobox.cleanpro.bean.ResponseDataBean;
+import com.pakpobox.cleanpro.model.net.callback.INetCallback;
+import com.pakpobox.cleanpro.model.net.ssl.SSLUtil;
 import com.pakpobox.logger.Logger;
 
 import java.io.ByteArrayOutputStream;
@@ -32,10 +42,6 @@ import okhttp3.Response;
 
 public class HttpManager {
 	private final String TAG = getClass().getSimpleName();
-	public static final int ERR_TYPE_DATA_FORMATE = -3;//数据格式错误
-	public static final int ERR_TYPE_EMPTY = -2;//数据空错误
-	public static final int ERR_TYPE_CONNECT = -1;//连接错误
-	public static final int ERR_TYPE_IO = 0;//io流错误
 	public static final int CONNECT_TIMEOUT_DEF = 30 * 1000;
 	public static final int READ_TIMEOUT_DEF = 30 * 1000;
 	public static final int WRITE_TIMEOUT_DEF = 30 * 1000;
@@ -46,10 +52,6 @@ public class HttpManager {
 	private ConcurrentHashMap<String, Call> mHttpCallMap = null;
 
 	public HttpManager(){
-		this(CONNECT_TIMEOUT_DEF, READ_TIMEOUT_DEF, WRITE_TIMEOUT_DEF);
-	}
-
-	public HttpManager(int connectTimeout, int readTimeout, int writeTimeout) {
 		SSLSocketFactory sslSocketFactory = null;
 		try {
 //			sslSocketFactory = SSLUtil.getSSLSocketFactory(MyApplication.getContext().getAssets().open("sslChina.cer"), MyApplication.getContext().getAssets().open("sslSingapore.cer"));
@@ -63,13 +65,13 @@ public class HttpManager {
 		mClient = new OkHttpClient.Builder()
 //				.sslSocketFactory(MySSLSocketFactory.getSocketFactory(context))
 //				.sslSocketFactory(sslSocketFactory)
-				.connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
-				.readTimeout(readTimeout, TimeUnit.MILLISECONDS)
-				.writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+				.connectTimeout(CONNECT_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
+				.readTimeout(READ_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
+				.writeTimeout(WRITE_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
 				.build();
 
 		mHttpCallMap = new ConcurrentHashMap<>();
-		Logger.t(TAG).i("Init HttpClient: ConnectTimeout:" + connectTimeout + "; ReadTimeout:" + readTimeout + "; WriteTimeout" + writeTimeout);
+		Logger.t(TAG).i("Init HttpClient: ConnectTimeout:" + CONNECT_TIMEOUT_DEF + "; ReadTimeout:" + READ_TIMEOUT_DEF + "; WriteTimeout" + WRITE_TIMEOUT_DEF);
 	}
 
 	/**
@@ -107,12 +109,12 @@ public class HttpManager {
 	 *
 	 * @param url 网络地址
 	 * @param headerValues 表头信息
-	 * @param responseCallback 回调
+	 * @param netCallback 回调
 	 */
-	public void asyncGetDataByHttp(String url, HashMap<String, String> headerValues, HttpResponseCallback responseCallback) {
+	public void asyncGetDataByHttp(String url, HashMap<String, String> headerValues, INetCallback netCallback) {
 		Logger.t(TAG).i("HTTP-request(GET): " + url + "\nHeader:" + headerValues);
 		Call call = newHttpCall(url, headerValues, null);
-		call.enqueue(new ResponseCallback(url, responseCallback));
+		call.enqueue(new ResponseCallback(url, netCallback));
 	}
 
 	/**
@@ -135,13 +137,13 @@ public class HttpManager {
 	 * 异步上传文字数据
 	 * @param url 网络地址
 	 * @param postString 要上传的字符串
-	 * @param responseCallback 回调
+	 * @param netCallback 回调
 	 */
-	public void asyncPostStringByHttp(String url, HashMap<String, String> headerValues, String postString, HttpResponseCallback responseCallback) {
+	public void asyncPostStringByHttp(String url, HashMap<String, String> headerValues, String postString, INetCallback netCallback) {
 		Logger.t(TAG).i("HTTP-request(POST): " + url + "\nupload-data: " + postString + "\nHeader:" + headerValues);
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postString);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, responseCallback));
+		call.enqueue(new ResponseCallback(url, netCallback));
 	}
 
 	/**
@@ -149,12 +151,12 @@ public class HttpManager {
 	 *
 	 * @param url 网络地址
 	 * @param file 文件对象
-	 * @param responseCallback 回调
+	 * @param netCallback 回调
 	 */
-	public void asyncPostFileByHttp(String url, HashMap<String, String> headerValues, File file, HttpResponseCallback responseCallback) {
+	public void asyncPostFileByHttp(String url, HashMap<String, String> headerValues, File file, INetCallback netCallback) {
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, responseCallback));
+		call.enqueue(new ResponseCallback(url, netCallback));
 	}
 
 	/**
@@ -162,12 +164,12 @@ public class HttpManager {
 	 *
 	 * @param url 网络地址
 	 * @param data 要上传的数据
-	 * @param responseCallback 回调
+	 * @param netCallback 回调
 	 */
-	public void asyncPostBytesByHttp(String url, HashMap<String, String> headerValues, byte[] data, HttpResponseCallback responseCallback) {
+	public void asyncPostBytesByHttp(String url, HashMap<String, String> headerValues, byte[] data, INetCallback netCallback) {
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), data);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, responseCallback));
+		call.enqueue(new ResponseCallback(url, netCallback));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,12 +241,12 @@ public class HttpManager {
 	}
 
 	// HTTP异步请求响应回调
-	private class ResponseCallback implements Callback {
+	private class ResponseCallback<T> implements Callback {
 		private String url = null;
-		private HttpResponseCallback callback;
+		private INetCallback callback;
 
 
-		public ResponseCallback(String url, HttpResponseCallback callback) {
+		public ResponseCallback(String url, INetCallback callback) {
 			this.url = url;
 			this.callback = callback;
 		}
@@ -254,7 +256,7 @@ public class HttpManager {
 			mHttpCallMap.remove(url);
 			Logger.t(TAG).e(e, "Request fail: url:" + url + "\n");
 			if(null != callback)
-				callback.requestFail(url, ERR_TYPE_CONNECT, "Request Error：" + e.getMessage());
+				callback.onError(e);
 		}
 
 		@Override
@@ -273,24 +275,34 @@ public class HttpManager {
 					}
 
 					byte[] data = mByteBuffer.toByteArray();
-					Logger.t(TAG).i("Response success: " + url + "\ndata:" + new String(data));
 
-					if(null != callback) {
-						if (null == data || data.length <= 0) {
-							callback.requestFail(url, ERR_TYPE_EMPTY, "Response data is empty");
-						}else{
-							callback.requestSuccess(url, data);
+					String responseStr = new String(data);
+					if (TextUtils.isEmpty(responseStr)) {
+						return;
+					}
+
+					Logger.t(TAG).i("Response success: " + url + "\ndata:" + responseStr);
+
+					try {
+						BaseBean<T> dataBean = new Gson().fromJson(responseStr,  new TypeToken<BaseBean<T>>() {}.getType());
+						if (null != callback) {
+							callback.onNext(dataBean);
+							callback.onComplete();
 						}
+					} catch (JsonSyntaxException e) {
+						Logger.e(e, "Parse response data from %s", url);
+						if(null != callback)
+							callback.onError(e);
 					}
 				} else {
 					Logger.t(TAG).e("Response error: " + url + "\ncode：" + response.code() + "\nmessage：" + response.message());
 					if(null != callback)
-						callback.requestFail(url, response.code(), response.message());
+						callback.onError(null);
 				}
 			} catch (IOException e) {
 				Logger.t(TAG).e(e, "HTTP response IO error");
 				if(null != callback)
-					callback.requestFail(url, ERR_TYPE_IO, e.getMessage());
+					callback.onError(e);
 			} finally {
 				mHttpCallMap.remove(url);
 				if (null != inputStream) {
@@ -312,27 +324,5 @@ public class HttpManager {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Http响应回调接口
-	 */
-	public interface HttpResponseCallback {
-		/**
-		 * HTTP Request成功回调
-		 *
-		 * @param url HTTP URL
-		 * @param data 响应数据
-		 */
-		void requestSuccess(String url, byte[] data);
-
-		/**
-		 * HTTP Request失败回调
-		 *
-		 * @param url HTTP URL
-		 * @param httpCode HTTP响应码
-		 * @param errMsg 错误信息
-		 */
-		void requestFail(String url, int httpCode, String errMsg);
 	}
 }

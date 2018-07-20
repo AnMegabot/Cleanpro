@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.login.ChangePSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.logon.ChangePSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/change_psw_toolbar"
@@ -76,17 +76,13 @@
 
             <Button
                 android:id="@+id/change_psw_complete_btn"
+                style="@style/AppButtonBlue"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/selector_app_blue_btn"
                 android:enabled="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:text="@string/app_complete"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:text="@string/app_complete"/>
 
         </LinearLayout>
 

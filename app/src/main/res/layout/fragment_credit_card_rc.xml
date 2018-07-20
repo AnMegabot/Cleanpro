@@ -142,18 +142,14 @@
 
     <Button
         android:id="@+id/credit_card_rc_pay_btn"
+        style="@style/AppButtonBlue"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="@dimen/app_pading_horizontal"
         android:layout_marginStart="@dimen/app_pading_horizontal"
-        android:background="@drawable/selector_app_blue_btn"
         android:enabled="true"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/booking_pay"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -21,29 +21,22 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.model.AppSetting;
 import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
-import com.pakpobox.cleanpro.ui.login.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
 import com.pakpobox.cleanpro.ui.widget.tabbar.UIUtils;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
-import com.youth.banner.loader.ImageLoaderInterface;
 import com.zhy.magicviewpager.transformer.AlphaPageTransformer;
-import com.zhy.magicviewpager.transformer.RotateDownPageTransformer;
 import com.zhy.magicviewpager.transformer.ScaleInTransformer;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 首页

@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.model.net;
+package com.pakpobox.cleanpro.model.net.ssl;
 
 import android.content.Context;
 

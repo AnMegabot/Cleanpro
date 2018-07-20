@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.pakpobox.cleanpro.ui.login.SetPSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.logon.SetPSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/set_psw_toolbar"
@@ -225,16 +225,12 @@
 
     <Button
         android:id="@+id/set_psw_sign_up_btn"
+        style="@style/AppButtonBlue"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/selector_app_blue_btn"
         android:enabled="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/login_signUn"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:text="@string/login_signUn"/>
 
 </LinearLayout>

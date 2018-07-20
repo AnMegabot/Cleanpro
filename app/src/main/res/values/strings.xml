@@ -7,6 +7,12 @@
     <string name="tip_load_data">数据加载中&#8230;</string>
     <string name="tip_load_error">加载出错</string>
 
+    <string name="app_connect_error">网络异常</string>
+    <string name="app_connect_timeout">连接超时</string>
+    <string name="app_request_timeout">请求超时</string>
+    <string name="app_parse_error">解析错误</string>
+    <string name="app_unknown_error">未知错误</string>
+
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>
     <string name="main_bottom_nav_orders">Orders</string>

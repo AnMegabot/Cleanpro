@@ -1,13 +1,11 @@
-package com.pakpobox.cleanpro.ui.login;
+package com.pakpobox.cleanpro.ui.logon;
 
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
@@ -17,38 +15,33 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
- * 忘记登录密码
+ * 修改登录密码
  */
-public class ForgetPSWFragment extends BaseFragment {
+public class ChangePSWFragment extends BaseFragment {
 
-    @BindView(R.id.register_toolbar)
+
+    @BindView(R.id.change_psw_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.register_mobile_et)
-    EditText mMobileEt;
-    @BindView(R.id.register_verifycation_et)
-    EditText mVerifycationEt;
-    @BindView(R.id.register_verifycation_btn)
-    Button mVerifycationBtn;
-    @BindView(R.id.register_next_btn)
-    Button mNextBtn;
-    @BindView(R.id.register_content_llt)
+    @BindView(R.id.change_psw_et)
+    EditText mPswEt;
+    @BindView(R.id.change_psw_complete_btn)
+    Button mCompleteBtn;
+    @BindView(R.id.change_psw_scrollview)
     ScrollView mContentLlt;
-
     private KeyBoardHelper keyBoardHelper;
 
-    public static ForgetPSWFragment newInstance() {
+    public static ChangePSWFragment newInstance() {
         Bundle args = new Bundle();
-        ForgetPSWFragment fragment = new ForgetPSWFragment();
+        ChangePSWFragment fragment = new ChangePSWFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_register;
+        return R.layout.fragment_change_psw;
     }
 
     @Override
@@ -65,17 +58,8 @@ public class ForgetPSWFragment extends BaseFragment {
         keyBoardHelper.setKeyboardListener(mContentLlt, null);
     }
 
-    @OnClick({R.id.register_country_code_btn, R.id.register_verifycation_btn, R.id.register_next_btn})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.register_country_code_btn:
-                break;
-            case R.id.register_verifycation_btn:
-                break;
-            case R.id.register_next_btn:
-                start(ChangePSWFragment.newInstance());
-                break;
-        }
+    @OnClick(R.id.change_psw_complete_btn)
+    public void onClick() {
     }
 
     @Override

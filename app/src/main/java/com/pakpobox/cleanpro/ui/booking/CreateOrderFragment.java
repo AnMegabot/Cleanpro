@@ -3,23 +3,17 @@ package com.pakpobox.cleanpro.ui.booking;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.model.net.NetDataModel;
-import com.pakpobox.cleanpro.model.net.OnDataCallback;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
-import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
-import com.pakpobox.cleanpro.utils.ToastUtils;
 import com.timmy.tdialog.TDialog;
 import com.timmy.tdialog.base.BindViewHolder;
 import com.timmy.tdialog.listener.OnBindViewListener;
@@ -32,9 +26,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 创建订单
