@@ -12,6 +12,7 @@
     <string name="app_request_timeout">请求超时</string>
     <string name="app_parse_error">解析错误</string>
     <string name="app_unknown_error">未知错误</string>
+    <string name="app_service_error">服务器异常：</string>
 
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>

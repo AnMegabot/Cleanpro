@@ -3,6 +3,7 @@ package com.pakpobox.cleanpro.model;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.pakpobox.cleanpro.model.net.HttpManager;
 import com.pakpobox.cleanpro.utils.AESUtil;
 import com.pakpobox.cleanpro.utils.SharedPreferenceUtil;
 
@@ -19,6 +20,8 @@ public class AppSetting {
 
     private static final String PREFER_FILE_NAME = "Creanpro_config";
     private SharedPreferenceUtil mAppPreference = null;
+
+    private HttpManager httpManager = null;
 
     private Context mContext = null;
 
@@ -49,6 +52,8 @@ public class AppSetting {
         mContext = context;
         if(null == mAppPreference)
             mAppPreference = new SharedPreferenceUtil(mContext, PREFER_FILE_NAME);
+
+        httpManager = new HttpManager();
     }
 
     //注销登录
@@ -63,6 +68,10 @@ public class AppSetting {
 
     public void setHasLogin(boolean hasLogin) {
         this.hasLogin = hasLogin;
+    }
+
+    public HttpManager getHttpManager() {
+        return httpManager;
     }
 
     /*==================== 本地存储 ======================*/

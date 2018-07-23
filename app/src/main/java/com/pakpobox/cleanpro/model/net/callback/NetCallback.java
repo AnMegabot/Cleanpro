@@ -14,14 +14,14 @@ import java.util.List;
  * Time:16:46
  */
 
-public abstract class NetCallback<T> extends BaseNetCallback<T> {
+public abstract class NetCallback<T, V> extends BaseNetCallback<BaseBean<V>> {
 
     public NetCallback(Activity activity, BasePresenter mPresenter) {
         super(activity, mPresenter);
     }
 
     @Override
-    public void onNext(final BaseBean<T> data) {
+    public void onResolve(final BaseBean<V> data) {
         if (null != activity && !activity.isFinishing()) {
             activity.runOnUiThread(new Runnable() {
                 @Override
@@ -36,7 +36,6 @@ public abstract class NetCallback<T> extends BaseNetCallback<T> {
                 }
             });
         }
-
     }
 
     /**
@@ -44,7 +43,7 @@ public abstract class NetCallback<T> extends BaseNetCallback<T> {
      * @param data 数据实体
      * @param datas 数据实体列表
      */
-    protected abstract void onSuccess(T data, List<T> datas);
+    protected abstract void onSuccess(V data, List<V> datas);
 
     /**
      * 请求数据失败

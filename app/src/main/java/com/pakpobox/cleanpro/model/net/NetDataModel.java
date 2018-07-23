@@ -9,6 +9,7 @@ import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.bean.ResponseDataBean;
 import com.pakpobox.cleanpro.model.GlobalData;
+import com.pakpobox.cleanpro.model.net.callback.INetCallback;
 import com.pakpobox.logger.Logger;
 
 import java.lang.reflect.Type;
@@ -50,10 +51,12 @@ public class NetDataModel {
      * @param body 参数
      * @param callback
      */
-    public void createOrder(CreateOrderRequest body, OnDataCallback callback) {
+    public void createOrder(CreateOrderRequest body, INetCallback callback) {
         String url = getApiUrl(GlobalData.API_CTEATE_ORDER);
         String requestStr = new Gson().toJson(body);
-        httpManager.asyncPostStringByHttp(url, null, requestStr, new MyHttpResponseCallback(callback, new TypeToken<ResponseDataBean<CreateOrderRequest>>() {}.getType()));
+//        httpManager.asyncPostStringByHttp(url, null, requestStr, new MyHttpResponseCallback(callback, new TypeToken<ResponseDataBean<CreateOrderRequest>>() {}.getType()));
+//        httpManager.asyncPostStringByHttp(url, null, requestStr, callback);
+        httpManager.asyncGetDataByHttp(url, null, callback);
     }
 
     //获取接口url
@@ -74,41 +77,4 @@ public class NetDataModel {
 //        return headerMap;
 //    }
 
-    /**
-     * 回调数据统一处理内部类
-     */
-    private class MyHttpResponseCallback implements HttpManager.HttpResponseCallback {
-        private OnDataCallback callback;
-        private Type type;
-
-        MyHttpResponseCallback(OnDataCallback callback, Type type) {
-            this.callback = callback;
-            this.type = type;
-        }
-
-        @Override
-        public void requestSuccess(String url, byte[] data) {
-            if (null == callback)
-                return;
-            String responseStr = new String(data);
-            if (TextUtils.isEmpty(responseStr)) {
-                callback.onError(HttpManager.ERR_TYPE_EMPTY, "Empty data");
-                return;
-            }
-
-            try {
-                ResponseDataBean dataBean = new Gson().fromJson(responseStr, type);
-                callback.onData(dataBean.getStatusCode(), dataBean.getMessage(), dataBean.getResult(), dataBean.getResultList());
-            } catch (JsonSyntaxException e) {
-                Logger.e(e, "Parse response data from %s", url);
-                callback.onError(HttpManager.ERR_TYPE_DATA_FORMATE, "Error data");
-            }
-        }
-
-        @Override
-        public void requestFail(String url, int httpCode, String errMsg) {
-            if (null != callback)
-                callback.onError(httpCode, errMsg);
-        }
-    }
 }

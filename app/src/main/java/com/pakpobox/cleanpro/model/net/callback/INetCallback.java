@@ -1,5 +1,7 @@
 package com.pakpobox.cleanpro.model.net.callback;
 
+import java.lang.reflect.Type;
+
 /**
  * 请求数据回调接口
  * User:Sean.Wei
@@ -7,7 +9,8 @@ package com.pakpobox.cleanpro.model.net.callback;
  * Time:15:25
  */
 
-public interface INetCallback<T> {
+public interface INetCallback {
+
     /**
      * 开始
      */
@@ -17,7 +20,7 @@ public interface INetCallback<T> {
      * 响应数据回调
      * @param data 数据
      */
-    void onNext(T data);
+    void onNext(byte[] data);
 
     /**
      * 错误
@@ -26,7 +29,14 @@ public interface INetCallback<T> {
     void onError(Throwable throwable);
 
     /**
+     * 响应错误
+     * @param errorCode 响应错误码
+     */
+    void onResponseError(int errorCode);
+
+    /**
      * 完成
      */
     void onComplete();
+
 }

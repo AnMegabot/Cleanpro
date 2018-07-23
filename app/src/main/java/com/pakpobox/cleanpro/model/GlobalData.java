@@ -10,11 +10,13 @@ public class GlobalData {
     //api域名地址
 //    public static final String API_HOST_CHINA = "https://sumscn.storhub.com";//服务器正式
 //    public static final String API_HOST_CHINA = "https://storhubapish.pakpobox.com";//服务器UAT
-    public static final String API_HOST = "http://192.168.0.240:8098";//服务器测试
+//    public static final String API_HOST = "http://192.168.0.240:8098";//服务器测试
+    public static final String API_HOST = "https://storhubapi.pakpobox.com";//中国服务器UAT
     //api路径
     public static final String API_PATH = "/ebox/api/v1/";
     //api接口
-    public static final String API_CTEATE_ORDER = "cleanpro/order/create"; //创建订单
+//    public static final String API_CTEATE_ORDER = "cleanpro/order/create"; //创建订单
+    public static final String API_CTEATE_ORDER = "setting/getSettings.ashx"; //创建订单
 
     /**
      * 地区枚举类

@@ -1,14 +1,6 @@
 package com.pakpobox.cleanpro.model.net;
 
-import android.text.TextUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import com.pakpobox.cleanpro.base.MyApplication;
-import com.pakpobox.cleanpro.bean.BaseBean;
-import com.pakpobox.cleanpro.bean.CreateOrderRequest;
-import com.pakpobox.cleanpro.bean.ResponseDataBean;
 import com.pakpobox.cleanpro.model.net.callback.INetCallback;
 import com.pakpobox.cleanpro.model.net.ssl.SSLUtil;
 import com.pakpobox.logger.Logger;
@@ -54,7 +46,6 @@ public class HttpManager {
 	public HttpManager(){
 		SSLSocketFactory sslSocketFactory = null;
 		try {
-//			sslSocketFactory = SSLUtil.getSSLSocketFactory(MyApplication.getContext().getAssets().open("sslChina.cer"), MyApplication.getContext().getAssets().open("sslSingapore.cer"));
 			sslSocketFactory = SSLUtil.getSSLSocketFactory(MyApplication.getContext().getAssets().open("sslChina.cer")
 					, MyApplication.getContext().getAssets().open("sslSingapore.cer")
 					, MyApplication.getContext().getAssets().open("storhub_com.crt")
@@ -64,7 +55,7 @@ public class HttpManager {
 		}
 		mClient = new OkHttpClient.Builder()
 //				.sslSocketFactory(MySSLSocketFactory.getSocketFactory(context))
-//				.sslSocketFactory(sslSocketFactory)
+				.sslSocketFactory(sslSocketFactory)
 				.connectTimeout(CONNECT_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
 				.readTimeout(READ_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
 				.writeTimeout(WRITE_TIMEOUT_DEF, TimeUnit.MILLISECONDS)
@@ -241,7 +232,7 @@ public class HttpManager {
 	}
 
 	// HTTP异步请求响应回调
-	private class ResponseCallback<T> implements Callback {
+	private class ResponseCallback implements Callback {
 		private String url = null;
 		private INetCallback callback;
 
@@ -275,29 +266,16 @@ public class HttpManager {
 					}
 
 					byte[] data = mByteBuffer.toByteArray();
-
 					String responseStr = new String(data);
-					if (TextUtils.isEmpty(responseStr)) {
-						return;
-					}
-
 					Logger.t(TAG).i("Response success: " + url + "\ndata:" + responseStr);
-
-					try {
-						BaseBean<T> dataBean = new Gson().fromJson(responseStr,  new TypeToken<BaseBean<T>>() {}.getType());
-						if (null != callback) {
-							callback.onNext(dataBean);
-							callback.onComplete();
-						}
-					} catch (JsonSyntaxException e) {
-						Logger.e(e, "Parse response data from %s", url);
-						if(null != callback)
-							callback.onError(e);
+					if (null != callback) {
+						callback.onNext(data);
+						callback.onComplete();
 					}
 				} else {
 					Logger.t(TAG).e("Response error: " + url + "\ncode：" + response.code() + "\nmessage：" + response.message());
 					if(null != callback)
-						callback.onError(null);
+						callback.onResponseError(response.code());
 				}
 			} catch (IOException e) {
 				Logger.t(TAG).e(e, "HTTP response IO error");

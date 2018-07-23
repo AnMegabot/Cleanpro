@@ -79,17 +79,18 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_laundry_btn:
+                ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(LAUNDRY_SCAN_REQUEST_CODE));
 //                if (!AppSetting.getInstance().isHasLogin()) {
 //                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
 //                    setClickingView(view);
 //                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            requestPermissions(cameraPerms, RC_CAMERA_PERM);
-                            return;
-                        }
-                    }
-                    startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), LAUNDRY_SCAN_REQUEST_CODE);
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                            requestPermissions(cameraPerms, RC_CAMERA_PERM);
+//                            return;
+//                        }
+//                    }
+//                    startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), LAUNDRY_SCAN_REQUEST_CODE);
 //                }
                 break;
             case R.id.home_dryer_btn:
