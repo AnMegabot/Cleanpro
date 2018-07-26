@@ -4,18 +4,13 @@ package com.pakpobox.cleanpro.ui.booking;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.bean.BaseBean;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
-import com.pakpobox.cleanpro.bean.Setting;
-import com.pakpobox.cleanpro.model.net.NetDataModel;
-import com.pakpobox.cleanpro.model.net.callback.NetCallback;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.timmy.tdialog.TDialog;
@@ -26,8 +21,6 @@ import com.tuo.customview.VerificationCodeView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -132,28 +125,28 @@ public class CreateOrderFragment extends BaseFragment {
                                     createOrderRequest.setClient_type("ANDROID");
                                     createOrderRequest.setTotal_amount(3);
                                     createOrderRequest.setGoods_info(goodsObj.toString());
-                                    NetDataModel.getInstance().createOrder(createOrderRequest, new NetCallback<BaseBean<Setting>, Setting>(getActivity(), null) {
-                                        @Override
-                                        protected void onSuccess(Setting data, List<Setting> datas) {
-                                            Log.d("Cleanpro", data.toString());
-                                        }
-
-                                        @Override
-                                        protected void onFail(int errorCode, String errorMsg) {
-                                            Log.d("Cleanpro", errorCode + errorMsg);
-                                        }
-                                    });
-//                                    NetDataModel.getInstance().createOrder(createOrderRequest, new OnDataCallback() {
+//                                    NetDataModel.getInstance().createOrder(createOrderRequest, new NetCallback<BaseBean<Setting>, Setting>(getActivity(), null) {
 //                                        @Override
-//                                        public void onError(int responseCode, String errMsg) {
-//
+//                                        protected void onSuccess(Setting data, List<Setting> datas) {
+//                                            Log.d("Cleanpro", data.toString());
 //                                        }
 //
 //                                        @Override
-//                                        public void onData(int statusCode, String msg, Object data, List datas) {
-//                                            start(BookSuccessFragment.newInstance(mType));
+//                                        protected void onFail(int errorCode, String errorMsg) {
+//                                            Log.d("Cleanpro", errorCode + errorMsg);
 //                                        }
 //                                    });
+////                                    NetDataModel.getInstance().createOrder(createOrderRequest, new OnDataCallback() {
+////                                        @Override
+////                                        public void onError(int responseCode, String errMsg) {
+////
+////                                        }
+////
+////                                        @Override
+////                                        public void onData(int statusCode, String msg, Object data, List datas) {
+////                                            start(BookSuccessFragment.newInstance(mType));
+////                                        }
+////                                    });
                                 }
                             }
 

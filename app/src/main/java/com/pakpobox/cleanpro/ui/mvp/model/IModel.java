@@ -1,6 +1,9 @@
 package com.pakpobox.cleanpro.ui.mvp.model;
 
-import com.pakpobox.cleanpro.model.net.HttpManager;
+import com.pakpobox.cleanpro.net.HttpManager;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+
+import java.util.HashMap;
 
 /**
  * User:Sean.Wei
@@ -14,4 +17,36 @@ public interface IModel {
      * @return
      */
     HttpManager getHttpRequest();
+
+    /**
+     * post请求
+     * @param url
+     * @param postStr
+     * @param callback
+     */
+    void postRequest(String url, String postStr, BaseNetCallback callback);
+
+    /**
+     * post请求
+     * @param url
+     * @param headerValues
+     * @param postStr
+     * @param callback
+     */
+    void postRequest(String url, HashMap<String, String> headerValues, String postStr, BaseNetCallback callback);
+
+    /**
+     * Get请求
+     * @param url
+     * @param callback
+     */
+    void getRequest(String url, BaseNetCallback callback);
+
+    /**
+     * Get请求
+     * @param url
+     * @param headerValues
+     * @param callback
+     */
+    void getRequest(String url, HashMap<String, String> headerValues, BaseNetCallback callback);
 }

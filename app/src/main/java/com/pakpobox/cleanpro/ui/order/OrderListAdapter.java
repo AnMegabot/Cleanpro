@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.MyApplication;
+import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.base.list.ListDataHolder;
 import com.pakpobox.cleanpro.bean.Order;

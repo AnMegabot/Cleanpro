@@ -21,7 +21,6 @@ public interface IView {
 
     /**
      * 失败
-     *
      * @param msg
      */
     void showFail(String msg);
@@ -35,5 +34,11 @@ public interface IView {
      * 没有数据
      */
     void showEmpty();//没有数据
+
+    /**
+     * 处理错误
+     * @param errorCode 错误代码
+     */
+    void dealError(int errorCode);
 
 }

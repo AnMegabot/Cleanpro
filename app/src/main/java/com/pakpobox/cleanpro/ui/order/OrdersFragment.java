@@ -3,24 +3,19 @@ package com.pakpobox.cleanpro.ui.order;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BaseListFragment;
+import com.pakpobox.cleanpro.base.list.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.order.detail.OrderDetailFragment;
 import com.pakpobox.cleanpro.ui.order.unpaid.UnpaidScanFragment;
-import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 订单列表

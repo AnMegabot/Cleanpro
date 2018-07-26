@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.logon.ForgetPSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.logon.register.ForgetPSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/register_toolbar"
@@ -97,7 +97,7 @@
                 android:background="@null"
                 android:ems="10"
                 android:hint="@string/login_verifycation"
-                android:inputType="textPassword"
+                android:inputType="numberSigned"
                 android:singleLine="true"
                 android:textColor="@color/textColorPrimaryDark"
                 android:textColorHint="@color/textColorEditHint"

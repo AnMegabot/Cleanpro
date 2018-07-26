@@ -21,6 +21,9 @@ public interface IPresenter<V extends IView> {
 
     V getView();
 
+    //添加指定的请求
+    void addDisposable(String disposableUrl);
+
     //取消所有请求
     void removeAllDisposable();
 }

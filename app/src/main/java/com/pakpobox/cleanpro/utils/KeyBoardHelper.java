@@ -130,7 +130,8 @@ public class KeyBoardHelper {
                                 @Override
                                 public void run() {
                                     View v = activity.getCurrentFocus();
-                                    mResizeView.scrollTo(0, v.getTop() + v.getHeight());
+                                    if (null != v)
+                                        mResizeView.scrollTo(0, v.getTop() + v.getHeight());
                                 }
                             },100);
                         }else if (mResizeView instanceof ViewGroup) {
@@ -142,7 +143,8 @@ public class KeyBoardHelper {
                                         @Override
                                         public void run() {
                                             View v = activity.getCurrentFocus();
-                                            view.scrollTo(0, v.getTop() + v.getHeight());
+                                            if (null != v)
+                                                view.scrollTo(0, v.getTop() + v.getHeight());
                                         }
                                     },100);
                                 }

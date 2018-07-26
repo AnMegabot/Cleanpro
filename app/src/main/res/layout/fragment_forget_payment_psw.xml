@@ -15,98 +15,115 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <CheckBox
-        android:id="@+id/forget_payment_psw_country_code_btn"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/forget_paypsw_content_llt"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:button="@android:color/transparent"
-        android:drawableRight="@drawable/selector_country_code_dropdown_icon"
-        android:text="+86"
-        app:layout_constraintBottom_toBottomOf="@+id/forget_payment_psw_mobile_et"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/forget_payment_psw_mobile_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="45dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="@string/login_mobile_hint"
-        android:inputType="number"
-        android:singleLine="true"
-        android:textColor="@color/textColorPrimaryDark"
-        android:textColorHint="@color/textColorEditHint"
-        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/forget_payment_psw_country_code_btn"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <View
-        android:id="@+id/forget_payment_psw_line_1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorLine_1"
-        app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_country_code_btn"
-        app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_mobile_et"
-        app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_mobile_et" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/forget_payment_psw_verifycation_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="@string/login_verifycation"
-        android:inputType="textPassword"
-        android:singleLine="true"
-        android:textColor="@color/textColorPrimaryDark"
-        android:textColorHint="@color/textColorEditHint"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/forget_payment_psw_verifycation_btn"
-        app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_line_1"
-        app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_line_1" />
+            <CheckBox
+                android:id="@+id/forget_payment_psw_country_code_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:button="@android:color/transparent"
+                android:drawableRight="@drawable/selector_country_code_dropdown_icon"
+                android:text="+86"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_payment_psw_mobile_et"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-        android:id="@+id/forget_payment_psw_verifycation_btn"
-        style="@style/AppButtonBlue"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:enabled="true"
-        android:text="@string/login_getCode"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/forget_payment_psw_verifycation_et"
-        app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_1"
-        app:layout_constraintTop_toTopOf="@+id/forget_payment_psw_verifycation_et" />
+            <EditText
+                android:id="@+id/forget_payment_psw_mobile_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/login_mobile_hint"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textColorHint="@color/textColorEditHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/forget_payment_psw_country_code_btn"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/forget_payment_psw_line_2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorLine_1"
-        app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_verifycation_btn"
-        app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_verifycation_et"
-        app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_verifycation_et" />
+            <View
+                android:id="@+id/forget_payment_psw_line_1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorLine_1"
+                app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_country_code_btn"
+                app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_mobile_et"
+                app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_mobile_et" />
 
-    <Button
-        android:id="@+id/forget_payment_psw_next_btn"
-        style="@style/AppButtonBlue"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="80dp"
-        android:enabled="true"
-        android:text="@string/login_next_step"
-        app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_2"
-        app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_line_2"
-        app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_line_2" />
+            <EditText
+                android:id="@+id/forget_payment_psw_verifycation_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/login_verifycation"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textColorHint="@color/textColorEditHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/forget_payment_psw_verifycation_btn"
+                app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_line_1"
+                app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_line_1" />
 
+            <Button
+                android:id="@+id/forget_payment_psw_verifycation_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:enabled="true"
+                android:text="@string/login_getCode"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_payment_psw_verifycation_et"
+                app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_1"
+                app:layout_constraintTop_toTopOf="@+id/forget_payment_psw_verifycation_et" />
+
+            <View
+                android:id="@+id/forget_payment_psw_line_2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorLine_1"
+                app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_verifycation_btn"
+                app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_verifycation_et"
+                app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_verifycation_et" />
+
+            <Button
+                android:id="@+id/forget_payment_psw_next_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="80dp"
+                android:enabled="true"
+                android:text="@string/login_next_step"
+                app:layout_constraintEnd_toEndOf="@+id/forget_payment_psw_line_2"
+                app:layout_constraintStart_toStartOf="@+id/forget_payment_psw_line_2"
+                app:layout_constraintTop_toBottomOf="@+id/forget_payment_psw_line_2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

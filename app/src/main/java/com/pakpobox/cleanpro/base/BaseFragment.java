@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,12 +25,13 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 
 public abstract class BaseFragment extends SupportFragment {
-    private TDialog mLoadingDialog;
-    private TDialog mMsgDialog;
-    private Toast mToast;
+//    private TDialog mLoadingDialog;
+//    private TDialog mMsgDialog;
     private View clickingView;//如果用户尚未登录，则保存需要登录才能下一步的被点击的视图，登录成功后自动调用该视图的点击事件
 
-    private boolean hasPop = false;
+    private ProgressDialog loadingDialog = null;
+
+//    private boolean hasPop = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,10 +73,49 @@ public abstract class BaseFragment extends SupportFragment {
         return false;
     }
 
-    protected void showMsgDialog(final String msg) {
-        if (TextUtils.isEmpty(msg))
-            return;
+    /**
+     * 显示带消息的进度框
+     *
+     * @param title 提示
+     */
+    protected void showLoadingDialog(String title) {
+        createLoadingDialog();
+        loadingDialog.setMessage(title);
+        if (!loadingDialog.isShowing())
+            loadingDialog.show();
+    }
 
+    /**
+     * 显示进度框
+     */
+    protected void showLoadingDialog() {
+        createLoadingDialog();
+        if (!loadingDialog.isShowing())
+            loadingDialog.show();
+    }
+
+    //创建LodingDialog
+    private void createLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new ProgressDialog(getContext());
+            loadingDialog.setCancelable(true);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    /**
+     * 隐藏进度框
+     */
+    protected void hideLoadingDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+
+//    protected void showMsgDialog(final String msg) {
+//        if (TextUtils.isEmpty(msg))
+//            return;
+//
 //        if (mMsgDialog != null) {
 //            mMsgDialog.dismiss();
 //        }
@@ -108,9 +149,9 @@ public abstract class BaseFragment extends SupportFragment {
 //        } catch (IllegalStateException e) {
 //            e.printStackTrace();
 //        }
-    }
+//    }
 
-    protected void showLoadingDialog() {
+//    protected void showLoadingDialog() {
 //        if (mLoadingDialog != null) {
 //            mLoadingDialog.dismiss();
 //        }
@@ -129,58 +170,28 @@ public abstract class BaseFragment extends SupportFragment {
 //        } catch (IllegalStateException e) {
 //            e.printStackTrace();
 //        }
-    }
+//    }
 
-    protected void dimissLoading() {
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
-            mLoadingDialog = null;
-        }
-    }
+//    protected void dimissLoading() {
+//        if (mLoadingDialog != null) {
+//            mLoadingDialog.dismiss();
+//            mLoadingDialog = null;
+//        }
+//    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        dimissLoading();
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        dimissLoading();
+//    }
 
-    @Override
-    public void pop() {
-        if (!hasPop) {
-            super.pop();
-            hasPop = true;
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-    }
-
-    /**
-     * 显示默认时长Toast
-     * @param msg 显示信息
-     */
-    public void showToast(final String msg) {
-        showToast( msg, Toast.LENGTH_SHORT);
-    }
-
-    /**
-     * 显示自定义时长Toast
-     * @param msg 显示信息
-     * @param duration 显示时长
-     */
-    public void showToast(String msg, int duration) {
-        if (TextUtils.isEmpty(msg))
-            return;
-
-        if(null != mToast)
-            mToast.cancel();
-
-        mToast = Toast.makeText(getContext(), msg, duration);
-        mToast.show();
-    }
+//    @Override
+//    public void pop() {
+//        if (!hasPop) {
+//            super.pop();
+//            hasPop = true;
+//        }
+//    }
 
     protected void setClickingView(View view) {
         clickingView = view;

@@ -1,21 +1,26 @@
 package com.pakpobox.cleanpro.ui.logon.login;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.model.AppSetting;
-import com.pakpobox.cleanpro.ui.logon.ForgetPSWFragment;
-import com.pakpobox.cleanpro.ui.logon.RegisterFragment;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.application.AppSetting;
+import com.pakpobox.cleanpro.ui.logon.register.ForgetPSWFragment;
+import com.pakpobox.cleanpro.ui.logon.register.RegisterFragment;
+import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,7 +28,7 @@ import butterknife.OnClick;
 /**
  * 登录
  */
-public class LoginFragment extends BaseFragment {
+public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginContract.ILoginView> implements LoginContract.ILoginView{
 
     @BindView(R.id.login_toolbar)
     Toolbar mToolbar;
@@ -51,6 +56,27 @@ public class LoginFragment extends BaseFragment {
     }
 
     @Override
+    public String getUserName() {
+        return mMobileEt.getText().toString().trim();
+    }
+
+    @Override
+    public String getPassWord() {
+        return mPasswordEt.getText().toString().trim();
+    }
+
+    @Override
+    public void loginSuccess() {
+        ToastUtils.showToast(getContext(), R.string.login_signIn_success_warn);
+        getActivity().finish();
+    }
+
+    @Override
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter(getActivity());
+    }
+
+    @Override
     protected void initViews(View view) {
         StatusBarUtil.setHeight(getContext(), mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -62,6 +88,47 @@ public class LoginFragment extends BaseFragment {
 
         keyBoardHelper = new KeyBoardHelper(getActivity());
         keyBoardHelper.setKeyboardListener(mScrollview, null);
+
+        InputUtils.setEditFilter(mMobileEt, new InputFilter.LengthFilter(11));
+        //填充上次登录账号
+        String lastPhoneNumb = AppSetting.getInstance().getLastPhoneNumb();
+        if (!TextUtils.isEmpty(lastPhoneNumb)) {
+            mMobileEt.setText(lastPhoneNumb);
+            mMobileEt.setSelection(mMobileEt.getText().toString().trim().length());
+        }
+
+        //监听输入框内容变化
+        mMobileEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mSignInBtn.setEnabled(mPresenter.verifyAccount());
+            }
+        });
+
+        mPasswordEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mSignInBtn.setEnabled(mPresenter.verifyAccount());
+            }
+        });
+
+        mSignInBtn.setEnabled(mPresenter.verifyAccount());
     }
 
     @OnClick({R.id.login_register_btn, R.id.login_sign_in_btn, R.id.login_forget_password_btn})
@@ -71,10 +138,7 @@ public class LoginFragment extends BaseFragment {
                 start(RegisterFragment.newInstance());
                 break;
             case R.id.login_sign_in_btn:
-                AppSetting.getInstance().setHasLogin(true);
-                Intent intent = getActivity().getIntent();
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+                mPresenter.login();
                 break;
             case R.id.login_forget_password_btn:
                 start(ForgetPSWFragment.newInstance());

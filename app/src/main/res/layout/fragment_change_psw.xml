@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.logon.ChangePSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.logon.changepsw.ChangePSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/change_psw_toolbar"
@@ -62,7 +62,7 @@
                 android:background="@null"
                 android:ems="10"
                 android:hint="@string/login_password_hint"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/textColorPrimaryDark"
                 android:textColorHint="@color/textColorEditHint"

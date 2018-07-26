@@ -11,6 +11,7 @@ public class Const {
     public static class USERINFO_KEY {
         public static final String USER_INFO = "mUserInfo";  //用户信息
         public static final String IS_LOGIN = "mIsLogin";    //登录状态
+        public static final String LAST_LOGIN_ACCOUNT = "mLastLoginAccount";    //上次登录账号
         public static final String AES = "mAES";//用户信息密钥
     }
 

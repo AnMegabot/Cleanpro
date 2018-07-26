@@ -12,7 +12,8 @@
     <string name="app_request_timeout">请求超时</string>
     <string name="app_parse_error">解析错误</string>
     <string name="app_unknown_error">未知错误</string>
-    <string name="app_service_error">服务器异常：</string>
+    <string name="app_login_invalid_error">登录失效</string>
+    <string name="app_service_error">响应错误：</string>
 
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>
@@ -40,11 +41,19 @@
     <!-- my -->
     <string name="my_wallet">My Wallet</string>
     <string name="my_settings">Settings</string>
+    <string name="my_no_login_tips">Click here to login</string>
 
     <!-- login -->
     <string name="login_signIn">Sign in</string>
-    <string name="login_signUn">Sign un</string>
+    <string name="login_signUp">Sign up</string>
+    <string name="login_signIn_success_warn">Sign in success</string>
+    <string name="login_signUp_success_warn">Sign up success</string>
+    <string name="login_reset_psw_success_warn">Reset password success</string>
+    <string name="login_signIn_fail_warn">Sign in failed</string>
+    <string name="login_signUp_fail_warn">Sign up failed</string>
     <string name="login_register">注册</string>
+    <string name="login_valitecode_time">%ds</string>
+    <string name="login_get_validecode_success">Send success</string>
     <string name="login_mobile_hint">Mobile No.</string>
     <string name="login_password_hint">Password</string>
     <string name="login_forgetPassword">Forget password?</string>
@@ -60,6 +69,8 @@
     <string name="login_set_payment_password_title">Set payment password</string>
     <string name="login_set_payment_password">Payment password</string>
     <string name="login_set_payment_password_enter">Enter again</string>
+    <string name="login_login_psw_match_warn">The two login passwords do not match</string>
+    <string name="login_pay_psw_match_warn">The two payment passwords do not match</string>
 
     <!-- booking -->
     <string name="booking_choose_temperature">Choose water temperature</string>
@@ -100,6 +111,7 @@
     <string name="setting_enter_payment_psw">Enter your payment password\nto verify your identity</string>
     <string name="setting_new_psw">Please set a new payment password</string>
     <string name="setting_comfirm_new_psw">Please enter again to confirm</string>
+    <string name="setting_payment_psw_error">Wrong password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

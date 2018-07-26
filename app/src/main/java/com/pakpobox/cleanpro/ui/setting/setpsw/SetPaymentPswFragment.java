@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
+import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWContract;
+import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWPresenter;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.tuo.customview.VerificationCodeView;
@@ -23,7 +26,7 @@ import butterknife.Unbinder;
 /**
  * 设置支付密码
  */
-public class SetPaymentPswFragment extends BaseFragment {
+public class SetPaymentPswFragment extends BasePresenterFragment<SetPaymentPswPresenter, SetPaymentPswContract.ISetPaymentPswView> implements SetPaymentPswContract.ISetPaymentPswView {
 
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
@@ -35,9 +38,15 @@ public class SetPaymentPswFragment extends BaseFragment {
     VerificationCodeView mPswView;
 
     private int mStep = 1;
-    public static SetPaymentPswFragment newInstance(int step) {
+    private String mOldPassword = null;
+    private String mNewPassword1 = null;
+    private String mToken = null;
+    public static SetPaymentPswFragment newInstance(int step, String oldPassword, String newPassword1, String token) {
         Bundle args = new Bundle();
         args.putInt("step", step);
+        args.putString("oldPassword", oldPassword);
+        args.putString("newPassword1", newPassword1);
+        args.putString("token", token);
         SetPaymentPswFragment fragment = new SetPaymentPswFragment();
         fragment.setArguments(args);
         return fragment;
@@ -49,6 +58,9 @@ public class SetPaymentPswFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             mStep = bundle.getInt("step");
+            mOldPassword = bundle.getString("oldPassword");
+            mNewPassword1 = bundle.getString("newPassword1");
+            mToken = bundle.getString("token");
         }
     }
 
@@ -69,13 +81,13 @@ public class SetPaymentPswFragment extends BaseFragment {
                 if (mPswView.getInputContent().length() >= 6) {
                     switch (mStep) {
                         case 1:
-                            start(SetPaymentPswFragment.newInstance(2));
+                            mPresenter.checkPayPsw();
                             break;
                         case 2:
-                            start(SetPaymentPswFragment.newInstance(3));
+                            start(SetPaymentPswFragment.newInstance(3, getOldPassword(), getNewPassword1(), getToken()));
                             break;
                         case 3:
-                            popTo(SettingFragment.class, false);
+                            mPresenter.resetPayPsw();
                             break;
                     }
                 }
@@ -98,6 +110,8 @@ public class SetPaymentPswFragment extends BaseFragment {
                 mTipsTv.setText(getString(R.string.setting_comfirm_new_psw));
                 break;
         }
+
+        mPswView.getEditText().requestFocus();
     }
 
     @Override
@@ -105,4 +119,62 @@ public class SetPaymentPswFragment extends BaseFragment {
         return R.layout.fragment_set_payment_psw;
     }
 
+    @Override
+    public String getOldPassword() {
+        switch (mStep) {
+            case 1:
+                return mPswView.getInputContent().trim();
+            case 2:
+                return mOldPassword;
+            case 3:
+                return mOldPassword;
+        }
+        return null;
+    }
+
+    @Override
+    public String getNewPassword1() {
+        switch (mStep) {
+            case 1:
+                return mNewPassword1;
+            case 2:
+                return mPswView.getInputContent().trim();
+            case 3:
+                return mNewPassword1;
+        }
+        return null;
+    }
+
+    @Override
+    public String getNewPassword2() {
+        switch (mStep) {
+            case 1:
+                return null;
+            case 2:
+                return null;
+            case 3:
+                return mPswView.getInputContent().trim();
+        }
+        return null;
+    }
+
+    @Override
+    public String getToken() {
+        return mToken;
+    }
+
+    @Override
+    public void checkPayPswSuccess() {
+        start(SetPaymentPswFragment.newInstance(2, getOldPassword(), null, getToken()));
+    }
+
+    @Override
+    public void resetPayPswSuccess(String result) {
+        popTo(SettingFragment.class, false);
+    }
+
+    @Override
+    protected SetPaymentPswPresenter createPresenter() {
+        return new SetPaymentPswPresenter(getActivity());
+    }
 }
