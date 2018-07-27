@@ -2,6 +2,7 @@
     <string name="app_name">Cleanpro</string>
     <string name="app_complete">Complete</string>
     <string name="app_success">Success!</string>
+    <string name="app_coming_soon">Coming soon</string>
     <string name="app_press_again_exit">Press again to exit</string>
     <string name="tip_no_data">没有数据哦</string>
     <string name="tip_load_data">数据加载中&#8230;</string>

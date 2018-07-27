@@ -12,6 +12,8 @@ public class CreateOrderRequest {
     private String client_type;
     private String order_type;
     private String goods_info;
+    private String location;
+    private String client_version;
 
     public String getMachine_no() {
         return machine_no;
@@ -51,5 +53,21 @@ public class CreateOrderRequest {
 
     public void setGoods_info(String goods_info) {
         this.goods_info = goods_info;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getClient_version() {
+        return client_version;
+    }
+
+    public void setClient_version(String client_version) {
+        this.client_version = client_version;
     }
 }

@@ -1,11 +1,13 @@
 package com.pakpobox.cleanpro.ui.wallet.trlist;
 
-import com.pakpobox.cleanpro.bean.TradingRecort;
-import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
+import android.app.Activity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.MyApplication;
+import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.bean.TradingRecort;
+import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 /**
  * User:Sean.Wei
@@ -14,55 +16,29 @@ import java.util.UUID;
  */
 
 public class TRListPresenter extends BasePresenter<TRListContract.ITRListView> implements TRListContract.ITRListPresenter {
-    private TRListContract.ITRListView rcDetailsView;
+    private TRListContract.ITRListModel mModel;
+    private TRListContract.ITRListView mTRListView;
 
-    TRListPresenter() {
+    private Activity activity;
+
+    public TRListPresenter(Activity activity) {
+        this.activity = activity;
+        mModel = new TRListModel();
     }
 
     @Override
     public void getRechargeDetailList() {
-        rcDetailsView = getView();
-        rcDetailsView.showLoading("");
-        List<TradingRecort> datas = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            String type = "Credit card";
-            String amount = "+30";
-            switch (i % 3) {
-                case 0:
-                    type = "Credit card";
-                    amount = "+30";
-                    break;
-                case 1:
-                    type = "Laundry";
-                    amount = "-5";
-                    break;
-                case 2:
-                    type = "Dryer";
-                    amount = "-5";
-                    break;
-                case 3:
-                    type = "Scan";
-                    amount = "+30";
-                    break;
+        mTRListView = getView();
+        NetCallback<PageListDataBean<TradingRecort>> callback = new NetCallback<PageListDataBean<TradingRecort>>(activity, this) {
+            @Override
+            protected void onSuccess(PageListDataBean<TradingRecort> data) {
+                if (null != data)
+                    mTRListView.getSuccess(data);
+                else
+                    mTRListView.showFail(MyApplication.getContext().getString(R.string.app_unknown_error));
             }
-            datas.add(new TradingRecort(UUID.randomUUID().toString(), type, "2018-05-22 12:02", amount));
-        }
-        if (rcDetailsView.getPage() == 0) {
-            rcDetailsView.clearListData();
-        }
-        if (rcDetailsView.getPage() > 10) {
-            rcDetailsView.showNoMore();
-        } else {
-            rcDetailsView.autoLoadMore();
-        }
-        rcDetailsView.setData(datas);
-
-        if (rcDetailsView.getData().size() == 0)
-            rcDetailsView.showEmpty();
-        else
-            rcDetailsView.showContent();
-
-        rcDetailsView.hideLoading();
+        };
+        mModel.getRechargeDetailList(mTRListView.getPage(), 20, callback);
     }
 
 }

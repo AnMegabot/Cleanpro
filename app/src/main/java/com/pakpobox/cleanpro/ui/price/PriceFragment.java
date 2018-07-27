@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.wallet.trlist;
+package com.pakpobox.cleanpro.ui.price;
 
 
 import android.os.Bundle;
@@ -8,29 +8,41 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.base.list.BaseListFragment;
-import com.pakpobox.cleanpro.bean.PageListDataBean;
 import com.pakpobox.cleanpro.bean.TradingRecort;
+import com.pakpobox.cleanpro.bean.Wallet;
+import com.pakpobox.cleanpro.bean.price.Price;
+import com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment;
+import com.pakpobox.cleanpro.ui.wallet.scan.ScanRcFragment;
+import com.pakpobox.cleanpro.ui.wallet.trlist.TRListAdapter;
+import com.pakpobox.cleanpro.ui.wallet.trlist.TRListContract;
+import com.pakpobox.cleanpro.ui.wallet.trlist.TRListFragment;
+import com.pakpobox.cleanpro.ui.wallet.trlist.TRListPresenter;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.SystemUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
- * 充值记录
+ * 我的钱包
  */
-public class TRListFragment extends BaseListFragment<TRListPresenter, TRListContract.ITRListView, TradingRecort> implements TRListContract.ITRListView {
+public class PriceFragment extends BaseListFragment<PricePresenter, PriceContract.IPriceView, Price> implements PriceContract.IPriceView {
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.rc_details_containerLayout)
+    @BindView(R.id.price_containerLayout)
     FrameLayout mContainerLayout;
 
 
-    public static TRListFragment newInstance() {
+    public static PriceFragment newInstance() {
         Bundle args = new Bundle();
-        TRListFragment fragment = new TRListFragment();
+        PriceFragment fragment = new PriceFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -38,7 +50,7 @@ public class TRListFragment extends BaseListFragment<TRListPresenter, TRListCont
     @Override
     protected void initViews(View view) {
         StatusBarUtil.setHeight(getContext(), mToolbar);
-        mTitleTv.setText(getString(R.string.wallet_details));
+        mTitleTv.setText(getString(R.string.home_price));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,23 +63,20 @@ public class TRListFragment extends BaseListFragment<TRListPresenter, TRListCont
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_tr_list;
+        return R.layout.fragment_price;
     }
 
     @Override
-    public void getSuccess(PageListDataBean<TradingRecort> datas) {
+    public void getSuccess(List<Price> datas) {
         if (getPage() == 0) {
             clearListData();
         }
-        setData(datas.getResultList());
-
-        if (getData().size() > 0) {
-            if (datas.isOver()) {
-                showNoMore();
-            } else {
-                autoLoadMore();
-            }
+        if (getPage() > 0 && (null==datas || datas.size()<=0)) {
+            showNoMore();
+        } else {
+            autoLoadMore();
         }
+        setData(datas);
 
         if (getData().size() == 0)
             showEmpty();
@@ -76,25 +85,25 @@ public class TRListFragment extends BaseListFragment<TRListPresenter, TRListCont
     }
 
     @Override
-    protected TRListPresenter createPresenter() {
-        return new TRListPresenter(getActivity());
+    protected PricePresenter createPresenter() {
+        return new PricePresenter(getActivity());
     }
 
     @Override
     protected void loadDatas() {
-        mPresenter.getRechargeDetailList();
+        mPresenter.getPrices();
     }
 
     @Override
     protected boolean isCanLoadMore() {
-        return true;
+        return false;
     }
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new TRListAdapter(new TRListAdapter.OnItemClickListener() {
+        return new PriceAdapter(new PriceAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(TradingRecort order) {
+            public void onItemClick(Price order) {
 
             }
         });

@@ -46,13 +46,12 @@ public class SetPaymentPswModel extends BaseModel implements SetPaymentPswContra
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("token", token);
-            requestObj.put("password", null);
             requestObj.put("payPassword", newPaymentPassword);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.CHANGE_PASSWORD), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.CHANGE_PAY_PASSWORD), requestObj.toString(), callback);
     }
 
 }

@@ -22,7 +22,6 @@ public class ChangePSWModel extends BaseModel implements ChangePSWContract.IChan
         try {
             requestObj.put("token", token);
             requestObj.put("password", newPassword);
-            requestObj.put("payPassword", null);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -46,6 +46,11 @@ public class UrlConstainer {
     public static final String CHANGE_PASSWORD = "member/resetPassword";
 
     /**
+     * 重置支付密码
+     */
+    public static final String CHANGE_PAY_PASSWORD = "member/resetPayPassword";
+
+    /**
      * 校验支付密码
      */
     public static final String CHECK_PAY_PSW = "member/checkPayPassword";
@@ -61,8 +66,23 @@ public class UrlConstainer {
     public static final String WALLET = "member/wallet";
 
     /**
+     * 获取钱包流水
+     */
+    public static final String WALLET_QUERY = "member/walletLog/query?page=%d&maxCount=%d";
+
+    /**
      * 创建订单
      */
     public static final String CTEATE_ORDER = "cleanpro/order/create";
+
+    /**
+     * 订单列表
+     */
+    public static final String ORDER_LIST = "cleanpro/order/query?page=%d&maxCount=%d";
+
+    /**
+     * 价格列表
+     */
+    public static final String PRICE = "goods/member/getWashMachePrice";
 
 }

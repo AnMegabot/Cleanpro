@@ -37,7 +37,12 @@ public abstract class NetCallback<T> extends BaseNetCallback<T> {
     public void onNext(byte[] data) {
         final String responseStr = new String(data);
         if (!TextUtils.isEmpty(responseStr)) {
-            BaseBean baseBean = new Gson().fromJson(responseStr, new TypeToken<BaseBean>() {}.getType());
+            BaseBean baseBean = null;
+            try {
+                baseBean = new Gson().fromJson(responseStr, new TypeToken<BaseBean>() {}.getType());
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            }
             if (null == baseBean || 0 == baseBean.getStatusCode()) {
                 boolean returnJson = false;
                 if (genericityType instanceof Class) {

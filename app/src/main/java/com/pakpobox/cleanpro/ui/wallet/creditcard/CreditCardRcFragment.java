@@ -11,6 +11,7 @@ import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem;
 import com.pakpobox.cleanpro.ui.widget.tabbar.TabBarLayout;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,6 +61,6 @@ public class CreditCardRcFragment extends BaseFragment {
 
     @OnClick(R.id.credit_card_rc_pay_btn)
     public void onClick() {
-        
+        ToastUtils.showToast(getContext(), R.string.app_coming_soon);
     }
 }

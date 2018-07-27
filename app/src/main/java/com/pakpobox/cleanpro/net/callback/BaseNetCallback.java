@@ -124,6 +124,7 @@ public abstract class BaseNetCallback<T> implements INetCallback {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    view.showError();
                     switch (errorCode) {
                         case NetConfig.CONNECT_ERROR:
                             ToastUtils.showToast(context, R.string.app_connect_error);

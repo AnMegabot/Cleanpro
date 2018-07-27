@@ -1,7 +1,16 @@
 package com.pakpobox.cleanpro.ui.order;
 
+import android.app.Activity;
+
+import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.bean.price.Price;
+import com.pakpobox.cleanpro.net.callback.NetCallback;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
+import com.pakpobox.cleanpro.ui.price.PriceContract;
+import com.pakpobox.cleanpro.ui.price.PriceModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,35 +23,29 @@ import java.util.UUID;
  */
 
 public class OrdersPresenter extends BasePresenter<OrdersContract.IOrdersView> implements OrdersContract.IOrdersPresenter {
-    private OrdersContract.IOrdersView ordersView;
+    private OrdersContract.IIOrdersModel mModel;
+    private OrdersContract.IOrdersView mOrdersView;
 
-    OrdersPresenter() {
+    private Activity activity;
+
+    public OrdersPresenter(Activity activity) {
+        this.activity = activity;
+        mModel = new OrdersModel();
     }
 
     @Override
     public void getOrdersList() {
-        ordersView = getView();
-        ordersView.showLoading("");
-        List<Order> orders = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            orders.add(new Order(UUID.randomUUID().toString(), i % 2 == 0 ? "Laundry" : "Dryer", i % 3 == 0 ? "PAID" : "UNPAID", "Order No.D123456789", "5.00"));
-        }
-        if (ordersView.getPage() == 0) {
-            ordersView.clearListData();
-        }
-        if (ordersView.getPage() > 10) {
-            ordersView.showNoMore();
-        } else {
-            ordersView.autoLoadMore();
-        }
-        ordersView.setData(orders);
-
-        if (ordersView.getData().size() == 0)
-            ordersView.showEmpty();
-        else
-            ordersView.showContent();
-
-        ordersView.hideLoading();
+        mOrdersView = getView();
+        NetCallback<PageListDataBean<Order>> callback = new NetCallback<PageListDataBean<Order>>(activity, this) {
+            @Override
+            protected void onSuccess(PageListDataBean<Order> data) {
+                if (null != data)
+                    mOrdersView.getSuccess(data);
+                else
+                    mOrdersView.showFail(MyApplication.getContext().getString(R.string.app_unknown_error));
+            }
+        };
+        mModel.getOrdersList(mOrdersView.getPage(), 20, callback);
     }
 
 }

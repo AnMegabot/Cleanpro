@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.booking;
+package com.pakpobox.cleanpro.ui.booking.create;
 
 
 import android.os.Bundle;
@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
+import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
+import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWContract;
+import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWPresenter;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.timmy.tdialog.TDialog;
 import com.timmy.tdialog.base.BindViewHolder;
@@ -28,8 +33,7 @@ import butterknife.OnClick;
 /**
  * 创建订单
  */
-public class CreateOrderFragment extends BaseFragment {
-
+public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresenter, CreateOrderContract.ICreateOrderView> implements CreateOrderContract.ICreateOrderView {
 
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
@@ -80,6 +84,47 @@ public class CreateOrderFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public CreateOrderRequest getCreateOrderParam() {
+        CreateOrderRequest createOrderRequest = new CreateOrderRequest();
+        JSONObject goodsObj = new JSONObject();
+        switch (mType) {
+            case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+                createOrderRequest.setOrder_type("LAUNDRY");
+                try {
+                    goodsObj.put("temperature", "Warm");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+                createOrderRequest.setOrder_type("DRYER");
+                try {
+                    goodsObj.put("time", "30m");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        createOrderRequest.setMachine_no("P2018070401");
+        createOrderRequest.setClient_type("ANDROID");
+        createOrderRequest.setTotal_amount(3);
+        createOrderRequest.setGoods_info(goodsObj.toString());
+        createOrderRequest.setLocation("Bandar Kinrara");
+        createOrderRequest.setClient_version("1.0.4_dev");
+        return createOrderRequest;
+    }
+
+    @Override
+    public void getSuccess(Order data) {
+        start(BookSuccessFragment.newInstance(mType));
+    }
+
+    @Override
+    protected CreateOrderPresenter createPresenter() {
+        return new CreateOrderPresenter(getActivity());
+    }
+
     @OnClick(R.id.create_order_pay_btn)
     public void onClick() {
 
@@ -100,53 +145,7 @@ public class CreateOrderFragment extends BaseFragment {
                             public void inputComplete() {
                                 if (pswView.getInputContent().length() >= 6) {
                                     closeView.callOnClick();
-
-                                    CreateOrderRequest createOrderRequest = new CreateOrderRequest();
-                                    JSONObject goodsObj = new JSONObject();
-                                    switch (mType) {
-                                        case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
-                                            createOrderRequest.setOrder_type("LAUNDRY");
-                                            try {
-                                                goodsObj.put("temperature", "Warm");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
-                                        case HomeFragment.DRYER_SCAN_REQUEST_CODE:
-                                            createOrderRequest.setOrder_type("DRYER");
-                                            try {
-                                                goodsObj.put("time", "30m");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
-                                    }
-                                    createOrderRequest.setMachine_no("P2018070401");
-                                    createOrderRequest.setClient_type("ANDROID");
-                                    createOrderRequest.setTotal_amount(3);
-                                    createOrderRequest.setGoods_info(goodsObj.toString());
-//                                    NetDataModel.getInstance().createOrder(createOrderRequest, new NetCallback<BaseBean<Setting>, Setting>(getActivity(), null) {
-//                                        @Override
-//                                        protected void onSuccess(Setting data, List<Setting> datas) {
-//                                            Log.d("Cleanpro", data.toString());
-//                                        }
-//
-//                                        @Override
-//                                        protected void onFail(int errorCode, String errorMsg) {
-//                                            Log.d("Cleanpro", errorCode + errorMsg);
-//                                        }
-//                                    });
-////                                    NetDataModel.getInstance().createOrder(createOrderRequest, new OnDataCallback() {
-////                                        @Override
-////                                        public void onError(int responseCode, String errMsg) {
-////
-////                                        }
-////
-////                                        @Override
-////                                        public void onData(int statusCode, String msg, Object data, List datas) {
-////                                            start(BookSuccessFragment.newInstance(mType));
-////                                        }
-////                                    });
+                                    mPresenter.createOrder();
                                 }
                             }
 

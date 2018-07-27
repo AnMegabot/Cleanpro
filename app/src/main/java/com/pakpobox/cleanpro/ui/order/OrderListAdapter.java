@@ -9,13 +9,14 @@ import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.base.list.ListDataHolder;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.bean.price.Price;
 
 
 public class OrderListAdapter extends BaseListAdapter<Order> {
 
-    private OnOrderItemClickListener listener;
+    private OnItemClickListener listener;
 
-    public OrderListAdapter(OnOrderItemClickListener listener) {
+    public OrderListAdapter(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -32,13 +33,13 @@ public class OrderListAdapter extends BaseListAdapter<Order> {
         TextView paymentStatusTv = holder.getView(R.id.item_order_payment_status_tv);
         TextView amountTv = holder.getView(R.id.item_order_amount_tv);
 
-        typeTv.setText(bean.getType());
-        orderNoTv.setText(bean.getOrderNo());
-        paymentStatusTv.setText(bean.getPaymentStatus());
-        paymentStatusTv.setTextColor(bean.getPaymentStatus()=="PAID" ? MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor) : MyApplication.getContext().getResources().getColor(R.color.orderUnpaidTextColor));
-        amountTv.setText(bean.getTotalAmount());
+        typeTv.setText(bean.getOrder_type());
+        orderNoTv.setText(bean.getOrder_no());
+        paymentStatusTv.setText("PAID");
+        paymentStatusTv.setTextColor(MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor));
+        amountTv.setText(bean.getTotal_amount() + "");
 
-        typeIm.setImageResource(bean.getType()=="Laundry" ? R.mipmap.icon_laundry_1 : R.mipmap.icon_dryer_1);
+        typeIm.setImageResource(bean.getOrder_type()=="LAUNDRY" ? R.mipmap.icon_laundry_1 : R.mipmap.icon_dryer_1);
 //        Glide.with(MyApplication.getContext()).load(context.getResources().getDrawable((int)path)).into(typeIm);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -51,4 +52,7 @@ public class OrderListAdapter extends BaseListAdapter<Order> {
         });
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(Order order);
+    }
 }

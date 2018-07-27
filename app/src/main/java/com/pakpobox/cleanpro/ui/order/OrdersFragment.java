@@ -10,10 +10,13 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.list.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.bean.PageListDataBean;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.order.detail.OrderDetailFragment;
 import com.pakpobox.cleanpro.ui.order.unpaid.UnpaidScanFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -45,10 +48,30 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
         return R.layout.fragment_orders;
     }
 
+    @Override
+    public void getSuccess(PageListDataBean<Order> datas) {
+        if (getPage() == 0) {
+            clearListData();
+        }
+        setData(datas.getResultList());
+
+        if (getData().size() > 0) {
+            if (datas.isOver()) {
+                showNoMore();
+            } else {
+                autoLoadMore();
+            }
+        }
+
+        if (getData().size() == 0)
+            showEmpty();
+        else
+            showContent();
+    }
 
     @Override
     protected OrdersPresenter createPresenter() {
-        return new OrdersPresenter();
+        return new OrdersPresenter(getActivity());
     }
 
     @Override
@@ -63,14 +86,11 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new OrderListAdapter(new OnOrderItemClickListener() {
+        return new OrderListAdapter(new OrderListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Order order) {
                 if (getParentFragment() instanceof MainFragment) {
-                    if (order.getPaymentStatus().equals("PAID"))
-                        ((MainFragment) getParentFragment()).start(OrderDetailFragment.newInstance());
-                    else
-                        ((MainFragment) getParentFragment()).start(UnpaidScanFragment.newInstance());
+                    ((MainFragment) getParentFragment()).start(OrderDetailFragment.newInstance());
                 }
             }
         });

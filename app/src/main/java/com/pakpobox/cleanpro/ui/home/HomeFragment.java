@@ -23,9 +23,11 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
+import com.pakpobox.cleanpro.ui.price.PriceFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
 import com.pakpobox.cleanpro.ui.widget.tabbar.UIUtils;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -103,12 +105,15 @@ public class HomeFragment extends BaseFragment {
                 startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), DRYER_SCAN_REQUEST_CODE);
                 break;
             case R.id.home_service_btn:
+                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
                 break;
             case R.id.home_location_btn:
                 break;
             case R.id.home_price_btn:
+                ((MainFragment) getParentFragment()).start(PriceFragment.newInstance());
                 break;
             case R.id.home_promotion_btn:
+                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
                 break;
         }
     }
