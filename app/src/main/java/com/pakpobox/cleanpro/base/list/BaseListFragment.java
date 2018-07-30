@@ -37,6 +37,12 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
     protected boolean isAutoLoadMore = true;//是否开启自动加载
     protected List<T> mListData = new ArrayList<>();
 
+    //当前页面状态
+    public static class PAGE_STATE {
+        public static final int STATE_REFRESH = 0; //刷新
+        public static final int STATE_LOAD_MORE = 1;//加载更多
+    }
+
     /**
      * 初始化列表视图
      * @param containerLayout 列表视图容器
@@ -66,7 +72,7 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
      * 刷新列表
      */
     public void refreshData() {
-        state = Const.PAGE_STATE.STATE_REFRESH;
+        state = PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
         page = 0;
         loadDatas();
@@ -121,7 +127,7 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
 
     @Override
     public void showLoading(String msg) {
-        if (state == Const.PAGE_STATE.STATE_REFRESH)
+        if (state == PAGE_STATE.STATE_REFRESH)
             setRefreshing(true);
     }
 
@@ -140,7 +146,7 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
         isAutoLoadMore = false;
         //如果是加载更多出错，那么底部就显示点击重新加载;
         // 否则，就清空数据，显示没有数据
-        if (state == Const.PAGE_STATE.STATE_LOAD_MORE) {
+        if (state == PAGE_STATE.STATE_LOAD_MORE) {
             mRecyclerView.showLoadMoreError();
             mListAdapter.notifyAllDatas(mListData, mRecyclerView);
         } else {
@@ -156,7 +162,7 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
     @Override
     public void loadMore() {
         if (!isAutoLoadMore) return;
-        state = Const.PAGE_STATE.STATE_LOAD_MORE;
+        state = PAGE_STATE.STATE_LOAD_MORE;
         loadDatas();
     }
 

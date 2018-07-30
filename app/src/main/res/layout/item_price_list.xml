@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
@@ -12,144 +12,45 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+        
+        <LinearLayout
+            android:id="@+id/item_price_title_llt"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:background="@color/price_item_laundry_title_bg"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/item_price_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textColorPrimaryDark"
-            android:textSize="18sp"
-            tools:text="Laundry" />
+            <ImageView
+                android:id="@+id/item_price_type_icon"
+                android:layout_width="21dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                app:srcCompat="@mipmap/icon_laundry_2" />
+
+            <TextView
+                android:id="@+id/item_price_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                tools:text="Laundry" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/item_price_content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:orientation="vertical">
 
         </LinearLayout>
 
-            <!--<TableLayout-->
-                <!--android:id="@+id/item_price_title_tl"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:stretchColumns="*"-->
-                <!--android:divider="@drawable/shape_line_tblayout"-->
-                <!--android:showDividers="beginning|middle|end"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TableRow-->
-                    <!--android:id="@+id/title1"-->
-                    <!--android:divider="@drawable/shape_line_tblayout"-->
-                    <!--android:showDividers="beginning|middle|end"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:padding="8dp"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="标题一"-->
-                        <!--android:gravity="center"/>-->
-                    <!--<TextView-->
-                        <!--android:padding="8dp"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="标题一"-->
-                        <!--android:gravity="center"/>-->
-
-                <!--</TableRow>-->
-
-                <!--<TableRow-->
-                    <!--android:id="@+id/title2"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:divider="@drawable/shape_line_tblayout"-->
-                    <!--android:showDividers="beginning|middle|end"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:padding="8dp"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="标题一"-->
-                        <!--android:gravity="center"/>-->
-
-                    <!--<TableLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:stretchColumns="*"-->
-                        <!--android:divider="@drawable/shape_line_tblayout"-->
-                        <!--android:showDividers="middle"-->
-                        <!--android:orientation="vertical"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintStart_toStartOf="parent"-->
-                        <!--app:layout_constraintTop_toBottomOf="@+id/item_price_title_tv">-->
-
-                        <!--<TableRow-->
-                            <!--android:divider="@drawable/shape_line_tblayout"-->
-                            <!--android:showDividers="middle"-->
-                            <!--android:orientation="horizontal">-->
-
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-
-                        <!--</TableRow>-->
-
-                        <!--<TableRow-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:divider="@drawable/shape_line_tblayout"-->
-                            <!--android:showDividers="middle"-->
-                            <!--android:orientation="horizontal">-->
-
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-
-                            <!--<TextView-->
-                                <!--android:padding="8dp"-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="标题一"-->
-                                <!--android:gravity="center"/>-->
-
-                        <!--</TableRow>-->
-
-                    <!--</TableLayout>-->
-
-                <!--</TableRow>-->
-
-            <!--</TableLayout>-->
     </LinearLayout>
 </android.support.v7.widget.CardView>

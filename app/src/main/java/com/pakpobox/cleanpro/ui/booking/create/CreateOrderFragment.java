@@ -13,6 +13,7 @@ import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
 import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWContract;
@@ -30,6 +31,9 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.DRYER;
+import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
+
 /**
  * 创建订单
  */
@@ -40,7 +44,7 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    private int mType = HomeFragment.LAUNDRY_SCAN_REQUEST_CODE;
+    private int mType = LAUNDRY;
 
     public static CreateOrderFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -75,10 +79,10 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
         });
 
         switch (mType) {
-            case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+            case LAUNDRY:
                 mTitleTv.setText(getString(R.string.home_laundry));
                 break;
-            case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+            case DRYER:
                 mTitleTv.setText(getString(R.string.home_dryer));
                 break;
         }
@@ -89,7 +93,7 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
         CreateOrderRequest createOrderRequest = new CreateOrderRequest();
         JSONObject goodsObj = new JSONObject();
         switch (mType) {
-            case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+            case LAUNDRY:
                 createOrderRequest.setOrder_type("LAUNDRY");
                 try {
                     goodsObj.put("temperature", "Warm");
@@ -97,7 +101,7 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
                     e.printStackTrace();
                 }
                 break;
-            case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+            case DRYER:
                 createOrderRequest.setOrder_type("DRYER");
                 try {
                     goodsObj.put("time", "30m");

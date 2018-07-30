@@ -21,4 +21,7 @@
     <color name="textColorSetPassworTitle">#666666</color>
     <color name="colorTemperatureSelected">#EE5475</color>
     <color name="textColorTemperature">#EE5475</color>
+    <color name="price_item_laundry_title_bg">#43E1E7</color>
+    <color name="price_item_dryer_title_bg">#E8CC32</color>
+    <color name="price_item_bg_dark">#F0F0F0</color>
 </resources>

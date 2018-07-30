@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.create.CreateOrderFragment;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
@@ -20,6 +21,9 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.DRYER;
+import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
 
 /**
  * 选择偏好
@@ -65,7 +69,7 @@ public class SelectPreferenceFragment extends BaseFragment {
     @BindView(R.id.select_pref_next_btn)
     Button selectPrefNextBtn;
 
-    private int mType = HomeFragment.LAUNDRY_SCAN_REQUEST_CODE;
+    private int mType = LAUNDRY;
 
     private int mTime = 23;
 
@@ -102,7 +106,7 @@ public class SelectPreferenceFragment extends BaseFragment {
         });
 
         switch (mType) {
-            case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+            case LAUNDRY:
                 mTitleTv.setText(getString(R.string.home_laundry));
                 typeIm.setImageResource(R.mipmap.icon_laundry);
                 mTipsTv.setText(getString(R.string.booking_choose_temperature));
@@ -131,7 +135,7 @@ public class SelectPreferenceFragment extends BaseFragment {
                     }
                 });
                 break;
-            case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+            case DRYER:
                 mTitleTv.setText(getString(R.string.home_dryer));
                 typeIm.setImageResource(R.mipmap.icon_dryer);
                 mTipsTv.setText(getString(R.string.booking_choose_time));

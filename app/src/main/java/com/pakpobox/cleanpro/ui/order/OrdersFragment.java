@@ -90,7 +90,7 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
             @Override
             public void onItemClick(Order order) {
                 if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(OrderDetailFragment.newInstance());
+                    ((MainFragment) getParentFragment()).start(OrderDetailFragment.newInstance(order));
                 }
             }
         });

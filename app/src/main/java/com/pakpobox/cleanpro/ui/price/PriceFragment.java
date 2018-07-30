@@ -101,7 +101,7 @@ public class PriceFragment extends BaseListFragment<PricePresenter, PriceContrac
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new PriceAdapter(new PriceAdapter.OnItemClickListener() {
+        return new PriceAdapter(getContext(), new PriceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Price order) {
 

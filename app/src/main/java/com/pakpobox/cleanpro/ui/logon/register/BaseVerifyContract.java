@@ -55,9 +55,10 @@ public interface BaseVerifyContract {
         /**
          * 获取验证码
          * @param phoneNumber 手机号码
+         * @param countryCode 国家代码
          * @param callback 回调
          */
-        void getVerifyCode(String phoneNumber, NetCallback<String> callback);
+        void getVerifyCode(String phoneNumber, String countryCode, NetCallback<String> callback);
 
         /**
          * 校验验证码

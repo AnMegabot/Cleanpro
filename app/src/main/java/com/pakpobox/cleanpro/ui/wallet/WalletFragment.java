@@ -65,7 +65,7 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
 
     @Override
     public void getSuccess(Wallet data) {
-        mBalanceTv.setText(data.getCurrencyUnit() + SystemUtils.formatFloat2Str(data.getBalance()));
+        mBalanceTv.setText(data.getCurrencyUnit() + SystemUtils.formatFloat2Str(data.getBalance()/100.0));
     }
 
     @Override

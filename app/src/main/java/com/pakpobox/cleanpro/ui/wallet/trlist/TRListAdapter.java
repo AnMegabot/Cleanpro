@@ -8,6 +8,10 @@ import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.base.list.ListDataHolder;
 import com.pakpobox.cleanpro.bean.TradingRecort;
+import com.pakpobox.cleanpro.utils.SystemUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * User:Sean.Wei
@@ -34,10 +38,14 @@ public class TRListAdapter extends BaseListAdapter<TradingRecort> {
         TextView timeTv = holder.getView(R.id.item_tr_time_tv);
         TextView amountTv = holder.getView(R.id.item_tr_amount_tv);
 
-        typeTv.setText(bean.getType());
-        timeTv.setText(bean.getTime());
-        amountTv.setTextColor(bean.getType().equals("Credit card") || bean.getType().equals("Scan") ? MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor) : MyApplication.getContext().getResources().getColor(R.color.textColorPrimaryDark));
-        amountTv.setText(bean.getTotalAmount());
+        typeTv.setText(bean.getTransactionType());
+
+        Date date = new Date();
+        date.setTime(bean.getCreateTime());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+        timeTv.setText(timeStamp);
+        amountTv.setTextColor("IN".equals(bean.getIncomeType()) ? MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor) : MyApplication.getContext().getResources().getColor(R.color.textColorPrimaryDark));
+        amountTv.setText(("IN".equals(bean.getIncomeType()) ? "+" : "-") + SystemUtils.formatFloat2Str(bean.getAmount()/100.0));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

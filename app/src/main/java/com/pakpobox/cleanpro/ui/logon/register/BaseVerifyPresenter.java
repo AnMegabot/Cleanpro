@@ -33,7 +33,7 @@ public class BaseVerifyPresenter extends BasePresenter<BaseVerifyContract.IVerif
                     mRegisterView.getSuccess(data);
                 }
             };
-            mModel.getVerifyCode(phoneNumber, callback);
+            mModel.getVerifyCode(phoneNumber, mRegisterView.getCountryCode(), callback);
         }
     }
 

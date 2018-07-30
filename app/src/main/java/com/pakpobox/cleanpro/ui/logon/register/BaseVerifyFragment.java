@@ -3,14 +3,20 @@ package com.pakpobox.cleanpro.ui.logon.register;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
@@ -21,7 +27,9 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.ToastUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * User:Sean.Wei
@@ -43,6 +51,10 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
     Button mNextBtn;
     @BindView(R.id.register_content_llt)
     ScrollView mContentLlt;
+    @BindView(R.id.register_country_code_btn)
+    CheckBox mCountryCodeBtn;
+
+    private String countryCode = "86";
 
     private KeyBoardHelper keyBoardHelper;
 
@@ -86,7 +98,7 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
 
     @Override
     public String getCountryCode() {
-        return "86";
+        return countryCode;
     }
 
     @Override
@@ -160,7 +172,30 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_country_code_btn:
-
+                final PopupMenu popupMenu;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    popupMenu = new PopupMenu(_mActivity, mCountryCodeBtn, GravityCompat.START);
+                } else {
+                    popupMenu = new PopupMenu(_mActivity, mCountryCodeBtn);
+                }
+                popupMenu.inflate(R.menu.country_code_pop);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        mCountryCodeBtn.setText(item.getTitle());
+                        switch (item.getItemId()) {
+                            case R.id.country_code_china:
+                                countryCode = "86";
+                                break;
+                            case R.id.country_code_malaysia:
+                                countryCode = "60";
+                                break;
+                        }
+                        popupMenu.dismiss();
+                        return true;
+                    }
+                });
+                popupMenu.show();
                 break;
             case R.id.register_verifycation_btn:
                 mPresenter.getVerifyCode();

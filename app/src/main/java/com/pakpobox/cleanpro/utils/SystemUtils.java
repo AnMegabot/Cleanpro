@@ -1,5 +1,7 @@
 package com.pakpobox.cleanpro.utils;
 
+import android.content.Context;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -36,5 +38,16 @@ public class SystemUtils {
 //            decimalFormat=new DecimalFormat("0.0");
 
         return decimalFormat.format(f);//format 返回的是字符串
+    }
+
+    /**
+     * dip转px
+     * @param context 上下文
+     * @param dpValue dp值
+     * @return px值
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

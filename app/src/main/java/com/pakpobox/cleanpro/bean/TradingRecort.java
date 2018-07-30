@@ -8,47 +8,76 @@ package com.pakpobox.cleanpro.bean;
  */
 
 public class TradingRecort {
-    private String ID;
-    private String Type;
-    private String Time;
-    private String TotalAmount;
+    private String id;
+    private String paymentType;//支付方式
+    private String tradeType;//交易类型
+    private String transactionType;//服务类型
+    private int amount;//金额
+    private int balance;//余额
+    private long createTime;//创建时间
+    private String incomeType;//收入类型
 
-    public TradingRecort(String ID, String type, String time, String totalAmount) {
-        this.ID = ID;
-        Type = type;
-        Time = time;
-        TotalAmount = totalAmount;
+    public String getId() {
+        return id;
     }
 
-    public String getID() {
-        return ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    public String getType() {
-        return Type;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public String getTradeType() {
+        return tradeType;
     }
 
-    public String getTime() {
-        return Time;
+    public void setTradeType(String tradeType) {
+        this.tradeType = tradeType;
     }
 
-    public void setTime(String time) {
-        Time = time;
+    public String getTransactionType() {
+        return transactionType;
     }
 
-    public String getTotalAmount() {
-        return TotalAmount;
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
-    public void setTotalAmount(String totalAmount) {
-        TotalAmount = totalAmount;
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getIncomeType() {
+        return incomeType;
+    }
+
+    public void setIncomeType(String incomeType) {
+        this.incomeType = incomeType;
     }
 }

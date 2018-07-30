@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/country_code_china"
+        android:title="+86"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/country_code_malaysia"
+        android:title="+60"
+        app:showAsAction="never" />
+</menu>

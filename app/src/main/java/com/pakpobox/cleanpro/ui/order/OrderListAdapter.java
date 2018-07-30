@@ -10,6 +10,7 @@ import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.base.list.ListDataHolder;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.bean.price.Price;
+import com.pakpobox.cleanpro.utils.SystemUtils;
 
 
 public class OrderListAdapter extends BaseListAdapter<Order> {
@@ -34,12 +35,12 @@ public class OrderListAdapter extends BaseListAdapter<Order> {
         TextView amountTv = holder.getView(R.id.item_order_amount_tv);
 
         typeTv.setText(bean.getOrder_type());
-        orderNoTv.setText(bean.getOrder_no());
-        paymentStatusTv.setText("PAID");
-        paymentStatusTv.setTextColor(MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor));
-        amountTv.setText(bean.getTotal_amount() + "");
+        orderNoTv.setText(String.format(MyApplication.getContext().getString(R.string.orders_no_format), bean.getOrder_no()));
+        paymentStatusTv.setText(bean.getPay_status());
+        paymentStatusTv.setTextColor("UNPAID".equals(bean.getPay_status()) ? MyApplication.getContext().getResources().getColor(R.color.orderUnpaidTextColor) : MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor));
+        amountTv.setText(String.format(MyApplication.getContext().getString(R.string.orders_amount_format), SystemUtils.formatFloat2Str(bean.getTotal_amount())));
 
-        typeIm.setImageResource(bean.getOrder_type()=="LAUNDRY" ? R.mipmap.icon_laundry_1 : R.mipmap.icon_dryer_1);
+        typeIm.setImageResource("LAUNDRY".equals(bean.getOrder_type()) ? R.mipmap.icon_laundry_1 : R.mipmap.icon_dryer_1);
 //        Glide.with(MyApplication.getContext()).load(context.getResources().getDrawable((int)path)).into(typeIm);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

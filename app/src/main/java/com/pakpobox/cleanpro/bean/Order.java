@@ -1,23 +1,52 @@
 package com.pakpobox.cleanpro.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * User:Sean.Wei
  * Date:2018/6/21
  * Time:17:05
  */
 
-public class Order {
+public class Order implements Parcelable {
     private String id;
     private String machine_no;
     private String order_no;
-    private String total_amount;
+    private double total_amount;
     private String client_type;
     private String order_type;
     private String goods_info;
-    private String create_time;
+    private long create_time;
     private String pay_status;
     private String location;
     private String client_version;
+
+    protected Order(Parcel in) {
+        id = in.readString();
+        machine_no = in.readString();
+        order_no = in.readString();
+        total_amount = in.readDouble();
+        client_type = in.readString();
+        order_type = in.readString();
+        goods_info = in.readString();
+        create_time = in.readLong();
+        pay_status = in.readString();
+        location = in.readString();
+        client_version = in.readString();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -43,11 +72,11 @@ public class Order {
         this.order_no = order_no;
     }
 
-    public String getTotal_amount() {
+    public double getTotal_amount() {
         return total_amount;
     }
 
-    public void setTotal_amount(String total_amount) {
+    public void setTotal_amount(double total_amount) {
         this.total_amount = total_amount;
     }
 
@@ -75,11 +104,11 @@ public class Order {
         this.goods_info = goods_info;
     }
 
-    public String getCreate_time() {
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 
@@ -105,5 +134,25 @@ public class Order {
 
     public void setClient_version(String client_version) {
         this.client_version = client_version;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(machine_no);
+        parcel.writeString(order_no);
+        parcel.writeDouble(total_amount);
+        parcel.writeString(client_type);
+        parcel.writeString(order_type);
+        parcel.writeString(goods_info);
+        parcel.writeLong(create_time);
+        parcel.writeString(pay_status);
+        parcel.writeString(location);
+        parcel.writeString(client_version);
     }
 }

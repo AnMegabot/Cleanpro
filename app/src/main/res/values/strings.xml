@@ -32,9 +32,12 @@
     <!--0rders-->
     <string name="orders">0rders</string>
     <string name="orders_no">Order No. :</string>
+    <string name="orders_no_format">Order No. %s</string>
+    <string name="orders_amount_format">RM %s</string>
     <string name="orders_Location">Location :</string>
     <string name="orders_MachineNo">Machine No. :</string>
     <string name="orders_Temperature">Temperature :</string>
+    <string name="orders_Duration">Duration :</string>
     <string name="orders_Time">Time :</string>
     <string name="orders_Price">Price :</string>
     <string name="orders_unpaid_scan_tips">Please scan the QR code  on the machine</string>
@@ -113,9 +116,5 @@
     <string name="setting_new_psw">Please set a new payment password</string>
     <string name="setting_comfirm_new_psw">Please enter again to confirm</string>
     <string name="setting_payment_psw_error">Wrong password</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>

@@ -31,9 +31,6 @@ public class AppSetting {
 
     private Context mContext = null;
 
-    /** 秘钥 */
-    public static final String RANDOM_STR = "CN#.r$#uJ#~@";
-
     private AppSetting(){
     }
 

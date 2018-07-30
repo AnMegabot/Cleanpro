@@ -20,8 +20,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
+import com.pakpobox.cleanpro.ui.logon.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
@@ -81,8 +84,8 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_laundry_btn:
-                ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(LAUNDRY_SCAN_REQUEST_CODE));
-//                if (!AppSetting.getInstance().isHasLogin()) {
+                ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.LAUNDRY));
+//                if (!AppSetting.isLogin()) {
 //                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
 //                    setClickingView(view);
 //                } else {
@@ -96,13 +99,18 @@ public class HomeFragment extends BaseFragment {
 //                }
                 break;
             case R.id.home_dryer_btn:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(cameraPerms, RC_CAMERA_PERM);
-                        return;
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
+                    setClickingView(view);
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(cameraPerms, RC_CAMERA_PERM);
+                            return;
+                        }
                     }
+                    startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), DRYER_SCAN_REQUEST_CODE);
                 }
-                startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), DRYER_SCAN_REQUEST_CODE);
                 break;
             case R.id.home_service_btn:
                 ToastUtils.showToast(getContext(), R.string.app_coming_soon);
@@ -178,12 +186,12 @@ public class HomeFragment extends BaseFragment {
         switch (requestCode) {
             case LAUNDRY_SCAN_REQUEST_CODE:
                 if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(LAUNDRY_SCAN_REQUEST_CODE));
+                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.LAUNDRY));
                 }
                 break;
             case DRYER_SCAN_REQUEST_CODE:
                 if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(DRYER_SCAN_REQUEST_CODE));
+                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.DRYER));
                 }
                 break;
             case LOGIN_REQUEST_CODE:
