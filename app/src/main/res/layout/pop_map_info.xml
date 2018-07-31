@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_map_info_title_icon"/>
+
+        <TextView
+            android:id="@+id/pop_map_info_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="14sp"
+            android:textColor="@color/textColorPrimaryDark"
+            tools:text="Bandar Kinrara 5, CE"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="11dp"
+            android:background="@color/colorLine"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/icon_location"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/pop_map_info_location_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="12dp"
+                android:textSize="12sp"
+                android:textColor="@color/textColorPrimaryDark"
+                tools:text="NO.35-0, JALAN 5A/3A, BANDAR KINRARA, 47180 PUCHONG,SELANGOR"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

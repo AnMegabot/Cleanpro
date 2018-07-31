@@ -85,4 +85,9 @@ public class UrlConstainer {
      */
     public static final String PRICE = "goods/member/getWashMachePrice";
 
+    /**
+     * 门店列表
+     */
+    public static final String LOCATION = "cleanpro/location?page=%d&maxCount=%d";
+
 }

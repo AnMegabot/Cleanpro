@@ -18,4 +18,6 @@ public interface NetConfig {
     int UNKNOWN_ERROR = 1004; //未知错误
     int REQUEST_TIMEOUT = 1005; //请求超时
     int RESPONSE_ERROR = 1006; //响应错误
+
+    int WALLET_NOT_SUFFICIENT_FUNDS = 400509; //钱包余额不足
 }

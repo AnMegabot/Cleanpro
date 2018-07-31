@@ -97,4 +97,7 @@ dependencies {
     implementation project(':zxinglib')
     /*ViewPager动画*/
     implementation 'com.zhy:magic-viewpager:1.0.1'
+
+    /*Google Map*/
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }

@@ -31,6 +31,18 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!-- ================= 地图权限 ======================== -->
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:name=".application.MyApplication"
         android:allowBackup="false"
@@ -57,6 +69,12 @@
             android:name=".ui.logon.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".ui.scanner.QRCodeScanActivity"/>
+
+        <!-- Google map配置 -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAojA8GoIzDSSM5MDjyBMjrLugACPCpPMQ"/>
+        <!--android:value="AIzaSyBR3-HH60zF11XEMNs3jGh3kF4elClJ4y4"/>-->
     </application>
 
 </manifest>

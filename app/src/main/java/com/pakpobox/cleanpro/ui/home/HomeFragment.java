@@ -24,7 +24,9 @@ import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
+import com.pakpobox.cleanpro.ui.location.LocationFragment;
 import com.pakpobox.cleanpro.ui.logon.LoginActivity;
+import com.pakpobox.cleanpro.ui.logon.login.LoginFragment;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
@@ -116,6 +118,7 @@ public class HomeFragment extends BaseFragment {
                 ToastUtils.showToast(getContext(), R.string.app_coming_soon);
                 break;
             case R.id.home_location_btn:
+                ((MainFragment) getParentFragment()).start(LocationFragment.newInstance());
                 break;
             case R.id.home_price_btn:
                 ((MainFragment) getParentFragment()).start(PriceFragment.newInstance());
