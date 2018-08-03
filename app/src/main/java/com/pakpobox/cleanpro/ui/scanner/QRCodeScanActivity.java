@@ -58,7 +58,7 @@ public class QRCodeScanActivity extends BaseCaptureActivity {
     @Override
     public void dealDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
         playBeepSoundAndVibrate(true, false);
-        ToastUtils.showToast(this, rawResult.getText());
+//        ToastUtils.showToast(this, rawResult.getText());
 //        对此次扫描结果不满意可以调用
 //        reScan();
 

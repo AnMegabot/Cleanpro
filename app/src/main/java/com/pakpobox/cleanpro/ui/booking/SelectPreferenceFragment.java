@@ -13,11 +13,25 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.bean.CreateOrderRequest;
+import com.pakpobox.cleanpro.bean.price.Price;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.create.CreateOrderFragment;
+import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceContract;
+import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferencePresenter;
 import com.pakpobox.cleanpro.ui.home.HomeFragment;
+import com.pakpobox.cleanpro.ui.location.LocationContract;
+import com.pakpobox.cleanpro.ui.location.LocationPresenter;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.SystemUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,7 +42,7 @@ import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
 /**
  * 选择偏好
  */
-public class SelectPreferenceFragment extends BaseFragment {
+public class SelectPreferenceFragment extends BasePresenterFragment<SelectPreferencePresenter, SelectPreferenceContract.ISelectPreferenceView> implements SelectPreferenceContract.ISelectPreferenceView {
 
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
@@ -69,13 +83,23 @@ public class SelectPreferenceFragment extends BaseFragment {
     @BindView(R.id.select_pref_next_btn)
     Button selectPrefNextBtn;
 
-    private int mType = LAUNDRY;
+    private Const.CLEAN_TYPE mType = LAUNDRY;
+    private String mOrderNo = null;
+    private String mMachineNo = null;
 
+    private String mTemperature = "Cold";
     private int mTime = 23;
+    private double coldPrice = 3;
+    private double warmPrice = 3;
+    private double hotPrice = 3;
+    private double dryerBasePrice = 4;
+    private double dryerExtraPrice = 1;
 
-    public static SelectPreferenceFragment newInstance(int type) {
+    public static SelectPreferenceFragment newInstance(String orderNo, String machineNo, String type) {
         Bundle args = new Bundle();
-        args.putInt("type", type);
+        args.putString("orderNo", orderNo);
+        args.putString("machineNo", machineNo);
+        args.putString("type", type);
         SelectPreferenceFragment fragment = new SelectPreferenceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -86,7 +110,17 @@ public class SelectPreferenceFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (null != bundle) {
-            mType = bundle.getInt("type");
+            String type = bundle.getString("type");
+            switch (type.toUpperCase()) {
+                case "LAUNDRY":
+                    mType = LAUNDRY;
+                    break;
+                case "DRYER":
+                    mType = DRYER;
+                    break;
+            }
+            mOrderNo = bundle.getString("orderNo");
+            mMachineNo = bundle.getString("machineNo");
         }
     }
 
@@ -120,16 +154,19 @@ public class SelectPreferenceFragment extends BaseFragment {
                                 setLayoutEnable(mTempColdLauout, true);
                                 setLayoutEnable(mTempWarmLauout, false);
                                 setLayoutEnable(mTempHotLauout, false);
+                                mTemperature = "Cold";
                                 break;
                             case R.id.select_pref_temp_warm_rb:
                                 setLayoutEnable(mTempColdLauout, false);
                                 setLayoutEnable(mTempWarmLauout, true);
                                 setLayoutEnable(mTempHotLauout, false);
+                                mTemperature = "Warm";
                                 break;
                             case R.id.select_pref_temp_hot_rb:
                                 setLayoutEnable(mTempColdLauout, false);
                                 setLayoutEnable(mTempWarmLauout, false);
                                 setLayoutEnable(mTempHotLauout, true);
+                                mTemperature = "Hot";
                                 break;
                         }
                     }
@@ -148,6 +185,8 @@ public class SelectPreferenceFragment extends BaseFragment {
         setLayoutEnable(mTempColdLauout, true);
         setLayoutEnable(mTempWarmLauout, false);
         setLayoutEnable(mTempHotLauout, false);
+
+        mPresenter.getPrice();
     }
 
     private void setLayoutEnable(ViewGroup viewGroup, boolean isEnable) {
@@ -160,6 +199,46 @@ public class SelectPreferenceFragment extends BaseFragment {
                 setLayoutEnable((ViewGroup) viewGroup.getChildAt(i), isEnable);
             }
         }
+    }
+
+    @Override
+    public String getMachineNo() {
+        return URLEncoder.encode(mOrderNo + "#" + mMachineNo);
+    }
+
+    @Override
+    public void getSuccess(List<Price> data) {
+        if (null != data) {
+            switch (mType) {
+                case LAUNDRY:
+                    for (Price price : data) {
+                        if ("Laundry".equals(price.getName_en()) && null!=price.getSku_list() && price.getSku_list().size()>=3) {
+                            coldPrice = price.getSku_list().get(0).getPrice();
+                            mTempColdPayAmountTv.setText(SystemUtils.formatFloat2Str(coldPrice));
+                            warmPrice = price.getSku_list().get(1).getPrice();
+                            mTempWarmPayAmountTv.setText(SystemUtils.formatFloat2Str(warmPrice));
+                            hotPrice = price.getSku_list().get(2).getPrice();
+                            mTempHotPayAmountTv.setText(SystemUtils.formatFloat2Str(hotPrice));
+                        }
+                    }
+                    break;
+                case DRYER:
+                    for (Price price : data) {
+                        if ("Dryer".equals(price.getName_en()) && null!=price.getSku_list() && price.getSku_list().size()>=2) {
+                            dryerBasePrice = price.getSku_list().get(0).getPrice();
+                            dryerExtraPrice = price.getSku_list().get(1).getPrice();
+
+                            mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected SelectPreferencePresenter createPresenter() {
+        return new SelectPreferencePresenter(getActivity());
     }
 
     @OnClick({R.id.select_pref_temp_cold_lauout, R.id.select_pref_temp_warm_lauout, R.id.select_pref_temp_hot_lauout, R.id.select_pref_dryer_less_btn, R.id.select_pref_dryer_pluss_btn, R.id.select_pref_next_btn})
@@ -175,19 +254,65 @@ public class SelectPreferenceFragment extends BaseFragment {
                 mLaundryLayout.check(R.id.select_pref_temp_hot_rb);
                 break;
             case R.id.select_pref_dryer_less_btn:
-                mTime--;
+                mTime -= 5;
                 if (mTime < 23)
                     mTime = 23;
                 mDryerTimeTv.setText(mTime + "");
+                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
                 break;
             case R.id.select_pref_dryer_pluss_btn:
-                mTime++;
+                mTime += 5;
                 if (mTime > 100)
                     mTime = 100;
                 mDryerTimeTv.setText(mTime + "");
+                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
                 break;
             case R.id.select_pref_next_btn:
-                start(CreateOrderFragment.newInstance(mType));
+                double mAmount = 0;
+                switch (mType) {
+                    case LAUNDRY:
+                        switch (mTemperature) {
+                            case "Cold":
+                                mAmount = coldPrice;
+                                break;
+                            case "Warm":
+                                mAmount = warmPrice;
+                                break;
+                            case "Hot":
+                                mAmount = hotPrice;
+                                break;
+                        }
+                        break;
+                    case DRYER:
+                        mAmount = dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice;
+                        break;
+                }
+                CreateOrderRequest createOrderRequest = new CreateOrderRequest();
+                JSONObject goodsObj = new JSONObject();
+                switch (mType) {
+                    case LAUNDRY:
+                        createOrderRequest.setOrder_type("LAUNDRY");
+                        try {
+                            goodsObj.put("temperature", mTemperature);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case DRYER:
+                        createOrderRequest.setOrder_type("DRYER");
+                        try {
+                            goodsObj.put("time", mTime + "m");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+                createOrderRequest.setMachine_no(mOrderNo + "#" + mMachineNo);
+                createOrderRequest.setClient_type("ANDROID");
+                createOrderRequest.setTotal_amount(mAmount);
+                createOrderRequest.setGoods_info(goodsObj.toString());
+                createOrderRequest.setClient_version(SystemUtils.getVersionName(getContext()));
+                start(CreateOrderFragment.newInstance(createOrderRequest));
                 break;
         }
     }

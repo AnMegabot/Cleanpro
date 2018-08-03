@@ -5,22 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.ui.home.HomeFragment;
+import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
-import com.timmy.tdialog.TDialog;
-import com.timmy.tdialog.base.BindViewHolder;
-import com.timmy.tdialog.listener.OnBindViewListener;
-import com.timmy.tdialog.listener.OnViewClickListener;
-import com.tuo.customview.VerificationCodeView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,11 +28,11 @@ public class BookSuccessFragment extends BaseFragment {
     @BindView(R.id.book_success_im)
     ImageView imView;
 
-    private int mType = HomeFragment.LAUNDRY_SCAN_REQUEST_CODE;
+    private Order mOrder = null;
 
-    public static BookSuccessFragment newInstance(int type) {
+    public static BookSuccessFragment newInstance(Order order) {
         Bundle args = new Bundle();
-        args.putInt("type", type);
+        args.putParcelable("order", order);
         BookSuccessFragment fragment = new BookSuccessFragment();
         fragment.setArguments(args);
         return fragment;
@@ -51,7 +43,7 @@ public class BookSuccessFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (null != bundle) {
-            mType = bundle.getInt("type");
+            mOrder = bundle.getParcelable("order");
         }
     }
 
@@ -70,12 +62,12 @@ public class BookSuccessFragment extends BaseFragment {
             }
         });
 
-        switch (mType) {
-            case HomeFragment.LAUNDRY_SCAN_REQUEST_CODE:
+        switch (mOrder.getOrder_type()) {
+            case "LAUNDRY":
                 mTitleTv.setText(getString(R.string.home_laundry));
                 imView.setImageResource(R.mipmap.illustrator_laundry);
                 break;
-            case HomeFragment.DRYER_SCAN_REQUEST_CODE:
+            case "DRYER":
                 mTitleTv.setText(getString(R.string.home_dryer));
                 imView.setImageResource(R.mipmap.illustrator_dry);
                 break;

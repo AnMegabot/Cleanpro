@@ -86,6 +86,11 @@ public class UrlConstainer {
     public static final String PRICE = "goods/member/getWashMachePrice";
 
     /**
+     * 获取指定机器价格列表
+     */
+    public static final String MACHINE_PRICE = "goods/member/getMachePrice?macheNo=%s";
+
+    /**
      * 门店列表
      */
     public static final String LOCATION = "cleanpro/location?page=%d&maxCount=%d";

@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,8 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
     private double latitude = 3.03319;//纬度
     private double longitude = 101.66505;//经度
 
+    private List<Site> mSiteList = null;
+
     //谷歌地图
     private MapView mGoogleMapView;//谷歌地图视图
     private GoogleMap googlemap;
@@ -76,7 +79,7 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
     @Override
     protected void initViews(View view) {
         StatusBarUtil.setHeight(getContext(), mToolbar);
-        mTitleTv.setText(getString(R.string.wallet_my));
+        mTitleTv.setText(getString(R.string.home_location));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +116,7 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
     public void getSuccess(PageListDataBean<Site> data) {
         List<Site> siteList = data.getResultList();
         if (null != siteList) {
+            mSiteList = siteList;
             for (Site site : siteList) {
                 markGoogleMapSite(site);
             }
@@ -175,7 +179,7 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
                 return;
             MarkerOptions markerOption = new MarkerOptions();
             markerOption.position(latLng);
-//            markerOption.title(site.getName()).snippet(site.getName());
+            markerOption.snippet(site.getId());
 
             markerOption.draggable(false);//设置Marker可拖动
             markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.location_marker)));
@@ -197,7 +201,16 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
         if (null != marker) {
             marker.setIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.location_marker_on)));
             lastMarker = marker;
-//            showInfoPopupView();
+
+            if (null != mSiteList && !TextUtils.isEmpty(marker.getSnippet())) {
+                Site clickSite = null;
+                for (Site site : mSiteList) {
+                    if (null != site && site.getId().equals(marker.getSnippet())) {
+                        clickSite = site;
+                    }
+                }
+                showInfoPopupView(clickSite);
+            }
         }
         return false;
     }
@@ -219,12 +232,19 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
         }
     }
 
-    private void showInfoPopupView() {
+    private void showInfoPopupView(Site site) {
         View contentView= LayoutInflater.from(getContext()).inflate(R.layout.pop_map_info, null, false);
+        TextView titleTv = contentView.findViewById(R.id.pop_map_info_title_tv);
+        TextView locationTv = contentView.findViewById(R.id.pop_map_info_location_tv);
+        if (null != site) {
+            titleTv.setText(site.getName());
+            locationTv.setText(site.getZoneId());
+        }
         window = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(false);
         window.setTouchable(false);
+        window.setFocusable(false);
         window.setAnimationStyle(R.style.animTranslate);
         window.showAtLocation(mMapContainer, Gravity.BOTTOM, 0, 0);
     }
@@ -268,6 +288,8 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
     @Override
     public void onDestroy() {
         super.onDestroy();
+        recoverLastMarker();
+
         if (mGoogleMapView != null) {
             try {
                 mGoogleMapView.onDestroy();

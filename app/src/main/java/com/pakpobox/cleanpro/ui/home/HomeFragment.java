@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,15 @@ import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
 import com.pakpobox.cleanpro.ui.location.LocationFragment;
 import com.pakpobox.cleanpro.ui.logon.LoginActivity;
-import com.pakpobox.cleanpro.ui.logon.login.LoginFragment;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
+import com.pakpobox.cleanpro.ui.promotion.PromotionFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
 import com.pakpobox.cleanpro.ui.widget.tabbar.UIUtils;
+import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.ToastUtils;
+import com.pakpobox.logger.Logger;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -42,8 +45,12 @@ import com.zhy.magicviewpager.transformer.ScaleInTransformer;
 
 import java.util.Arrays;
 
+import javax.crypto.spec.SecretKeySpec;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
 
 /**
  * 首页
@@ -86,19 +93,19 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_laundry_btn:
-                ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.LAUNDRY));
-//                if (!AppSetting.isLogin()) {
-//                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
-//                    setClickingView(view);
-//                } else {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//                            requestPermissions(cameraPerms, RC_CAMERA_PERM);
-//                            return;
-//                        }
-//                    }
-//                    startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), LAUNDRY_SCAN_REQUEST_CODE);
-//                }
+//                ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.LAUNDRY));
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
+                    setClickingView(view);
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(cameraPerms, RC_CAMERA_PERM);
+                            return;
+                        }
+                    }
+                    startActivityForResult(new Intent(getContext(), QRCodeScanActivity.class), LAUNDRY_SCAN_REQUEST_CODE);
+                }
                 break;
             case R.id.home_dryer_btn:
                 if (!AppSetting.isLogin()) {
@@ -124,7 +131,7 @@ public class HomeFragment extends BaseFragment {
                 ((MainFragment) getParentFragment()).start(PriceFragment.newInstance());
                 break;
             case R.id.home_promotion_btn:
-                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
+                ((MainFragment) getParentFragment()).start(PromotionFragment.newInstance());
                 break;
         }
     }
@@ -135,7 +142,7 @@ public class HomeFragment extends BaseFragment {
         //设置图片加载器
         homeBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        Integer[] sh_images = {R.mipmap.hp_banner, R.mipmap.hp_banner, R.mipmap.hp_banner};
+        Integer[] sh_images = {R.mipmap.banner_1, R.mipmap.banner_1, R.mipmap.banner_1};
         homeBanner.setImages(Arrays.asList(sh_images));
         //设置banner动画效果
 //        homeBanner.setBannerAnimation(Transformer.ForegroundToBackground);
@@ -188,14 +195,27 @@ public class HomeFragment extends BaseFragment {
 
         switch (requestCode) {
             case LAUNDRY_SCAN_REQUEST_CODE:
-                if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.LAUNDRY));
-                }
-                break;
             case DRYER_SCAN_REQUEST_CODE:
-                if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(Const.CLEAN_TYPE.DRYER));
+                if (null != data) {
+                    String scannerStr = data.getStringExtra("scan_result");
+                    if (!TextUtils.isEmpty(scannerStr)) {
+                        SecretKeySpec keySpec = AesEncryptionUtils.getSecretKey(Const.QRCODE_AES_KEY.getBytes());
+                        String decryptScanStr = AesEncryptionUtils.decrypt(keySpec, scannerStr);
+                        Logger.d("解码后：" + decryptScanStr);
+                        if (!TextUtils.isEmpty(decryptScanStr)) {
+                            String[] actionData = decryptScanStr.split("#");
+                            if (null != actionData && actionData.length >= 3) {
+                                if (getParentFragment() instanceof MainFragment) {
+                                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(actionData[0], actionData[1], actionData[2]));
+                                    return;
+                                }
+                            }
+                        }
+
+                    }
                 }
+                ToastUtils.showToast(getContext(), R.string.app_unknown_error);
+
                 break;
             case LOGIN_REQUEST_CODE:
                 clickClickingView();
@@ -237,7 +257,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private PagerAdapter mCommentAdapter = new PagerAdapter() {
-        private Integer[] sh_images = {R.mipmap.hp_banner, R.mipmap.hp_banner, R.mipmap.hp_banner};
+        private Integer[] sh_images = {R.mipmap.banner_1, R.mipmap.banner_1, R.mipmap.banner_1};
         @Override
         public Object instantiateItem(ViewGroup container, int position)
         {

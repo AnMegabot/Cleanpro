@@ -117,4 +117,7 @@
     <string name="setting_comfirm_new_psw">Please enter again to confirm</string>
     <string name="setting_payment_psw_error">Wrong password</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

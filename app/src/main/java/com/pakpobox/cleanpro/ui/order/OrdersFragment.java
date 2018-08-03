@@ -2,6 +2,7 @@ package com.pakpobox.cleanpro.ui.order;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,10 +12,15 @@ import com.pakpobox.cleanpro.base.list.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.order.detail.OrderDetailFragment;
 import com.pakpobox.cleanpro.ui.order.unpaid.UnpaidScanFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.logger.Logger;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -35,6 +41,11 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
         OrdersFragment fragment = new OrdersFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    protected boolean isRegisterEvent() {
+        return true;
     }
 
     @Override
@@ -101,4 +112,8 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
         return null;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(Order event) {
+        refreshData();
+    }
 }

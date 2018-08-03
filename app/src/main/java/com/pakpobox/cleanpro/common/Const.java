@@ -6,6 +6,7 @@ package com.pakpobox.cleanpro.common;
  */
 
 public class Const {
+    public static final String QRCODE_AES_KEY = "s8fPakpoE1j676v6";
     //用户相关
     public static class USERINFO_KEY {
         public static final String USER_INFO = "mUserInfo";  //用户信息
@@ -15,9 +16,9 @@ public class Const {
     }
 
     //洗衣类型
-    public static class CLEAN_TYPE {
-        public static final int LAUNDRY = 0;
-        public static final int DRYER = 1;
+    public enum CLEAN_TYPE {
+        LAUNDRY,
+        DRYER
     }
 
 }

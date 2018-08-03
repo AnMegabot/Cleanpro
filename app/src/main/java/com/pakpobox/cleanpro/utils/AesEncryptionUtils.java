@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.utils;
 
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -30,12 +31,19 @@ public class AesEncryptionUtils {
      * 生成AES密钥
      */
     public static SecretKeySpec createKey() {
+        return createKey(null);
+    }
+
+    /**
+     * 生成AES密钥
+     */
+    public static SecretKeySpec createKey(String seedStr) {
         try {
             //指定加密算法的名称为AES,
             KeyGenerator keyGenerator = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM);
             //初始化密钥生成器，指定密钥的长度(单位:bit),
             //SecureRandom是生成安全随机数序列
-            SecureRandom secureRandom = new SecureRandom(key.getBytes());
+            SecureRandom secureRandom = new SecureRandom(TextUtils.isEmpty(seedStr) ? key.getBytes() : seedStr.getBytes());
             keyGenerator.init(128, secureRandom);
             //生成原始对称密钥
             SecretKey secretKey = keyGenerator.generateKey();

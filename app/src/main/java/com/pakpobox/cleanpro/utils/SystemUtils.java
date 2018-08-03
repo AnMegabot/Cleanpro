@@ -1,6 +1,9 @@
 package com.pakpobox.cleanpro.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -49,5 +52,23 @@ public class SystemUtils {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 获取版本名
+     * @return String
+     */
+    public static String getVersionName(Context context) {
+        String version = "unknown!";
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(null != packageInfo)
+            version = packageInfo.versionName;
+
+        return version;
     }
 }
