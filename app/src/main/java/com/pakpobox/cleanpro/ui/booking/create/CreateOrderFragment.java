@@ -113,7 +113,7 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
                     e.printStackTrace();
                 }
             } else {
-                mGoodsInfoTitleTv.setText(getString(R.string.orders_Duration));
+                mGoodsInfoTitleTv.setText(getString(R.string.orders_Time));
                 try {
                     JSONObject laundryObj = new JSONObject(mCreateOrderRequest.getGoods_info());
                     mGoodsInfoTv.setText(laundryObj.getString("time") + "min");

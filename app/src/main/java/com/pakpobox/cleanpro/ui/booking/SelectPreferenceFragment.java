@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.price.Price;
@@ -20,12 +19,10 @@ import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.create.CreateOrderFragment;
 import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceContract;
 import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferencePresenter;
-import com.pakpobox.cleanpro.ui.home.HomeFragment;
-import com.pakpobox.cleanpro.ui.location.LocationContract;
-import com.pakpobox.cleanpro.ui.location.LocationPresenter;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
+import com.pakpobox.logger.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,6 +91,7 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
     private double hotPrice = 3;
     private double dryerBasePrice = 4;
     private double dryerExtraPrice = 1;
+    private int dryerExtraTime = 5;
 
     public static SelectPreferenceFragment newInstance(String orderNo, String machineNo, String type) {
         Bundle args = new Bundle();
@@ -224,15 +222,26 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                     break;
                 case DRYER:
                     for (Price price : data) {
-                        if ("Dryer".equals(price.getName_en()) && null!=price.getSku_list() && price.getSku_list().size()>=2) {
+                        if ("Dryer".equals(price.getName_en()) && null!=price.getSku_list() && price.getSku_list().size()>=1) {
                             dryerBasePrice = price.getSku_list().get(0).getPrice();
-                            dryerExtraPrice = price.getSku_list().get(1).getPrice();
+                            dryerExtraPrice = price.getSku_list().get(0).getContinue_price();
+                            dryerExtraTime = price.getSku_list().get(0).getContinue_value();
 
-                            mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
+                            mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(computeDryerAmount()));
                         }
                     }
                     break;
             }
+        }
+    }
+
+    private double computeDryerAmount() {
+        int extrTime = mTime - 23;
+        Logger.d("哈哈：" + extrTime);
+        if (extrTime > 0) {
+            return dryerBasePrice + (extrTime/dryerExtraTime) * dryerExtraPrice;
+        } else {
+            return dryerBasePrice;
         }
     }
 
@@ -258,14 +267,14 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                 if (mTime < 23)
                     mTime = 23;
                 mDryerTimeTv.setText(mTime + "");
-                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
+                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(computeDryerAmount()));
                 break;
             case R.id.select_pref_dryer_pluss_btn:
                 mTime += 5;
                 if (mTime > 100)
                     mTime = 100;
                 mDryerTimeTv.setText(mTime + "");
-                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice));
+                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(computeDryerAmount()));
                 break;
             case R.id.select_pref_next_btn:
                 double mAmount = 0;
@@ -284,7 +293,7 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                         }
                         break;
                     case DRYER:
-                        mAmount = dryerBasePrice + (mTime - 23)/5 * dryerExtraPrice;
+                        mAmount = computeDryerAmount();
                         break;
                 }
                 CreateOrderRequest createOrderRequest = new CreateOrderRequest();
