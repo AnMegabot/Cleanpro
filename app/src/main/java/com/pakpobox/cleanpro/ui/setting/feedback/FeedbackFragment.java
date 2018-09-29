@@ -51,7 +51,8 @@ public class FeedbackFragment extends BaseFragment {
     Button mSubmitBtn;
     @BindView(R.id.feedback_hotline_tv)
     TextView mHotlineTv;
-    Unbinder unbinder;
+
+    private String hotling = "12345678";
 
     public static FeedbackFragment newInstance() {
         Bundle args = new Bundle();
@@ -104,20 +105,6 @@ public class FeedbackFragment extends BaseFragment {
         return R.layout.fragment_feedback;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     @OnClick({R.id.feedback_submit_btn, R.id.feedback_hotline_tv})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -150,14 +137,14 @@ public class FeedbackFragment extends BaseFragment {
 
     private void callHotline() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Call tel:123465");
+        builder.setMessage("Call tel:" + hotling);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.CALL");
-                intent.setData(Uri.parse("tel:" + "123456"));
+                intent.setData(Uri.parse("tel:" + hotling));
                 startActivity(intent);
             }
         });

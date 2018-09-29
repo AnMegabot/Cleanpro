@@ -121,7 +121,7 @@ public class PriceAdapter extends BaseListAdapter<Price> {
             }else{
                 TextView capTv = createTableTv();
                 capTv.setPaddingRelative(0, 0, 0, 0);
-                capTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                capTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
                 TableRow.LayoutParams tltleTvLps = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT);
                 tltleTvLps.weight = 1;
                 capTv.setLayoutParams(tltleTvLps);
@@ -181,7 +181,7 @@ public class PriceAdapter extends BaseListAdapter<Price> {
         titleTbl.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
         TableRow.LayoutParams tltleLps = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         tltleLps.weight = 2;
-        tltleLps.span = 2;
+//        tltleLps.span = 2;
         titleTbl.setLayoutParams(tltleLps);
 
         return titleTbl;
