@@ -32,6 +32,7 @@ import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
 import com.pakpobox.cleanpro.ui.promotion.PromotionFragment;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
+import com.pakpobox.cleanpro.ui.service.ServiceFragment;
 import com.pakpobox.cleanpro.ui.widget.tabbar.UIUtils;
 import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -129,7 +130,8 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.home_service_btn:
-                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
+//                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
+                ((MainFragment) getParentFragment()).start(ServiceFragment.newInstance());
                 break;
             case R.id.home_location_btn:
                 ((MainFragment) getParentFragment()).start(LocationFragment.newInstance());

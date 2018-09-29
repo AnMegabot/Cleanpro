@@ -95,7 +95,7 @@ public class FeedbackFragment extends BaseFragment {
         });
 
         mSubmitBtn.setEnabled(!TextUtils.isEmpty(mCommentEt.getText().toString().trim()));
-        String hotline = "Hotline：<font color='#29d1ff'>123456</font>";
+        String hotline = "Hotline：<font color='#29d1ff'>12345678</font>";
         mHotlineTv.setText(Html.fromHtml(hotline));
     }
 

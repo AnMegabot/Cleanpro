@@ -130,4 +130,8 @@
     <string name="feedback_comment_hint">Add a comment</string>
     <string name="feedback_submit">Submit</string>
 
+    <!-- Service -->
+    <string name="service">Service</string>
+    <string name="service_title">SELF-SERVICE LAUNDRY MANAGEMENT</string>
+
 </resources>
