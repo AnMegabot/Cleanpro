@@ -145,6 +145,46 @@
                 android:background="@color/colorLine"
                 android:layout_marginLeft="@dimen/app_pading_horizontal"/>
 
+            <LinearLayout
+                android:id="@+id/my_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_feedback" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/my_feedback"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorLine"
+                android:layout_marginLeft="@dimen/app_pading_horizontal"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

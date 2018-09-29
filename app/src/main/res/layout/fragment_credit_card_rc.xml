@@ -43,7 +43,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_10"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_marginTop="8dp"
             app:itemText="@string/wallet_amount_10"
             app:itemTextSize="@dimen/app_tabbar_item_textsize"
@@ -59,7 +59,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_20"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             app:itemText="@string/wallet_amount_20"
             app:itemTextSize="@dimen/app_tabbar_item_textsize"
             app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_10"
@@ -75,7 +75,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_30"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             app:itemText="@string/wallet_amount_30"
             app:itemTextSize="@dimen/app_tabbar_item_textsize"
             app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_10"
@@ -91,7 +91,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_50"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="0dp"
             app:itemText="@string/wallet_amount_50"
@@ -108,7 +108,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_100"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             app:itemText="@string/wallet_amount_100"
             app:itemTextSize="@dimen/app_tabbar_item_textsize"
             app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_50"
@@ -124,7 +124,7 @@
         <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem
             android:id="@+id/credit_card_rc_tabbar_item_200"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             app:itemText="@string/wallet_amount_200"
             app:itemTextSize="@dimen/app_tabbar_item_textsize"
             app:layout_constraintBottom_toBottomOf="@+id/credit_card_rc_tabbar_item_50"

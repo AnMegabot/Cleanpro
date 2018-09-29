@@ -23,8 +23,9 @@ import com.bumptech.glide.Glide;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.Const;
-import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
+import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment;
 import com.pakpobox.cleanpro.ui.location.LocationFragment;
 import com.pakpobox.cleanpro.ui.logon.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
@@ -43,14 +44,15 @@ import com.youth.banner.loader.ImageLoader;
 import com.zhy.magicviewpager.transformer.AlphaPageTransformer;
 import com.zhy.magicviewpager.transformer.ScaleInTransformer;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.Arrays;
 
 import javax.crypto.spec.SecretKeySpec;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
 
 /**
  * 首页
@@ -75,6 +77,11 @@ public class HomeFragment extends BaseFragment {
         HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    protected boolean isRegisterEvent() {
+        return true;
     }
 
     @Override
@@ -295,5 +302,12 @@ public class HomeFragment extends BaseFragment {
                 break;
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(UserBean event) {
+        if (AppSetting.isLogin()) {
+            clickClickingView();
+        }
     }
 }

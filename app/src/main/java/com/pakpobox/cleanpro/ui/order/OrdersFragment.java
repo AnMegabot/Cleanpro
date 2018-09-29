@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.list.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
@@ -106,6 +107,15 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
             }
         });
     }
+
+//    @Override
+//    public void showError() {
+//        if (AppSetting.isLogin()) {
+//            super.showError();
+//        } else {
+//
+//        }
+//    }
 
     @Override
     protected View initHeaderView() {

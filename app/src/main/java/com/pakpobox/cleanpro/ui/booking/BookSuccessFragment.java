@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;

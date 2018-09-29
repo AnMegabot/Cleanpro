@@ -44,17 +44,19 @@ public class StatusBarUtil {
     }
 
     public static void setHeight(Context context, View view) {
-        // 获取actionbar的高度
-        TypedArray actionbarSizeTypedArray = context.obtainStyledAttributes(new int[]{
-                android.R.attr.actionBarSize
-        });
-        float height = actionbarSizeTypedArray.getDimension(0, 0);
-        // ToolBar的top值
-        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        double statusBarHeight = getStatusBarHeight(context);
-        lp.height = (int) (statusBarHeight + height);
-        view.setPadding(0,(int) statusBarHeight,0, 0);
-        view.setLayoutParams(lp);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 获取actionbar的高度
+            TypedArray actionbarSizeTypedArray = context.obtainStyledAttributes(new int[]{
+                    android.R.attr.actionBarSize
+            });
+            float height = actionbarSizeTypedArray.getDimension(0, 0);
+            // ToolBar的top值
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            double statusBarHeight = getStatusBarHeight(context);
+            lp.height = (int) (statusBarHeight + height);
+            view.setPadding(0,(int) statusBarHeight,0, 0);
+            view.setLayoutParams(lp);
+        }
     }
 
     private static double getStatusBarHeight(Context context) {

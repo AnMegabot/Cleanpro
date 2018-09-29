@@ -104,7 +104,7 @@
 }
 
 
-#-keep class com.pakpobox.storhub_app_universal.model.bean.** {*;}
+-keep class com.pakpobox.cleanpro.bean.** {*;}
 
 #Glide图片加载框架
 -keep public class * implements com.bumptech.glide.module.GlideModule

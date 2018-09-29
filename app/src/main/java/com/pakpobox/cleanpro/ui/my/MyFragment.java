@@ -14,6 +14,7 @@ import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.logon.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
+import com.pakpobox.cleanpro.ui.setting.feedback.FeedbackFragment;
 import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
@@ -56,7 +57,7 @@ public class MyFragment extends BaseFragment {
         return R.layout.fragment_my;
     }
 
-    @OnClick({R.id.my_portrait_im, R.id.my_wallet, R.id.my_settings})
+    @OnClick({R.id.my_portrait_im, R.id.my_wallet, R.id.my_settings, R.id.my_feedback})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.my_portrait_im:
@@ -77,6 +78,12 @@ public class MyFragment extends BaseFragment {
             case R.id.my_settings:
                 if (getParentFragment() instanceof MainFragment) {
                     ((MainFragment) getParentFragment()).start(SettingFragment.newInstance());
+                }
+                break;
+
+            case R.id.my_feedback:
+                if (getParentFragment() instanceof MainFragment) {
+                    ((MainFragment) getParentFragment()).start(FeedbackFragment.newInstance());
                 }
                 break;
         }

@@ -76,12 +76,12 @@ public class PriceAdapter extends BaseListAdapter<Price> {
         titleTbl.addView(tltleTr);
 
         for (int i = 0; i<columns; i++) {
-            TextView title = createTableTv();
-            tltleTr.addView(title);
-
             ItemProp itemProp = i<itemProps.size() ? itemProps.get(i) : null;
-            if (null != itemProp)
+            if (null != itemProp) {
+                TextView title = createTableTv();
+                tltleTr.addView(title);
                 title.setText(itemProp.getName());
+            }
         }
 
         //velue
@@ -120,6 +120,7 @@ public class PriceAdapter extends BaseListAdapter<Price> {
 
             }else{
                 TextView capTv = createTableTv();
+                capTv.setPaddingRelative(0, 0, 0, 0);
                 capTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                 TableRow.LayoutParams tltleTvLps = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT);
                 tltleTvLps.weight = 1;

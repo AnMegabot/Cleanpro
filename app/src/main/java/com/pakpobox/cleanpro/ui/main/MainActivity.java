@@ -1,25 +1,14 @@
 package com.pakpobox.cleanpro.ui.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.view.MenuItem;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragmentActivity;
-import com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment;
-import com.pakpobox.cleanpro.ui.home.HomeFragment;
-import com.pakpobox.cleanpro.ui.my.MyFragment;
-import com.pakpobox.cleanpro.ui.order.OrdersFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseFragmentActivity {
 

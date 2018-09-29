@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
-    tools:context="com.pakpobox.cleanpro.ui.booking.SelectPreferenceFragment">
+    tools:context="com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment">
 
     <include
         android:id="@+id/toolbar"

@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.booking;
+package com.pakpobox.cleanpro.ui.booking.preference;
 
 
 import android.os.Bundle;
@@ -17,8 +17,6 @@ import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.price.Price;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.create.CreateOrderFragment;
-import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceContract;
-import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferencePresenter;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
