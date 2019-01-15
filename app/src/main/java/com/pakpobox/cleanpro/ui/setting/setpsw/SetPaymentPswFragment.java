@@ -4,24 +4,16 @@ package com.pakpobox.cleanpro.ui.setting.setpsw;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
-import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
-import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWContract;
-import com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWPresenter;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.tuo.customview.VerificationCodeView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 设置支付密码

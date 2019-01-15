@@ -1,15 +1,15 @@
 package com.pakpobox.cleanpro.net.callback;
 
 import android.app.Activity;
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.application.MyApplication;
-import com.pakpobox.cleanpro.net.NetConfig;
-import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
+import com.pakpobox.cleanpro.bean.BaseErrorBean;
+import com.pakpobox.cleanpro.ui.mvp.presenter.IPresenter;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 import com.pakpobox.cleanpro.utils.ToastUtils;
 
@@ -28,20 +28,89 @@ import java.text.ParseException;
  * Time:16:03
  */
 
-public abstract class BaseNetCallback<T> implements INetCallback {
+public abstract class BaseNetCallback<T> implements INetCallback, ParameterizedType {
     protected Activity activity;
     protected IView view;
-    private BasePresenter mPresenter;
+    private IPresenter mPresenter;
 
-    public BaseNetCallback(Activity activity, BasePresenter presenter) {
+    public BaseNetCallback(Activity activity, IPresenter presenter) {
         this.activity = activity;
         this.mPresenter = presenter;
         if (null != mPresenter)
             this.view = mPresenter.getView();
     }
 
-    public BasePresenter getPresenter() {
+    public IPresenter getPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public void onNext(byte[] data) {
+        final String responseStr = new String(data);
+        if (!TextUtils.isEmpty(responseStr)) {
+            //先判断返回的数据是否是异常状态信息
+            try {
+                BaseErrorBean baseBean = new Gson().fromJson(responseStr, new TypeToken<BaseErrorBean>() {}.getType());
+                if (null != baseBean && 0 != baseBean.getStatusCode()) {
+                    onStatusError(baseBean.getStatusCode(), baseBean.getErrorMessage());
+                    return;
+                }
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+
+            boolean returnJson = false;
+            Type gsonType = getRawType();
+            if (gsonType instanceof Class) {
+                switch (((Class) gsonType).getSimpleName()) {
+                    case "Object":
+                    case "String":
+                        returnJson = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (returnJson) {
+                if (null != activity && !activity.isFinishing()) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onSuccess((T) responseStr);
+                        }
+                    });
+                } else {
+                    onSuccess((T) responseStr);
+                }
+            } else {
+                try {
+                    final T t = (new Gson()).fromJson(responseStr, getGsonFormatType());
+                    if (null != activity && !activity.isFinishing()) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onSuccess(t);
+                            }
+                        });
+                    } else {
+                        onSuccess(t);
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    onError(e);
+                }
+            }
+        } else {
+            ToastUtils.showToast(activity, R.string.app_response_empty);
+        }
+    }
+
+    protected void onSuccess(T data) {
+    }
+
+    protected void onStatusError(int statusCode, String statusMsg) {
+        showError(statusMsg);
     }
 
     @Override
@@ -52,13 +121,18 @@ public abstract class BaseNetCallback<T> implements INetCallback {
     @Override
     public void onError(Throwable throwable) {
         hideLoading();
-        dealException(MyApplication.getContext(), throwable);
+        dealException(throwable);
     }
 
     @Override
     public void onResponseError(int errorCode, String errorMsg) {
         hideLoading();
-        onException(MyApplication.getContext(), errorCode, errorMsg);
+        if (null != activity) {
+            String msgStr = activity.getString(R.string.app_response_error) + errorCode;
+            if (!TextUtils.isEmpty(errorMsg))
+                msgStr = msgStr + "-" + errorMsg;
+            showError(msgStr);
+        }
     }
 
     @Override
@@ -67,7 +141,7 @@ public abstract class BaseNetCallback<T> implements INetCallback {
     }
 
     //显示正在加载
-    private void showLoading() {
+    protected void showLoading() {
         if (null != view && null != activity && !activity.isFinishing()) {
             activity.runOnUiThread(new Runnable() {
                 @Override
@@ -78,7 +152,7 @@ public abstract class BaseNetCallback<T> implements INetCallback {
         }
     }
     //隐藏正在加载
-    private void hideLoading() {
+    protected void hideLoading() {
         if (null != view && null != activity && !activity.isFinishing()) {
             activity.runOnUiThread(new Runnable() {
                 @Override
@@ -90,68 +164,86 @@ public abstract class BaseNetCallback<T> implements INetCallback {
     }
 
     //处理异常错误
-    void dealException(Context context, Throwable t) {
-
+    private void dealException(Throwable t) {
         if (t instanceof ConnectException || t instanceof UnknownHostException) {
             //连接错误
-            onException(context, NetConfig.CONNECT_ERROR);
+            showError(R.string.app_connect_error);
         } else if (t instanceof InterruptedException) {
             //连接超时
-            onException(context, NetConfig.CONNECT_TIMEOUT);
+            showError(R.string.app_connect_timeout);
         } else if (t instanceof JsonParseException
                 || t instanceof JSONException
                 || t instanceof ParseException) {
             //解析错误
-            onException(context, NetConfig.PARSE_ERROR);
+            showError(R.string.app_parse_error);
         } else if (t instanceof SocketTimeoutException) {
             //请求超时
-            onException(context, NetConfig.REQUEST_TIMEOUT);
+            showError(R.string.app_request_timeout);
         } else if (t instanceof UnknownError) {
             //未知错误
-            onException(context, NetConfig.UNKNOWN_ERROR);
+            showError(R.string.app_unknown_error);
         } else {
             //未知错误
-            onException(context, NetConfig.UNKNOWN_ERROR);
+            showError(R.string.app_system_error);
         }
     }
 
-    void onException(final Context context, final int errorCode) {
-        onException(context,errorCode, null);
+    protected void showError(final int errorMsgResId) {
+        if (null != activity) {
+            showError(activity.getString(errorMsgResId));
+        }
     }
 
-    void onException(final Context context, final int errorCode, final String errorMsg) {
+    protected void showError(final String errorMsg) {
         if (null != activity && !activity.isFinishing()) {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    view.showError();
-                    switch (errorCode) {
-                        case NetConfig.CONNECT_ERROR:
-                            ToastUtils.showToast(context, R.string.app_connect_error);
-                            break;
-                        case NetConfig.CONNECT_TIMEOUT:
-                            ToastUtils.showToast(context, R.string.app_connect_timeout);
-                            break;
-                        case NetConfig.PARSE_ERROR:
-                            ToastUtils.showToast(context, R.string.app_parse_error);
-                            break;
-                        case NetConfig.REQUEST_TIMEOUT:
-                            ToastUtils.showToast(context, R.string.app_request_timeout);
-                            break;
-                        case NetConfig.UNKNOWN_ERROR:
-                            ToastUtils.showToast(context, R.string.app_unknown_error);
-                            break;
-                        case NetConfig.LOGIN_INVALID:
-                            ToastUtils.showToast(context, R.string.app_login_invalid_error);
-                            if (null != view)
-                                view.dealError(NetConfig.LOGIN_INVALID);
-                            break;
-                        default:
-                            ToastUtils.showToast(context, errorMsg);
-                            break;
-                    }
+                    ToastUtils.showToast(activity, errorMsg);
+                    if (null != view)
+                        view.showError();
                 }
             });
         }
+    }
+
+    //====================================== 重写ParameterizedType内部方法，返回BaseBean类型 ==========================================
+
+    @Override
+    public Type[] getActualTypeArguments() {
+        Class clz = this.getClass();
+        //这里必须注意在外面使用new GsonResponsePasare<GsonResponsePasare.DataInfo>(){};实例化时必须带上{},否则获取到的superclass为Object
+        Type superclass = clz.getGenericSuperclass(); //getGenericSuperclass()获得带有泛型的父类
+        if (superclass instanceof Class) {
+            throw new RuntimeException("Missing type parameter.");
+        }
+        ParameterizedType parameterized = (ParameterizedType) superclass;
+        return parameterized.getActualTypeArguments();
+    }
+
+    @Override
+    public Type getOwnerType() {
+        return null;
+    }
+
+    @Override
+    public Type getRawType() {
+        return getGenericityType();
+    }
+
+    private Type getGenericityType() {
+        //获取第1个泛型的类型
+        Type genericSuperclass = getClass().getGenericSuperclass();
+        Type genericityType;
+        if (genericSuperclass instanceof ParameterizedType) {
+            genericityType = ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
+        } else {
+            genericityType = Object.class;
+        }
+        return genericityType;
+    }
+
+    private Type getGsonFormatType() {
+        return getRawType() instanceof Class ? this : getRawType();
     }
 }

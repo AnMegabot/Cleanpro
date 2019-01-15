@@ -1,9 +1,6 @@
 package com.pakpobox.cleanpro.ui.logon.setpsw;
 
 import com.pakpobox.cleanpro.bean.Register;
-import com.pakpobox.cleanpro.bean.Result;
-import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -76,15 +73,5 @@ public interface SetPSWContract {
          * 注册成功
          */
         void registerSuccess();
-    }
-
-    interface ISetPSWModel {
-
-        /**
-         * 注册
-         * @param register 注册参数
-         * @param callback 回调
-         */
-        void register(Register register, NetCallback<UserBean> callback);
     }
 }

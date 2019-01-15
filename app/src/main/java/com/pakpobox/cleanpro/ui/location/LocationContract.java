@@ -1,10 +1,7 @@
 package com.pakpobox.cleanpro.ui.location;
 
 import com.pakpobox.cleanpro.bean.PageListDataBean;
-import com.pakpobox.cleanpro.bean.TradingRecort;
-import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.location.Site;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -32,16 +29,5 @@ public interface LocationContract {
          * 获取成功
          */
         void getSuccess(PageListDataBean<Site> data);
-    }
-
-    interface ILocationModel {
-
-        /**
-         * 获取门店列表
-         * @param page 页码
-         * @param maxCount 每页条数
-         * @param callback 回调
-         */
-        void getLocations(int page, int maxCount, NetCallback<PageListDataBean<Site>> callback);
     }
 }

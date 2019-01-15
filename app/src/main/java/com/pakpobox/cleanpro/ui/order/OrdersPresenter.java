@@ -6,15 +6,12 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.bean.PageListDataBean;
-import com.pakpobox.cleanpro.bean.price.Price;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.net.callback.PageListNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IOrderModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.OrderModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
-import com.pakpobox.cleanpro.ui.price.PriceContract;
-import com.pakpobox.cleanpro.ui.price.PriceModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * User:Sean.Wei
@@ -23,29 +20,21 @@ import java.util.UUID;
  */
 
 public class OrdersPresenter extends BasePresenter<OrdersContract.IOrdersView> implements OrdersContract.IOrdersPresenter {
-    private OrdersContract.IIOrdersModel mModel;
+    private IOrderModel mModel;
     private OrdersContract.IOrdersView mOrdersView;
 
     private Activity activity;
 
     public OrdersPresenter(Activity activity) {
         this.activity = activity;
-        mModel = new OrdersModel();
+        mModel = new OrderModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void getOrdersList() {
         mOrdersView = getView();
-        NetCallback<PageListDataBean<Order>> callback = new NetCallback<PageListDataBean<Order>>(activity, this) {
-            @Override
-            protected void onSuccess(PageListDataBean<Order> data) {
-                if (null != data)
-                    mOrdersView.getSuccess(data);
-                else
-                    mOrdersView.showFail(MyApplication.getContext().getString(R.string.app_unknown_error));
-            }
-        };
-        mModel.getOrdersList(mOrdersView.getPage(), 20, callback);
+        mModel.getOrdersList(mOrdersView.getPage(), 20, new PageListNetCallback<Order>(activity, this){});
     }
 
 }

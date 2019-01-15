@@ -14,7 +14,7 @@ public class PageListDataBean<T> {
     private int maxCount;
     private int totalPage;
     private int totalCount;
-    private List<T> resultList = new ArrayList<>();
+    private List<T> resultList;
 
     public boolean isOver() {
         return page >= totalPage-1;

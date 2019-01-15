@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.Const;
-import com.pakpobox.cleanpro.net.HttpManager;
 import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
 import com.pakpobox.cleanpro.utils.PreUtils;
 
@@ -26,8 +25,6 @@ public class AppSetting {
     private static AppSetting instance = null;
 
     private static final String PREFER_FILE_NAME = "Creanpro_config";
-
-    private HttpManager httpManager = null;
 
     private Context mContext = null;
 
@@ -50,11 +47,6 @@ public class AppSetting {
     public void init(Context context) {
         mContext = context;
         PreUtils.init(mContext, PREFER_FILE_NAME);
-        httpManager = new HttpManager();
-    }
-
-    public HttpManager getHttpManager() {
-        return httpManager;
     }
 
     /*==================== 本地存储 ======================*/
@@ -109,12 +101,12 @@ public class AppSetting {
 
     //获取AES密钥
     private static SecretKeySpec getAesKey(){
-        String keyStr = (String) PreUtils.get(Const.USERINFO_KEY.AES, "");
+        String keyStr = (String) PreUtils.get("RANDOM_AES_KEY", "");
         if (TextUtils.isEmpty(keyStr)) {
             //生成一个随机密钥
             SecretKeySpec key = AesEncryptionUtils.createKey();
             //保存密钥
-            PreUtils.put(Const.USERINFO_KEY.AES, Base64.encodeToString(key.getEncoded(),Base64.DEFAULT));
+            PreUtils.put("RANDOM_AES_KEY", Base64.encodeToString(key.getEncoded(),Base64.DEFAULT));
             return key;
         } else {
             return AesEncryptionUtils.getSecretKey(Base64.decode(keyStr, Base64.DEFAULT));

@@ -32,10 +32,9 @@ import java.util.Map;
 public class PriceAdapter extends BaseListAdapter<Price> {
 
     private OnItemClickListener listener;
-    private Context mContext;
 
     public PriceAdapter(Context context, OnItemClickListener listener) {
-        this.mContext = context;
+        super(context);
         this.listener = listener;
     }
 

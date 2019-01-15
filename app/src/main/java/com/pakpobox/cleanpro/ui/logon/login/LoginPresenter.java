@@ -7,7 +7,10 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.AccountModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,20 +23,21 @@ import org.greenrobot.eventbus.EventBus;
 
 public class LoginPresenter extends BasePresenter<LoginContract.ILoginView> implements LoginContract.ILoginPresenter{
     private String userName, password;
-    private LoginContract.ILoginModel mLoginModel;
+    private IAccountModel mModel;
     private LoginContract.ILoginView mLoginView;
 
     private Activity activity;
 
     public LoginPresenter(Activity activity) {
         this.activity = activity;
-        mLoginModel = new LoginModel();
+        mModel = new AccountModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void login() {
         if (verifyAccount()) {
-            NetCallback<UserBean> callback = new NetCallback<UserBean>(activity, this) {
+            BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
                 @Override
                 protected void onSuccess(UserBean data) {
                     if (null != data) {
@@ -46,7 +50,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginView> impl
                         mLoginView.showFail(MyApplication.getContext().getString(R.string.login_signIn_fail_warn));
                 }
             };
-            mLoginModel.login(userName, password, callback);
+            mModel.login(userName, password, callback);
         }
     }
 

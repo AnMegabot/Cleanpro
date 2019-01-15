@@ -7,8 +7,10 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Result;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
-import com.pakpobox.cleanpro.ui.logon.register.BaseVerifyContract;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.AccountModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 /**
@@ -18,21 +20,21 @@ import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
  */
 
 public class SetPaymentPswPresenter extends BasePresenter<SetPaymentPswContract.ISetPaymentPswView> implements SetPaymentPswContract.ISetPaymentPswPresenter {
-    private String phoneNumber, verifyCode;
     private SetPaymentPswContract.ISetPaymentPswView mSetPaymentPswView;
-    private SetPaymentPswContract.ISetPaymentPswModel mModel;
+    private IAccountModel mModel;
 
     private Activity activity;
 
     public SetPaymentPswPresenter(Activity activity) {
         this.activity = activity;
-        this.mModel = new SetPaymentPswModel();
+        this.mModel = new AccountModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void checkPayPsw() {
         if (verifyPayPassword(1)) {
-            NetCallback<Result> callback = new NetCallback<Result>(activity, this) {
+            BaseNetCallback<Result> callback = new BaseNetCallback<Result>(activity, this) {
                 @Override
                 protected void onSuccess(Result data) {
                     if (data.isResult())
@@ -48,7 +50,7 @@ public class SetPaymentPswPresenter extends BasePresenter<SetPaymentPswContract.
     @Override
     public void resetPayPsw() {
         if (verifyPayPassword(3)) {
-            NetCallback<UserBean> callback = new NetCallback<UserBean>(activity, this) {
+            BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
                 @Override
                 protected void onSuccess(UserBean data) {
                     mSetPaymentPswView.resetPayPswSuccess(data.getToken());

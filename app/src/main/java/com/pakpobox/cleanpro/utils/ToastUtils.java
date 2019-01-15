@@ -1,6 +1,7 @@
 package com.pakpobox.cleanpro.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
@@ -14,6 +15,9 @@ public class ToastUtils {
     private static long twoTime = 0;
 
     public static void showToast(Context context, String s) {
+        if (TextUtils.isEmpty(s))
+            return;
+
         if (toast == null) {
             toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
             toast.show();

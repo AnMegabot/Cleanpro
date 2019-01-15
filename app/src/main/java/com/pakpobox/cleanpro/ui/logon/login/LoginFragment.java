@@ -16,7 +16,7 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.ui.logon.register.ForgetPSWFragment;
-import com.pakpobox.cleanpro.ui.logon.register.RegisterFragment;
+import com.pakpobox.cleanpro.ui.logon.register.RegisterStartFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -135,7 +135,7 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_register_btn:
-                start(RegisterFragment.newInstance());
+                start(RegisterStartFragment.newInstance());
                 break;
             case R.id.login_sign_in_btn:
                 mPresenter.login();

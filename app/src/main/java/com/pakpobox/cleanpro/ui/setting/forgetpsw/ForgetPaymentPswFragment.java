@@ -23,7 +23,6 @@ import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.ChangePSWToken;
 import com.pakpobox.cleanpro.ui.logon.register.BaseVerifyContract;
 import com.pakpobox.cleanpro.ui.logon.register.BaseVerifyPresenter;
-import com.pakpobox.cleanpro.ui.logon.register.ForgetPSWModel;
 import com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
@@ -187,7 +186,7 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
 
     @Override
     protected BaseVerifyPresenter createPresenter() {
-        return new BaseVerifyPresenter(getActivity(), new ForgetPSWModel());
+        return new BaseVerifyPresenter(getActivity(), 1);
     }
 
     @OnClick({R.id.forget_payment_psw_country_code_btn, R.id.forget_payment_psw_verifycation_btn, R.id.forget_payment_psw_next_btn})

@@ -4,24 +4,32 @@
     <string name="app_success">Success!</string>
     <string name="app_coming_soon">Coming soon</string>
     <string name="app_press_again_exit">Press again to exit</string>
-    <string name="tip_no_data">没有数据哦</string>
-    <string name="tip_load_data">数据加载中&#8230;</string>
-    <string name="tip_load_error">加载出错</string>
+    <string name="tip_no_data">No Record!</string>
+    <string name="tip_load_data">Data loading&#8230;</string>
+    <string name="tip_load_error">Error loading!\n\nClick retry&#8230;</string>
 
-    <string name="app_connect_error">网络异常</string>
-    <string name="app_connect_timeout">连接超时</string>
-    <string name="app_request_timeout">请求超时</string>
-    <string name="app_parse_error">解析错误</string>
-    <string name="app_unknown_error">未知错误</string>
-    <string name="app_login_invalid_error">登录失效</string>
-    <string name="app_service_error">响应错误：</string>
+    <!--============= Net string =================-->
+    <string name="app_connect_error">Network error</string>
+    <string name="app_connect_timeout">Connection timeout</string>
+    <string name="app_request_timeout">Request timeout</string>
+    <string name="app_parse_error">Parse error</string>
+    <string name="app_unknown_error">Unknown error</string>
+    <string name="app_response_error">Response error：</string>
+    <string name="app_response_empty">Response empty</string>
+    <string name="app_system_error">System error:</string>
 
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>
+    <string name="main_bottom_nav_nearby">Nearby</string>
     <string name="main_bottom_nav_orders">Orders</string>
-    <string name="main_bottom_nav_my">My account</string>
+    <string name="main_bottom_nav_my">Me</string>
 
     <!--Home-->
+    <string name="home_balance">Balance</string>
+    <string name="home_coupons">Coupons</string>
+    <string name="home_points">Points</string>
+    <string name="home_promos">Promos</string>
+    <string name="home_view_all">View all</string>
     <string name="home_laundry">Laundry</string>
     <string name="home_dryer">Dryer</string>
     <string name="home_service">Service</string>
@@ -133,5 +141,13 @@
     <!-- Service -->
     <string name="service">Service</string>
     <string name="service_title">SELF-SERVICE LAUNDRY MANAGEMENT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_join_cleanpro">Join Cleanpro</string>
+    <string name="register_join_tips">We\'ll help you create a new account in a few easy step.</string>
+    <string name="register_whats_name">What\'s Your Name?</string>
+    <string name="register_first_name_hint">First Name</string>
+    <string name="register_last_name_hint">Last Name</string>
 
 </resources>

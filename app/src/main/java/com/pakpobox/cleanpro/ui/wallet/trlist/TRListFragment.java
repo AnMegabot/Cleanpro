@@ -8,9 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
-import com.pakpobox.cleanpro.base.list.BaseListFragment;
-import com.pakpobox.cleanpro.bean.PageListDataBean;
 import com.pakpobox.cleanpro.bean.TradingRecort;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
@@ -55,27 +54,6 @@ public class TRListFragment extends BaseListFragment<TRListPresenter, TRListCont
     }
 
     @Override
-    public void getSuccess(PageListDataBean<TradingRecort> datas) {
-        if (getPage() == 0) {
-            clearListData();
-        }
-        setData(datas.getResultList());
-
-        if (getData().size() > 0) {
-            if (datas.isOver()) {
-                showNoMore();
-            } else {
-                autoLoadMore();
-            }
-        }
-
-        if (getData().size() == 0)
-            showEmpty();
-        else
-            showContent();
-    }
-
-    @Override
     protected TRListPresenter createPresenter() {
         return new TRListPresenter(getActivity());
     }
@@ -92,7 +70,7 @@ public class TRListFragment extends BaseListFragment<TRListPresenter, TRListCont
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new TRListAdapter(new TRListAdapter.OnItemClickListener() {
+        return new TRListAdapter(getContext(), new TRListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(TradingRecort order) {
 

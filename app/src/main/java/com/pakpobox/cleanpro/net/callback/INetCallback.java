@@ -1,7 +1,7 @@
 package com.pakpobox.cleanpro.net.callback;
 
 /**
- * 请求数据回调接口
+ * 网络数据请求回调接口
  * User:Sean.Wei
  * Date:2018/7/20
  * Time:15:25

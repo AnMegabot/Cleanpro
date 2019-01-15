@@ -24,7 +24,7 @@ public class ForgetPSWFragment extends BaseVerifyFragment {
 
     @Override
     protected BaseVerifyPresenter createPresenter() {
-        return new BaseVerifyPresenter(getActivity(), new ForgetPSWModel());
+        return new BaseVerifyPresenter(getActivity(), 1);
     }
 
     @Override

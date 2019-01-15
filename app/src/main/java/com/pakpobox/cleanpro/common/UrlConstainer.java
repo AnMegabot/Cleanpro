@@ -5,8 +5,8 @@ package com.pakpobox.cleanpro.common;
  */
 public class UrlConstainer {
 //    public static final String BASE_URL = "https://sumscn.storhub.com";//服务器正式
-    public static final String BASE_URL = "http://47.90.16.40:18987";//服务器UAT
-//    public static final String BASE_URL = "http://192.168.0.240:8098";//服务器测试
+//    public static final String BASE_URL = "http://47.90.16.40:18987";//服务器UAT
+    public static final String BASE_URL = "http://192.168.0.240:8098";//服务器测试
     //api路径
     public static final String API_PATH = "/ebox/api/v1/";
 

@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.ui.mvp.presenter;
 
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -21,8 +22,7 @@ public interface IPresenter<V extends IView> {
 
     V getView();
 
-    //添加指定的请求
-    void addDisposable(String disposableUrl);
+    void addModel(IModel model);
 
     //取消所有请求
     void removeAllDisposable();

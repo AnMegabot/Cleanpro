@@ -5,10 +5,11 @@ import android.app.Activity;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.PageListDataBean;
-import com.pakpobox.cleanpro.bean.TradingRecort;
-import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.location.Site;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.ICommonModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.CommonModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 /**
@@ -18,20 +19,21 @@ import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
  */
 
 public class LocationPresenter extends BasePresenter<LocationContract.ILocationView> implements LocationContract.ILocationPresenter{
-    private LocationContract.ILocationModel mModel;
+    private ICommonModel mModel;
     private LocationContract.ILocationView mLocationView;
 
     private Activity activity;
 
     public LocationPresenter(Activity activity) {
         this.activity = activity;
-        mModel = new LocationModel();
+        mModel = new CommonModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void getLocations() {
         mLocationView = getView();
-        NetCallback<PageListDataBean<Site>> callback = new NetCallback<PageListDataBean<Site>>(activity, this) {
+        BaseNetCallback<PageListDataBean<Site>> callback = new BaseNetCallback<PageListDataBean<Site>>(activity, this){
             @Override
             protected void onSuccess(PageListDataBean<Site> data) {
                 if (null != data)

@@ -2,15 +2,16 @@ package com.pakpobox.cleanpro.ui.logon.setpsw;
 
 import android.app.Activity;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Register;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.AccountModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
-import com.pakpobox.cleanpro.utils.ToastUtils;
 
 /**
  * User:Sean.Wei
@@ -19,14 +20,15 @@ import com.pakpobox.cleanpro.utils.ToastUtils;
  */
 
 public class SetPSWPresenter extends BasePresenter<SetPSWContract.ISetPSWView> implements SetPSWContract.ISetPSWPresenter{
-    private SetPSWContract.ISetPSWModel mModel;
+    private IAccountModel mModel;
     private SetPSWContract.ISetPSWView mSetPSWView;
 
     private Activity activity;
 
     public SetPSWPresenter(Activity activity) {
         this.activity = activity;
-        mModel = new SetPSWModel();
+        mModel = new AccountModel();
+        addModel((IModel) mModel);
     }
 
     @Override
@@ -34,7 +36,7 @@ public class SetPSWPresenter extends BasePresenter<SetPSWContract.ISetPSWView> i
         if (verifyPassword(true)
                 && verifyPayPassword(true)
                 && verifyOther()){
-            NetCallback<UserBean> callback = new NetCallback<UserBean>(activity, this) {
+            BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
                 @Override
                 protected void onSuccess(UserBean data) {
                     if (null != data)

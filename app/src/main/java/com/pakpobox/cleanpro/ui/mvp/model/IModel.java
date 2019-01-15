@@ -1,7 +1,7 @@
 package com.pakpobox.cleanpro.ui.mvp.model;
 
 import com.pakpobox.cleanpro.net.HttpManager;
-import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.net.callback.INetCallback;
 
 import java.util.HashMap;
 
@@ -12,6 +12,7 @@ import java.util.HashMap;
  */
 
 public interface IModel {
+
     /**
      * 使用HttpManager请求数据
      * @return
@@ -24,7 +25,7 @@ public interface IModel {
      * @param postStr
      * @param callback
      */
-    void postRequest(String url, String postStr, BaseNetCallback callback);
+    void postRequest(String url, String postStr, INetCallback callback);
 
     /**
      * post请求
@@ -33,14 +34,14 @@ public interface IModel {
      * @param postStr
      * @param callback
      */
-    void postRequest(String url, HashMap<String, String> headerValues, String postStr, BaseNetCallback callback);
+    void postRequest(String url, HashMap<String, String> headerValues, String postStr, INetCallback callback);
 
     /**
      * Get请求
      * @param url
      * @param callback
      */
-    void getRequest(String url, BaseNetCallback callback);
+    void getRequest(String url, INetCallback callback);
 
     /**
      * Get请求
@@ -48,5 +49,5 @@ public interface IModel {
      * @param headerValues
      * @param callback
      */
-    void getRequest(String url, HashMap<String, String> headerValues, BaseNetCallback callback);
+    void getRequest(String url, HashMap<String, String> headerValues, INetCallback callback);
 }

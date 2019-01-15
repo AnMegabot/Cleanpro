@@ -80,12 +80,7 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
     protected void initViews(View view) {
         StatusBarUtil.setHeight(getContext(), mToolbar);
         mTitleTv.setText(getString(R.string.home_location));
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pop();
-            }
-        });
+        mToolbar.setNavigationIcon(null);
 
         mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
     }
@@ -101,6 +96,12 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
         return R.layout.fragment_location;
     }
 
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        if (null != googlemap)
+            mPresenter.getLocations();
+    }
 
     @Override
     protected LocationPresenter createPresenter() {
@@ -151,7 +152,6 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
         }
         return false;
 
-
     }
 
     @Override
@@ -166,7 +166,6 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
                 googlemap.setMyLocationEnabled(true);
             }
         }
-        mPresenter.getLocations();
         googlemap.setOnMarkerClickListener(this);
         googlemap.setOnMapClickListener(this);
     }

@@ -37,14 +37,14 @@ import okhttp3.Response;
 
 public class HttpManager {
 	private final String TAG = getClass().getSimpleName();
-	public static final int CONNECT_TIMEOUT_DEF = 30 * 1000;
-	public static final int READ_TIMEOUT_DEF = 30 * 1000;
-	public static final int WRITE_TIMEOUT_DEF = 30 * 1000;
+	public static final int CONNECT_TIMEOUT_DEF = 60 * 1000;
+	public static final int READ_TIMEOUT_DEF = 60 * 1000;
+	public static final int WRITE_TIMEOUT_DEF = 60 * 1000;
 
 	private static final int CACHE_SIZE = 2 * 1024;
 
 	private OkHttpClient mClient = null;
-	private ConcurrentHashMap<String, Call> mHttpCallMap = null;
+	private ConcurrentHashMap<Call, ResponseCallback> mHttpCallMap = null;
 
 	public HttpManager(){
 		SSLSocketFactory sslSocketFactory = null;
@@ -70,14 +70,15 @@ public class HttpManager {
 
 	/**
 	 * 终止HTTP请求
-	 *
-	 * @param url HTTP URL
+	 * @param call 请求
 	 */
-	public void stopHttpRequest(String url) {
-		Call httpCall = mHttpCallMap.remove(url);
-		if (null != httpCall) {
-			httpCall.cancel();
-			Logger.t(TAG).w("Shutdown a HTTP request: " + url);
+	public void stopHttpRequest(Call call) {
+		if (null != call) {
+			call.cancel();
+			ResponseCallback callback = mHttpCallMap.get(call);
+			callback.removeCallback();
+			Logger.t(TAG).w("Shutdown a HTTP request: " + call.request().url());
+			mHttpCallMap.remove(call);
 		}
 	}
 
@@ -85,13 +86,18 @@ public class HttpManager {
 	 * 清除所有HTTP请求
 	 */
 	public void clearAllRequest(){
-		for(Call httpCall : mHttpCallMap.values()){
-			if (null != httpCall) {
-				httpCall.cancel();
+		Logger.t(TAG).w("Clear all HTTP request: size:" + mHttpCallMap.size());
+		Iterator<ConcurrentHashMap.Entry<Call, ResponseCallback>> entries = mHttpCallMap.entrySet().iterator();
+		while (entries.hasNext()) {
+			ConcurrentHashMap.Entry<Call, ResponseCallback> entry = entries.next();
+			if (null != entry.getKey()) {
+				entry.getKey().cancel();
+			}
+			if (null != entry.getValue()) {
+				entry.getValue().removeCallback();
 			}
 		}
 		mHttpCallMap.clear();
-		Logger.t(TAG).w("Clear all HTTP request: size:" + mHttpCallMap.size());
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +114,9 @@ public class HttpManager {
 	public void asyncGetDataByHttp(String url, HashMap<String, String> headerValues, INetCallback netCallback) {
 		Logger.t(TAG).i("HTTP-request(GET): " + url + "\nHeader:" + headerValues);
 		Call call = newHttpCall(url, headerValues, null);
-		call.enqueue(new ResponseCallback(url, netCallback));
+		ResponseCallback callback = new ResponseCallback(url, netCallback);
+		mHttpCallMap.put(call, callback);
+		call.enqueue(callback);
 	}
 
 	/**
@@ -120,6 +128,7 @@ public class HttpManager {
 	public byte[] syncGetDataByHttp(String url, HashMap<String, String> headerValues) {
 		Logger.t(TAG).i("HTTP-request(GET): " + url + "\nHeader:" + headerValues);
 		Call call = newHttpCall(url, headerValues, null);
+		mHttpCallMap.put(call, null);
 		return responseData(url, call);
 	}
 
@@ -137,7 +146,9 @@ public class HttpManager {
 		Logger.t(TAG).i("HTTP-request(POST): " + url + "\nupload-data: " + postString + "\nHeader:" + headerValues);
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postString);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, netCallback));
+		ResponseCallback callback = new ResponseCallback(url, netCallback);
+		mHttpCallMap.put(call, callback);
+		call.enqueue(callback);
 	}
 
 	/**
@@ -150,7 +161,9 @@ public class HttpManager {
 	public void asyncPostFileByHttp(String url, HashMap<String, String> headerValues, File file, INetCallback netCallback) {
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, netCallback));
+		ResponseCallback callback = new ResponseCallback(url, netCallback);
+		mHttpCallMap.put(call, callback);
+		call.enqueue(callback);
 	}
 
 	/**
@@ -163,7 +176,9 @@ public class HttpManager {
 	public void asyncPostBytesByHttp(String url, HashMap<String, String> headerValues, byte[] data, INetCallback netCallback) {
 		RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), data);
 		Call call = newHttpCall(url, headerValues, requestBody);
-		call.enqueue(new ResponseCallback(url, netCallback));
+		ResponseCallback callback = new ResponseCallback(url, netCallback);
+		mHttpCallMap.put(call, callback);
+		call.enqueue(callback);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,13 +189,18 @@ public class HttpManager {
 	private Call newHttpCall(String url, HashMap<String, String> headerValues, RequestBody requestBody) {
 		Request request = createRequest(url, headerValues, requestBody);
 		Call call = mClient.newCall(request);
-		mHttpCallMap.put(url, call);
 		return call;
 	}
 
 	// 创建HTTP请求对象
 	private Request createRequest(String url, HashMap<String, String> headerValues, RequestBody requestBody) {
-		Request.Builder requestBuilder = new Request.Builder().url(url);
+		Request.Builder requestBuilder = null;
+		try {
+			requestBuilder = new Request.Builder().url(url);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
 		if (null != requestBody) {
 			requestBuilder.post(requestBody);
@@ -229,7 +249,7 @@ public class HttpManager {
 		} catch (IOException e) {
 			Logger.t(TAG).e(e,"Response error: " + url + "\nmessage：IO error");
 		}finally {
-			mHttpCallMap.remove(url);
+			mHttpCallMap.remove(call);
 		}
 		return responseData;
 	}
@@ -247,9 +267,13 @@ public class HttpManager {
 				callback.onStart();
 		}
 
+		public void removeCallback() {
+			callback = null;
+		}
+
 		@Override
 		public void onFailure(Call call, IOException e) {
-			mHttpCallMap.remove(url);
+			mHttpCallMap.remove(call);
 			Logger.t(TAG).e(e, "Request fail: url:" + url + "\n");
 			if(null != callback)
 				callback.onError(e);
@@ -279,14 +303,14 @@ public class HttpManager {
 				} else {
 					Logger.t(TAG).e("Response error: " + url + "\ncode：" + response.code() + "\nmessage：" + response.message());
 					if(null != callback)
-						callback.onResponseError(NetConfig.RESPONSE_ERROR, "Response error:" + response.code());
+						callback.onResponseError(response.code(), response.message());
 				}
 			} catch (IOException e) {
 				Logger.t(TAG).e(e, "HTTP response IO error");
 				if(null != callback)
 					callback.onError(e);
 			} finally {
-				mHttpCallMap.remove(url);
+				mHttpCallMap.remove(call);
 				if (null != inputStream) {
 					try {
 						inputStream.close();

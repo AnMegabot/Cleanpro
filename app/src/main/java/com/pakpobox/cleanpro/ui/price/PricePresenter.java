@@ -2,11 +2,11 @@ package com.pakpobox.cleanpro.ui.price;
 
 import android.app.Activity;
 
-import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.application.MyApplication;
-import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.price.Price;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.ICommonModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.CommonModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 import java.util.List;
@@ -18,26 +18,28 @@ import java.util.List;
  */
 
 public class PricePresenter extends BasePresenter<PriceContract.IPriceView> implements PriceContract.IPricePresenter{
-    private PriceContract.IPriceModel mModel;
-    private PriceContract.IPriceView mPriceView;
+    private ICommonModel mModel;
 
     private Activity activity;
 
     public PricePresenter(Activity activity) {
         this.activity = activity;
-        mModel = new PriceModel();
+        mModel = new CommonModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void getPrices() {
-        NetCallback<List<Price>> callback = new NetCallback<List<Price>>(activity, this) {
+        BaseNetCallback<List<Price>> callback = new BaseNetCallback<List<Price>>(activity, this){
             @Override
             protected void onSuccess(List<Price> data) {
-                mPriceView = getView();
-                if (null != data)
-                    mPriceView.getSuccess(data);
+                super.onSuccess(data);
+                getView().clearListData();
+                getView().setData(data);
+                if (getView().getData().size() == 0)
+                    getView().showEmpty();
                 else
-                    mPriceView.showFail(MyApplication.getContext().getString(R.string.app_unknown_error));
+                    getView().showContent();
             }
         };
         mModel.getPrices(callback);

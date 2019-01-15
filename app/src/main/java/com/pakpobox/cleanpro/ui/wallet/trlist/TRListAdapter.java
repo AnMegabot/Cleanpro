@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.ui.wallet.trlist;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,7 +24,8 @@ public class TRListAdapter extends BaseListAdapter<TradingRecort> {
 
     private OnItemClickListener listener;
 
-    public TRListAdapter(OnItemClickListener listener) {
+    public TRListAdapter(Context context, OnItemClickListener listener) {
+        super(context);
         this.listener = listener;
     }
 
@@ -44,7 +46,7 @@ public class TRListAdapter extends BaseListAdapter<TradingRecort> {
         date.setTime(bean.getCreateTime());
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
         timeTv.setText(timeStamp);
-        amountTv.setTextColor("IN".equals(bean.getIncomeType()) ? MyApplication.getContext().getResources().getColor(R.color.orderPaidTextColor) : MyApplication.getContext().getResources().getColor(R.color.textColorPrimaryDark));
+        amountTv.setTextColor("IN".equals(bean.getIncomeType()) ? mContext.getResources().getColor(R.color.orderPaidTextColor) : mContext.getResources().getColor(R.color.textColorPrimaryDark));
         amountTv.setText(("IN".equals(bean.getIncomeType()) ? "+" : "-") + SystemUtils.formatFloat2Str(bean.getAmount()/100.0));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

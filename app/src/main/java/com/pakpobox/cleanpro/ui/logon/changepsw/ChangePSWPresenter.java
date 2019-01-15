@@ -5,9 +5,11 @@ import android.text.TextUtils;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
-import com.pakpobox.cleanpro.bean.Result;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
+import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
+import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
+import com.pakpobox.cleanpro.ui.mvp.model.IModel;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.AccountModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 /**
@@ -18,20 +20,21 @@ import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 public class ChangePSWPresenter extends BasePresenter<ChangePSWContract.IChangePSWView> implements ChangePSWContract.IChangePSWPresenter{
     private String token, password;
-    private ChangePSWContract.IChangePSWModel mModel;
+    private IAccountModel mModel;
     private ChangePSWContract.IChangePSWView mChangePSWView;
 
     private Activity activity;
 
     public ChangePSWPresenter(Activity activity) {
         this.activity = activity;
-        mModel = new ChangePSWModel();
+        mModel = new AccountModel();
+        addModel((IModel) mModel);
     }
 
     @Override
     public void changePSW() {
         if (verifyPassword()) {
-            NetCallback<UserBean> callback = new NetCallback<UserBean>(activity, this) {
+            BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
                 @Override
                 protected void onSuccess(UserBean data) {
                     if (null != data)

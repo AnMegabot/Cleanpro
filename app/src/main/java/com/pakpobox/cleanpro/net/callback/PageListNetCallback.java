@@ -2,9 +2,11 @@ package com.pakpobox.cleanpro.net.callback;
 
 import android.app.Activity;
 
-import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
+import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.ui.mvp.presenter.IPresenter;
 import com.pakpobox.cleanpro.ui.mvp.view.IListDataView;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -13,26 +15,37 @@ import java.util.List;
  * Time:10:31
  */
 
-public class PageListNetCallback<T, V> extends NetCallback<T>{
+public abstract class PageListNetCallback<T> extends BaseNetCallback<PageListDataBean<T>>{
 
-    private IListDataView<V> mListDataView;
-    public PageListNetCallback(Activity activity, BasePresenter mPresenter) {
+    protected IListDataView<T> mListDataView;
+
+    public PageListNetCallback(Activity activity, IPresenter mPresenter) {
         super(activity, mPresenter);
-        this.mListDataView = (IListDataView<V>) view;
+        if (null != mPresenter) {
+            if (view instanceof IListDataView)
+                this.mListDataView = (IListDataView)view;
+        }
     }
 
     @Override
-    protected void onSuccess(T data) {
+    protected void onSuccess(PageListDataBean<T> data) {
+        if (null == mListDataView)
+            return;
 
-        if (mListDataView.getPage() == 0) {
+        if (data.getPage() == 0) {
             mListDataView.clearListData();
         }
-        if (mListDataView.getPage() > 0 && (null==data || ((List<V>)data).size()<=0)) {
-            mListDataView.showNoMore();
-        } else {
-            mListDataView.autoLoadMore();
+
+        List<T> datas = data.getResultList();
+        mListDataView.setData(datas);
+
+        if (mListDataView.getData().size() > 0) {
+            if (data.getPage() >= data.getTotalPage()-1) {
+                mListDataView.showNoMore();
+            } else {
+                mListDataView.autoLoadMore();
+            }
         }
-        mListDataView.setData((List<V>)data);
 
         if (mListDataView.getData().size() == 0)
             mListDataView.showEmpty();
@@ -40,4 +53,8 @@ public class PageListNetCallback<T, V> extends NetCallback<T>{
             mListDataView.showContent();
     }
 
+    @Override
+    public Type getRawType() {
+        return PageListDataBean.class;
+    }
 }

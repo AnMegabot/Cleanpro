@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 
@@ -93,5 +94,15 @@ public class StatusLayout extends FrameLayout {
         mEmptyView.setVisibility(GONE);
     }
 
+    public void setOnErrorClickListener(OnClickListener listener) {
+        mErrorView.setOnClickListener(listener);
+    }
 
+    public void setErrorText(String text) {
+        ((TextView)mErrorView.findViewById(R.id.studio_error_tv)).setText(text);
+    }
+
+    public void setEmptyText(String text) {
+        ((TextView)mEmptyView.findViewById(R.id.studio_empty_tv)).setText(text);
+    }
 }

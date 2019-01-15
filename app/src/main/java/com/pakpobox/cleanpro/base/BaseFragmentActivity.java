@@ -4,13 +4,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
+import android.view.View;
 
+import com.pakpobox.cleanpro.ui.widget.LoadingDialog;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.language.LanguageUtil;
 import com.pakpobox.cleanpro.utils.language.MyContextWrapper;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Locale;
 
+import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -20,13 +25,23 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Time:15:ic_launcher
  */
 
-public class BaseFragmentActivity extends SupportActivity {
+public abstract class BaseFragmentActivity extends SupportActivity {
+    private View clickingView;//如果用户尚未登录，则保存需要登录才能下一步的被点击的视图，登录成功后自动调用该视图的点击事件
     private KeyBoardHelper keyBoardHelper;
+    private boolean hasPop = false;//防止多次快速点击出现重复触发回退
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         keyBoardHelper = new KeyBoardHelper(this);
+        if (isRegisterEvent())
+            EventBus.getDefault().register(this);
+
+        if (0 != getLayoutId()) {
+            setContentView(getLayoutId());
+        }
+        ButterKnife.bind(this);
+        initViews();
     }
 
 
@@ -44,4 +59,65 @@ public class BaseFragmentActivity extends SupportActivity {
         Context context = MyContextWrapper.wrap(newBase, newLocale);
         super.attachBaseContext(context);
     }
+
+    @Override
+    protected void onDestroy() {
+        if (isRegisterEvent())
+            EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    /**
+     * 显示带消息的进度框
+     *
+     * @param title 提示
+     */
+    protected void showLoadingDialog(String title) {
+        LoadingDialog.showLoading(this, title);
+    }
+
+    /**
+     * 显示进度框
+     */
+    protected void showLoadingDialog() {
+        LoadingDialog.showLoading(this);
+    }
+
+    /**
+     * 隐藏进度框
+     */
+    protected void hideLoadingDialog() {
+        LoadingDialog.stopLoading();
+    }
+
+    protected void setClickingView(View view) {
+        clickingView = view;
+    }
+
+    protected void clickClickingView() {
+        if (null != clickingView) {
+            clickingView.callOnClick();
+            clickingView = null;
+        }
+    }
+
+    @Override
+    public void pop() {
+        if (!hasPop) {
+            super.pop();
+            hasPop = true;
+        }
+    }
+
+    /**
+     * 是否注册消息分发
+     * @return boolean
+     */
+    protected boolean isRegisterEvent(){
+        return false;
+    }
+
+    protected abstract void initViews();
+
+    protected abstract int getLayoutId();
 }

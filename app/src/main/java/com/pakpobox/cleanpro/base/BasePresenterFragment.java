@@ -1,19 +1,11 @@
 package com.pakpobox.cleanpro.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.pakpobox.cleanpro.application.AppSetting;
-import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.net.NetConfig;
-import com.pakpobox.cleanpro.ui.logon.LoginActivity;
-import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 import com.pakpobox.cleanpro.utils.ToastUtils;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * MVP模式Fragment基类
@@ -64,15 +56,15 @@ public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extend
 
     @Override
     public void dealError(int errorCode) {
-        switch (errorCode) {
-            case NetConfig.LOGIN_INVALID:
-                AppSetting.saveIsLogin(false);
-                AppSetting.saveUserInfo(null);
-                EventBus.getDefault().post(new UserBean());
-                popTo(MainFragment.class, false);
-                getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
-                break;
-        }
+//        switch (errorCode) {
+//            case NetConfig.LOGIN_INVALID:
+//                AppSetting.saveIsLogin(false);
+//                AppSetting.saveUserInfo(null);
+//                EventBus.getDefault().post(new UserBean());
+//                popTo(MainFragment.class, false);
+//                getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+//                break;
+//        }
     }
 
     private void detachView() {

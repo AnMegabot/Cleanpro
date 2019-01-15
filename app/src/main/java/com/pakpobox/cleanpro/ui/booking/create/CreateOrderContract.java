@@ -2,10 +2,7 @@ package com.pakpobox.cleanpro.ui.booking.create;
 
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
-import com.pakpobox.cleanpro.bean.Register;
 import com.pakpobox.cleanpro.bean.Result;
-import com.pakpobox.cleanpro.bean.Wallet;
-import com.pakpobox.cleanpro.net.callback.NetCallback;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -45,21 +42,5 @@ public interface CreateOrderContract {
          * @param data 钱包
          */
         void createSuccess(Order data);
-    }
-
-    interface ICreateOrderModel {
-        /**
-         * 校验支付密码
-         * @param payPassword 支付密码
-         * @param callback 回调
-         */
-        void checkPayPsw(String payPassword, NetCallback<Result> callback);
-
-        /**
-         * 创建订单
-         * @param body 下单数据
-         * @param callback 回调
-         */
-        void createOrder(CreateOrderRequest body, NetCallback<Order> callback);
     }
 }

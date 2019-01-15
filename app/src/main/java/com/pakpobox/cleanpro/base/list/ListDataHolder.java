@@ -23,6 +23,10 @@ public class ListDataHolder extends RecyclerView.ViewHolder {
             mHolderView = new SparseArray<>();
     }
 
+    protected View getItemView() {
+        return itemView;
+    }
+
 
     public static ListDataHolder createViewHolder(ViewGroup parent, int layoutId) {
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);

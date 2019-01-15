@@ -3,9 +3,7 @@ package com.pakpobox.cleanpro.ui.setting;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,9 +18,7 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 设置

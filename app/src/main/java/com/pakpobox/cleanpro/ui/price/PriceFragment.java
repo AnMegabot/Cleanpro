@@ -8,25 +8,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
-import com.pakpobox.cleanpro.base.list.BaseListFragment;
-import com.pakpobox.cleanpro.bean.TradingRecort;
-import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.price.Price;
-import com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment;
-import com.pakpobox.cleanpro.ui.wallet.scan.ScanRcFragment;
-import com.pakpobox.cleanpro.ui.wallet.trlist.TRListAdapter;
-import com.pakpobox.cleanpro.ui.wallet.trlist.TRListContract;
-import com.pakpobox.cleanpro.ui.wallet.trlist.TRListFragment;
-import com.pakpobox.cleanpro.ui.wallet.trlist.TRListPresenter;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
-import com.pakpobox.cleanpro.utils.SystemUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 我的钱包
@@ -64,24 +53,6 @@ public class PriceFragment extends BaseListFragment<PricePresenter, PriceContrac
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_price;
-    }
-
-    @Override
-    public void getSuccess(List<Price> datas) {
-        if (getPage() == 0) {
-            clearListData();
-        }
-        if (getPage() > 0 && (null==datas || datas.size()<=0)) {
-            showNoMore();
-        } else {
-            autoLoadMore();
-        }
-        setData(datas);
-
-        if (getData().size() == 0)
-            showEmpty();
-        else
-            showContent();
     }
 
     @Override

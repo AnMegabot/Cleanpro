@@ -58,7 +58,7 @@ public class LanguageUtil {
     }
 
     //保存更改
-    private static void saveAppLocale(Context context, Locale locale) {
+    public static void saveAppLocale(Context context, Locale locale) {
         SharedPreferences preferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(LANGUAGE, locale.getLanguage());
