@@ -102,5 +102,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
 
     /*选择器*/
-    implementation 'com.contrarywind:Android-PickerView:4.1.7'
+    implementation 'com.contrarywind:wheelview:4.0.9'
 }
