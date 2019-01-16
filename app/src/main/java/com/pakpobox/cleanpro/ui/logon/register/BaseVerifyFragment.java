@@ -9,10 +9,8 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -27,9 +25,7 @@ import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * User:Sean.Wei
@@ -37,7 +33,7 @@ import butterknife.Unbinder;
  * Time:14:32
  */
 
-public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerifyPresenter, BaseVerifyContract.IVerifyView> implements BaseVerifyContract.IVerifyView {
+public abstract class BaseVerifyFragment extends BasePresenterFragment<RegisterPresenter, RegisterContract.IRegisterView> implements RegisterContract.IRegisterView {
 
     @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
@@ -54,7 +50,7 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
     @BindView(R.id.register_country_code_btn)
     CheckBox mCountryCodeBtn;
 
-    private String countryCode = "86";
+    String countryCode = "86";
 
     private KeyBoardHelper keyBoardHelper;
 
@@ -70,7 +66,7 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
                 mHandler.postDelayed(countdownTask, 1000);
             } else {
                 hasGetSignCode = false;
-                if (!TextUtils.isEmpty(getUserName()))
+                if (!TextUtils.isEmpty(mMobileEt.getText().toString().trim()))
                     mVerifycationBtn.setEnabled(true);
                 else
                     mVerifycationBtn.setEnabled(false);
@@ -84,21 +80,6 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandler = new Handler();
-    }
-
-    @Override
-    public String getUserName() {
-        return mMobileEt.getText().toString().trim();
-    }
-
-    @Override
-    public String getVerifyCode() {
-        return mVerifycationEt.getText().toString().trim();
-    }
-
-    @Override
-    public String getCountryCode() {
-        return countryCode;
     }
 
     @Override
@@ -144,8 +125,8 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
 
             @Override
             public void afterTextChanged(Editable s) {
-                mVerifycationBtn.setEnabled(!hasGetSignCode && mPresenter.verifyAccount());
-                mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
+                mVerifycationBtn.setEnabled(!hasGetSignCode && verifyAccount());
+                mNextBtn.setEnabled(verifyAccount() && verifyCode());
             }
         });
 
@@ -160,12 +141,12 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
 
             @Override
             public void afterTextChanged(Editable s) {
-                mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
+                mNextBtn.setEnabled(verifyAccount() && verifyCode());
             }
         });
 
-        mVerifycationBtn.setEnabled(!hasGetSignCode && mPresenter.verifyAccount());
-        mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
+        mVerifycationBtn.setEnabled(!hasGetSignCode && verifyAccount());
+        mNextBtn.setEnabled(verifyAccount() && verifyCode());
     }
 
     @OnClick({R.id.register_country_code_btn, R.id.register_verifycation_btn, R.id.register_next_btn})
@@ -198,12 +179,26 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<BaseVerif
                 popupMenu.show();
                 break;
             case R.id.register_verifycation_btn:
-                mPresenter.getVerifyCode();
+                mPresenter.getVerifyCode(mMobileEt.getText().toString().trim(), countryCode);
                 break;
             case R.id.register_next_btn:
-                mPresenter.checkVerifyCode();
+                mPresenter.checkVerifyCode(mMobileEt.getText().toString().trim(), mVerifycationEt.getText().toString().trim());
                 break;
         }
+    }
+
+    public boolean verifyAccount() {
+        if (TextUtils.isEmpty(mMobileEt.getText().toString().trim())) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifyCode() {
+        if (TextUtils.isEmpty(mVerifycationEt.getText().toString().trim())) {
+            return false;
+        }
+        return true;
     }
 
     @Override

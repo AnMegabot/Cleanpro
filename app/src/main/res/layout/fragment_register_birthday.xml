@@ -24,7 +24,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:text="@string/register_whats_name"
+        android:text="@string/register_whats_birthday"
         android:textColor="@color/textColorPrimaryDark"
         android:textSize="17sp"
         android:textStyle="bold"/>
@@ -33,6 +33,11 @@
         android:id="@+id/register_birthday_timepicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
     </LinearLayout>
@@ -44,7 +49,6 @@
         style="@style/AppButtonBlue"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="35dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
         android:enabled="true"

@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:text="@string/register_whats_gender"
+        android:textColor="@color/textColorPrimaryDark"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/register_gender_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="83dp"
+        android:layout_marginTop="44dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/register_gender_male_rb"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="77dp"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_gender_male_bg"
+            android:checked="true"
+            android:gravity="center"
+            android:textColor="@drawable/selector_gender_male_text_color"
+            android:text="@string/register_gender_male"
+            android:textSize="13sp"
+            android:singleLine="true"/>
+
+        <RadioButton
+            android:id="@+id/register_gender_female_rb"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_gender_female_bg"
+            android:gravity="center"
+            android:textColor="@drawable/selector_gender_female_text_color"
+            android:text="@string/register_gender_female"
+            android:textSize="13sp"
+            android:singleLine="true"/>
+
+    </RadioGroup>
+
+
+
+    <Button
+        android:id="@+id/register_gender_next_btn"
+        style="@style/AppButtonBlue"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:enabled="true"
+        android:text="@string/login_next" />
+
+</LinearLayout>
+

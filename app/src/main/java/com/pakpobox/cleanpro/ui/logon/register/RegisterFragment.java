@@ -18,12 +18,12 @@ public class RegisterFragment extends BaseVerifyFragment {
     }
 
     @Override
-    protected BaseVerifyPresenter createPresenter() {
-        return new BaseVerifyPresenter(getActivity(), 0);
+    protected RegisterPresenter createPresenter() {
+        return new RegisterPresenter(getActivity(), 0);
     }
 
     @Override
     public void checkSuccess(String result) {
-        start(SetPSWFragment.newInstance(getUserName(), getVerifyCode(), getCountryCode()));
+        start(SetPSWFragment.newInstance(mMobileEt.getText().toString().trim(), mMobileEt.getText().toString().trim(), countryCode));
     }
 }

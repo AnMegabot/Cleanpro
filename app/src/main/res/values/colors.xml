@@ -25,4 +25,6 @@
     <color name="price_item_dryer_title_bg">#E8CC32</color>
     <color name="price_item_bg_dark">#F0F0F0</color>
     <color name="map_info_title_icon_color">#D6D6D6</color>
+
+    <color name="time_picker_divider_color">#DEDEDE</color>
 </resources>

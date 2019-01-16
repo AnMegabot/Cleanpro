@@ -21,8 +21,8 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.ChangePSWToken;
-import com.pakpobox.cleanpro.ui.logon.register.BaseVerifyContract;
-import com.pakpobox.cleanpro.ui.logon.register.BaseVerifyPresenter;
+import com.pakpobox.cleanpro.ui.logon.register.RegisterContract;
+import com.pakpobox.cleanpro.ui.logon.register.RegisterPresenter;
 import com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
 /**
  * 忘记支付密码
  */
-public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPresenter, BaseVerifyContract.IVerifyView> implements BaseVerifyContract.IVerifyView {
+public class ForgetPaymentPswFragment extends BasePresenterFragment<RegisterPresenter, RegisterContract.IRegisterView> implements RegisterContract.IRegisterView {
 
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
@@ -54,6 +54,8 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
 
     private KeyBoardHelper keyBoardHelper;
 
+    private String countryCode = "86";
+
     private Handler mHandler;
     private int countdownTime = 60;
     private boolean hasGetSignCode = false;
@@ -66,7 +68,7 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
                 mHandler.postDelayed(countdownTask, 1000);
             } else {
                 hasGetSignCode = false;
-                if (!TextUtils.isEmpty(getUserName()))
+                if (!TextUtils.isEmpty(mMobileEt.getText().toString().trim()))
                     mVerifycationBtn.setEnabled(true);
                 else
                     mVerifycationBtn.setEnabled(false);
@@ -124,8 +126,8 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
 
             @Override
             public void afterTextChanged(Editable s) {
-                mVerifycationBtn.setEnabled(!hasGetSignCode && mPresenter.verifyAccount());
-                mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
+                mVerifycationBtn.setEnabled(!hasGetSignCode && verifyAccount());
+                mNextBtn.setEnabled(verifyAccount() && verifyCode());
             }
         });
 
@@ -140,27 +142,12 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
 
             @Override
             public void afterTextChanged(Editable s) {
-                mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
+                mNextBtn.setEnabled(verifyAccount() && verifyCode());
             }
         });
 
-        mVerifycationBtn.setEnabled(!hasGetSignCode && mPresenter.verifyAccount());
-        mNextBtn.setEnabled(mPresenter.verifyAccount() && mPresenter.verifyCode());
-    }
-
-    @Override
-    public String getUserName() {
-        return mMobileEt.getText().toString().trim();
-    }
-
-    @Override
-    public String getVerifyCode() {
-        return mVerifycationEt.getText().toString().trim();
-    }
-
-    @Override
-    public String getCountryCode() {
-        return "86";
+        mVerifycationBtn.setEnabled(!hasGetSignCode && verifyAccount());
+        mNextBtn.setEnabled(verifyAccount() && verifyCode());
     }
 
     @Override
@@ -185,8 +172,22 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
     }
 
     @Override
-    protected BaseVerifyPresenter createPresenter() {
-        return new BaseVerifyPresenter(getActivity(), 1);
+    protected RegisterPresenter createPresenter() {
+        return new RegisterPresenter(getActivity(), 1);
+    }
+
+    public boolean verifyAccount() {
+        if (TextUtils.isEmpty(mMobileEt.getText().toString().trim())) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifyCode() {
+        if (TextUtils.isEmpty(mVerifycationEt.getText().toString().trim())) {
+            return false;
+        }
+        return true;
     }
 
     @OnClick({R.id.forget_payment_psw_country_code_btn, R.id.forget_payment_psw_verifycation_btn, R.id.forget_payment_psw_next_btn})
@@ -195,10 +196,10 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<BaseVerifyPr
             case R.id.forget_payment_psw_country_code_btn:
                 break;
             case R.id.forget_payment_psw_verifycation_btn:
-                mPresenter.getVerifyCode();
+                mPresenter.getVerifyCode(mMobileEt.getText().toString().trim(), countryCode);
                 break;
             case R.id.forget_payment_psw_next_btn:
-                mPresenter.checkVerifyCode();
+                mPresenter.checkVerifyCode(mMobileEt.getText().toString().trim(), mVerifycationEt.getText().toString().trim());
                 break;
         }
     }

@@ -49,7 +49,7 @@ public class RegisterNameFragment extends BaseFragment {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                pop();
             }
         });
 

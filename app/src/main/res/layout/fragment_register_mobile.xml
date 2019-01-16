@@ -1,0 +1,143 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/register_content_llt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="@string/register_set_mobile"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/register_country_code_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:button="@android:color/transparent"
+                android:checked="false"
+                android:drawableRight="@drawable/selector_country_code_dropdown_icon"
+                android:text="+86"
+                app:layout_constraintBottom_toBottomOf="@+id/register_mobile_et"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/register_mobile_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="44dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/login_mobile_hint"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textColorHint="@color/textColorEditHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/register_country_code_btn"
+                app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+            <View
+                android:id="@+id/register_line_1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorLine_1"
+                app:layout_constraintEnd_toEndOf="@+id/register_mobile_et"
+                app:layout_constraintStart_toStartOf="@+id/register_country_code_btn"
+                app:layout_constraintTop_toBottomOf="@+id/register_mobile_et" />
+
+            <EditText
+                android:id="@+id/register_verifycation_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="35dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/login_verifycation"
+                android:inputType="numberSigned"
+                android:singleLine="true"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textColorHint="@color/textColorEditHint"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/register_verifycation_btn"
+                app:layout_constraintStart_toStartOf="@+id/register_line_1"
+                app:layout_constraintTop_toBottomOf="@+id/register_line_1" />
+
+            <Button
+                android:id="@+id/register_verifycation_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:enabled="true"
+                android:text="@string/login_getCode"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/register_verifycation_et"
+                app:layout_constraintEnd_toEndOf="@+id/register_line_1"
+                app:layout_constraintTop_toTopOf="@+id/register_verifycation_et" />
+
+            <View
+                android:id="@+id/register_line_2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorLine_1"
+                app:layout_constraintEnd_toEndOf="@+id/register_verifycation_btn"
+                app:layout_constraintStart_toStartOf="@+id/register_verifycation_et"
+                app:layout_constraintTop_toBottomOf="@+id/register_verifycation_et" />
+
+            <Button
+                android:id="@+id/register_mobile_next_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="35dp"
+                android:enabled="true"
+                android:text="@string/login_next"
+                app:layout_constraintEnd_toEndOf="@+id/register_line_2"
+                app:layout_constraintStart_toStartOf="@+id/register_line_2"
+                app:layout_constraintTop_toBottomOf="@+id/register_line_2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
