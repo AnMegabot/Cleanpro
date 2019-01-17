@@ -62,7 +62,7 @@ public class KeyBoardHelper {
                 if (!isAllowSlide || (moveX<touchSlop && moveY<touchSlop)) {
                     // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹球或者实体案件会移动焦点）
                     View v = activity.getCurrentFocus();
-                    if (isShouldHideInput(v, ev)) {
+                    if (v != null && isShouldHideInput(v, ev)) {
                         hideSoftInput(activity, v.getWindowToken());
                     }
                 }

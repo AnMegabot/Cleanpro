@@ -28,7 +28,7 @@ public class MonthNumericWheelAdapter implements WheelAdapter {
     public Object getItem(int index) {
         if (index >= 0 && index < getItemsCount()) {
             int value = minValue + index;
-            return value >= 0 && value < MONTH_NUM.length ? MONTH_NUM[value-1] : String.valueOf(value);
+            return value > 0 && value <= MONTH_NUM.length ? MONTH_NUM[value-1] : String.valueOf(value);
         }
 //
         return MONTH_NUM[0];

@@ -33,21 +33,21 @@ import butterknife.OnClick;
  * Time:14:32
  */
 
-public abstract class BaseVerifyFragment extends BasePresenterFragment<RegisterPresenter, RegisterContract.IRegisterView> implements RegisterContract.IRegisterView {
+public abstract class BaseVerifyFragment extends BasePresenterFragment<VerifyMobilePresenter, RegisterContract.IVerifyMobileView> implements RegisterContract.IVerifyMobileView {
 
     @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.register_mobile_et)
+    @BindView(R.id.app_mobile_et)
     EditText mMobileEt;
-    @BindView(R.id.register_verifycation_et)
+    @BindView(R.id.app_verifycation_et)
     EditText mVerifycationEt;
-    @BindView(R.id.register_verifycation_btn)
+    @BindView(R.id.app_verifycation_btn)
     Button mVerifycationBtn;
     @BindView(R.id.register_next_btn)
     Button mNextBtn;
     @BindView(R.id.register_content_llt)
     ScrollView mContentLlt;
-    @BindView(R.id.register_country_code_btn)
+    @BindView(R.id.app_country_code_btn)
     CheckBox mCountryCodeBtn;
 
     String countryCode = "86";
@@ -149,10 +149,10 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<RegisterP
         mNextBtn.setEnabled(verifyAccount() && verifyCode());
     }
 
-    @OnClick({R.id.register_country_code_btn, R.id.register_verifycation_btn, R.id.register_next_btn})
+    @OnClick({R.id.app_country_code_btn, R.id.app_verifycation_btn, R.id.register_next_btn})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.register_country_code_btn:
+            case R.id.app_country_code_btn:
                 final PopupMenu popupMenu;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     popupMenu = new PopupMenu(_mActivity, mCountryCodeBtn, GravityCompat.START);
@@ -178,7 +178,7 @@ public abstract class BaseVerifyFragment extends BasePresenterFragment<RegisterP
                 });
                 popupMenu.show();
                 break;
-            case R.id.register_verifycation_btn:
+            case R.id.app_verifycation_btn:
                 mPresenter.getVerifyCode(mMobileEt.getText().toString().trim(), countryCode);
                 break;
             case R.id.register_next_btn:

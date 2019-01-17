@@ -32,7 +32,7 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
 
     @BindView(R.id.login_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.login_mobile_et)
+    @BindView(R.id.app_mobile_et)
     EditText mMobileEt;
     @BindView(R.id.login_password_et)
     EditText mPasswordEt;

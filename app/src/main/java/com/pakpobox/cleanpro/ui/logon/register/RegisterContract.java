@@ -1,5 +1,7 @@
 package com.pakpobox.cleanpro.ui.logon.register;
 
+import com.pakpobox.cleanpro.bean.Register;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -9,13 +11,19 @@ import com.pakpobox.cleanpro.ui.mvp.view.IView;
  */
 
 public interface RegisterContract {
-    interface IRegisterPresenter {
+    interface IVerifyMobilePresenter {
         void getVerifyCode(String phoneNumber, String countryCode);
 
         void checkVerifyCode(String phoneNumber, String verifyCode);
     }
 
-    interface IRegisterView extends IView {
+    interface IRegisterPresenter {
+        void checkInviteCode(String inviteCode);
+
+        void register(Register register);
+    }
+
+    interface IVerifyMobileView extends IView {
 
         /**
          * 获取验证码成功
@@ -27,4 +35,18 @@ public interface RegisterContract {
          */
         void checkSuccess(String result);
     }
+
+    interface IRegisterView extends IView  {
+        /**
+         * 校验邀请码成功
+         */
+        void checkInviteCodeSuccess(String result);
+
+        /**
+         * 注册成功
+         * @param userBean
+         */
+        void registerSuccess(UserBean userBean);
+    }
+
 }

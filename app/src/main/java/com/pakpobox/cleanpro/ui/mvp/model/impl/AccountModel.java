@@ -105,6 +105,11 @@ public class AccountModel extends BaseModel implements IAccountModel {
     }
 
     @Override
+    public void checkInviteCode(String inviteCode, INetCallback callback) {
+        getRequest(getApiUrl(UrlConstainer.GET_INVITECODE, inviteCode), getBaseHttpHeader(), callback);
+    }
+
+    @Override
     public void checkPayPsw(String payPassword, INetCallback callback) {
         JSONObject requestObj = new JSONObject();
         try {

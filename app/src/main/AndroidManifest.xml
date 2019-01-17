@@ -70,7 +70,8 @@
             android:theme="@style/AppTheme.NoActionBar.SplashTheme"
             android:name=".ui.main.StartVideoActivity"/>
         <activity
-            android:name=".ui.main.MainActivity"/>
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".ui.logon.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />

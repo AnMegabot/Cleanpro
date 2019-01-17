@@ -138,7 +138,14 @@ public class SetPSWFragment extends BasePresenterFragment<SetPSWPresenter, SetPS
 
     @Override
     public Register getRegisterParam() {
-        return new Register(mPhoneNumber, mPhoneNumber, mVerifyCode, getPassword(), getPayPassword(), mCountryCode);
+        Register register = new Register();
+        register.setPhoneNumber(mPhoneNumber);
+        register.setLoginName(mPhoneNumber);
+        register.setRandomPassword(mVerifyCode);
+        register.setPassword(getPassword());
+        register.setPayPassword(getPayPassword());
+        register.setCountryCode(mCountryCode);
+        return register;
     }
 
     @Override

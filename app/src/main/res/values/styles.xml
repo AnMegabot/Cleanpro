@@ -41,6 +41,17 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="AppEdittext">
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/shape_app_et_bg</item>
+        <item name="android:textColor">@color/textColorEdit</item>
+        <item name="android:textColorHint">@color/textColorEditHint</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ems">10</item>
+    </style>
+
     <style name="animTranslate">
         <item name="android:windowEnterAnimation">@anim/pop_translate_in</item>
         <item name="android:windowExitAnimation">@anim/pop_translate_out</item>

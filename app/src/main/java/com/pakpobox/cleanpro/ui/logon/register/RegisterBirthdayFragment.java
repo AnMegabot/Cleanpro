@@ -2,7 +2,9 @@ package com.pakpobox.cleanpro.ui.logon.register;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,6 +15,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.bean.Register;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
@@ -33,11 +36,24 @@ public class RegisterBirthdayFragment extends BaseFragment {
     @BindView(R.id.register_birthday_timepicker)
     LinearLayout mTimepicker;
 
-    public static RegisterBirthdayFragment newInstance() {
+    private Register mRegister;
+
+    public static RegisterBirthdayFragment newInstance(Register register) {
         Bundle args = new Bundle();
+        args.putParcelable("register", register);
         RegisterBirthdayFragment fragment = new RegisterBirthdayFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (null != bundle) {
+            mRegister = bundle.getParcelable("register");
+        }
     }
 
     @Override
@@ -51,10 +67,11 @@ public class RegisterBirthdayFragment extends BaseFragment {
         });
 
         Calendar selectedDate = Calendar.getInstance();//系统当前时间
+        selectedDate.set(1991, 10, 29);
         Calendar startDate = Calendar.getInstance();
-        startDate.set(2014, 1, 23);
+        startDate.set(1990, 1, 1);
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2027, 2, 28);
+//        endDate.set(2027, 2, 28);
         //时间选择器 ，自定义布局
         TimePickerView pvCustomTime = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
@@ -78,8 +95,8 @@ public class RegisterBirthdayFragment extends BaseFragment {
 //                .setCancelColor(Color.WHITE)
 //                .animGravity(Gravity.RIGHT)// default is center
                 .setDividerColor(getContext().getResources().getColor(R.color.time_picker_divider_color))
-                .setDate(selectedDate)
                 .setRangDate(startDate, endDate)
+                .setDate(selectedDate)
                 .setLayoutRes(R.layout.pickerview_custom_time, new CustomListener() {
 
                     @Override
@@ -114,7 +131,17 @@ public class RegisterBirthdayFragment extends BaseFragment {
                 .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
                     @Override
                     public void onTimeSelectChanged(Date date) {
-
+                        if (null != mRegister) {
+                            String dateStr = getTime(date);
+                            if (!TextUtils.isEmpty(dateStr)) {
+                                try {
+                                    long birthday = Long.parseLong(dateStr);
+                                    mRegister.setBirthday(birthday);
+                                } catch (NumberFormatException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                     }
                 })
                 .build();
@@ -123,7 +150,7 @@ public class RegisterBirthdayFragment extends BaseFragment {
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         return format.format(date);
     }
 
@@ -134,6 +161,6 @@ public class RegisterBirthdayFragment extends BaseFragment {
 
     @OnClick(R.id.register_birthday_next_btn)
     public void onClick() {
-        start(RegisterGenterFragment.newInstance());
+        start(RegisterGenterFragment.newInstance(mRegister));
     }
 }

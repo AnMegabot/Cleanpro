@@ -18,8 +18,8 @@ public class RegisterFragment extends BaseVerifyFragment {
     }
 
     @Override
-    protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter(getActivity(), 0);
+    protected VerifyMobilePresenter createPresenter() {
+        return new VerifyMobilePresenter(getActivity(), 0);
     }
 
     @Override

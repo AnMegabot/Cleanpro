@@ -22,7 +22,7 @@ import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.ChangePSWToken;
 import com.pakpobox.cleanpro.ui.logon.register.RegisterContract;
-import com.pakpobox.cleanpro.ui.logon.register.RegisterPresenter;
+import com.pakpobox.cleanpro.ui.logon.register.VerifyMobilePresenter;
 import com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
 /**
  * 忘记支付密码
  */
-public class ForgetPaymentPswFragment extends BasePresenterFragment<RegisterPresenter, RegisterContract.IRegisterView> implements RegisterContract.IRegisterView {
+public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobilePresenter, RegisterContract.IVerifyMobileView> implements RegisterContract.IVerifyMobileView {
 
     @BindView(R.id.toolbar_title_tv)
     TextView mTitleTv;
@@ -172,8 +172,8 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<RegisterPres
     }
 
     @Override
-    protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter(getActivity(), 1);
+    protected VerifyMobilePresenter createPresenter() {
+        return new VerifyMobilePresenter(getActivity(), 1);
     }
 
     public boolean verifyAccount() {

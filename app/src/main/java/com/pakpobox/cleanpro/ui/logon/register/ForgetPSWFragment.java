@@ -23,8 +23,8 @@ public class ForgetPSWFragment extends BaseVerifyFragment {
     }
 
     @Override
-    protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter(getActivity(), 1);
+    protected VerifyMobilePresenter createPresenter() {
+        return new VerifyMobilePresenter(getActivity(), 1);
     }
 
     @Override

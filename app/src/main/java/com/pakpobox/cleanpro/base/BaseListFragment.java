@@ -63,14 +63,16 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
         if (mListAdapter != null) {
             mRecyclerView.addHeaderView(initHeaderView());
             mRecyclerView.setAdapter(mListAdapter);
-            mStatusLayout.showLoding();
+            if (isStatusLayoutEnable())
+                mStatusLayout.showLoding();
             loadDatas();
         }
 
         mStatusLayout.setOnErrorClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mStatusLayout.showLoding();
+                if (isStatusLayoutEnable())
+                    mStatusLayout.showLoding();
                 isAutoLoadMore = true;
                 loadDatas();
             }
@@ -177,13 +179,15 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
             mRecyclerView.showLoadMoreError();
             mListAdapter.notifyAllDatas(mListData, mRecyclerView);
         } else {
-            mStatusLayout.showError();
+            if (isStatusLayoutEnable())
+                mStatusLayout.showError();
         }
     }
 
     @Override
     public void showEmpty() {
-        mStatusLayout.showEmpty();
+        if (isStatusLayoutEnable())
+            mStatusLayout.showEmpty();
     }
 
     @Override
@@ -197,6 +201,10 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
     public void reLoadMore() {
         isAutoLoadMore = true;
         loadMore();
+    }
+
+    public boolean isStatusLayoutEnable() {
+        return true;
     }
 
     protected void setRefreshing(final boolean isRefrshing) {

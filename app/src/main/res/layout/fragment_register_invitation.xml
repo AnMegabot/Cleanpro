@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/register_content_llt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="@string/register_set_invitation"
+                android:textColor="@color/textColorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <com.pakpobox.cleanpro.ui.widget.PasswordView
+                android:id="@+id/register_invitation_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:layout_centerInParent="true"
+                app:mode="underline"
+                app:passwordLength="6"
+                app:cipherEnable="false"/>
+
+            <Button
+                android:id="@+id/register_invitation_skip_btn"
+                style="@style/AppButtonBlue"
+                android:background="@drawable/shape_app_skip_btn"
+                android:textColor="@color/textColorPrimaryDark"
+                android:layout_width="154dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="98dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:enabled="true"
+                android:text="@string/register_skip" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

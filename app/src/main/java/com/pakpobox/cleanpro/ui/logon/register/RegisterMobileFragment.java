@@ -20,6 +20,8 @@ import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.bean.Register;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -31,7 +33,7 @@ import butterknife.OnClick;
 /**
  * 注册-6
  */
-public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresenter, RegisterContract.IRegisterView> implements RegisterContract.IRegisterView{
+public class RegisterMobileFragment extends BasePresenterFragment<VerifyMobilePresenter, RegisterContract.IVerifyMobileView> implements RegisterContract.IVerifyMobileView {
 
     @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
@@ -74,8 +76,11 @@ public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresen
         }
     };
 
-    public static RegisterMobileFragment newInstance() {
+    private Register mRegister;
+
+    public static RegisterMobileFragment newInstance(Register register) {
         Bundle args = new Bundle();
+        args.putParcelable("register", register);
         RegisterMobileFragment fragment = new RegisterMobileFragment();
         fragment.setArguments(args);
         return fragment;
@@ -85,6 +90,10 @@ public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandler = new Handler();
+        Bundle bundle = getArguments();
+        if (null != bundle) {
+            mRegister = bundle.getParcelable("register");
+        }
     }
 
     @Override
@@ -98,7 +107,13 @@ public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresen
 
     @Override
     public void checkSuccess(String result) {
-        start(RegisterPasswordFragment.newInstance());
+        if (null != mRegister) {
+            mRegister.setCountryCode(countryCode);
+            mRegister.setPhoneNumber(mMobileEt.getText().toString().trim());
+            mRegister.setLoginName(mMobileEt.getText().toString().trim());
+            mRegister.setRandomPassword(mVerifycationEt.getText().toString().trim());
+        }
+        start(RegisterPasswordFragment.newInstance(mRegister));
     }
 
     @Override
@@ -192,8 +207,8 @@ public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresen
                 mPresenter.getVerifyCode(mMobileEt.getText().toString().trim(), countryCode);
                 break;
             case R.id.register_mobile_next_btn:
-//                mPresenter.checkVerifyCode(mMobileEt.getText().toString().trim(), mVerifycationEt.getText().toString().trim());
-                start(RegisterPasswordFragment.newInstance());
+                mPresenter.checkVerifyCode(mMobileEt.getText().toString().trim(), mVerifycationEt.getText().toString().trim());
+//                start(RegisterPasswordFragment.newInstance(mRegister));
                 break;
         }
     }
@@ -222,7 +237,7 @@ public class RegisterMobileFragment extends BasePresenterFragment<RegisterPresen
     }
 
     @Override
-    protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter(getActivity(), 0);
+    protected VerifyMobilePresenter createPresenter() {
+        return new VerifyMobilePresenter(getActivity(), 0);
     }
 }

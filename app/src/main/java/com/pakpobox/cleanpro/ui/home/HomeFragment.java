@@ -128,7 +128,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
         //设置图片加载器
         homeBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        Integer[] sh_images = {R.mipmap.banner_1, R.mipmap.banner_1, R.mipmap.banner_1};
+        Integer[] sh_images = {R.mipmap.banner, R.mipmap.banner, R.mipmap.banner_1};
         homeBanner.setImages(Arrays.asList(sh_images));
         //设置banner动画效果
 //        homeBanner.setBannerAnimation(Transformer.ForegroundToBackground);
@@ -150,6 +150,11 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
         //banner设置方法全部调用完毕时最后调用
         homeBanner.start();
 
+    }
+
+    @Override
+    public boolean isStatusLayoutEnable() {
+        return false;
     }
 
     @Override

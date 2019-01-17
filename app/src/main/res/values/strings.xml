@@ -27,8 +27,8 @@
     <!--Home-->
     <string name="home_balance">Balance</string>
     <string name="home_coupons">Coupons</string>
-    <string name="home_points">Points</string>
-    <string name="home_promos">Promos</string>
+    <string name="home_credits">Credits</string>
+    <string name="home_promos">Collections for you！</string>
     <string name="home_view_all">View all</string>
     <string name="home_laundry">Laundry</string>
     <string name="home_dryer">Dryer</string>
@@ -64,7 +64,7 @@
     <string name="login_reset_psw_success_warn">Reset password success</string>
     <string name="login_signIn_fail_warn">Sign in failed</string>
     <string name="login_signUp_fail_warn">Sign up failed</string>
-    <string name="login_register">注册</string>
+    <string name="login_register">Sign up</string>
     <string name="login_valitecode_time">%ds</string>
     <string name="login_get_validecode_success">Send success</string>
     <string name="login_mobile_hint">Mobile No.</string>
@@ -153,11 +153,16 @@
     <string name="register_set_psw">Choose a Password</string>
     <string name="register_set_psw_hint">Password</string>
     <string name="register_set_psw_conf_hint">Confirm Password</string>
+    <string name="register_set_psw_length_error">Please enter 6-digit password</string>
+    <string name="register_set_psw_inconsistent_error">Inconsistent password, please enter again</string>
+    <string name="register_set_invitation">Enter code from your friends!</string>
+    <string name="register_set_invitation_valid_error">Please enter valid invitation code!</string>
     <string name="register_whats_postcode">Postcode</string>
     <string name="register_whats_postcode_hint">eg:14100</string>
     <string name="register_first_name_hint">First Name</string>
     <string name="register_last_name_hint">Last Name</string>
     <string name="register_gender_male">Male</string>
     <string name="register_gender_female">Female</string>
+    <string name="register_skip">Skip</string>
 
 </resources>

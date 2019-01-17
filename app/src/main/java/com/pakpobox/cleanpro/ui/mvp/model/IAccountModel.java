@@ -72,6 +72,14 @@ public interface IAccountModel {
      */
     void checkPayPsw(String payPassword, INetCallback callback);
 
+
+    /**
+     * 校验邀请码
+     * @param inviteCode 邀请码
+     * @param callback 回调
+     */
+    void checkInviteCode(String inviteCode, INetCallback callback);
+
     /**
      * 重置支付密码
      * @param oldPayPassword 旧支付密码

@@ -29,7 +29,7 @@ public class PromosListAdapter extends BaseListAdapter<Site> {
     public void bindDatas(ListDataHolder holder, final  Site bean, int itemType, int position) {
         ImageView typeIm = holder.getView(R.id.item_promos_im);
 
-        typeIm.setImageResource(R.mipmap.banner_1);
+        typeIm.setImageResource(R.mipmap.collections_1);
 //        Glide.with(mContext).load(context.getResources().getDrawable((int)path)).into(typeIm);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

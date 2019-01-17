@@ -1,8 +1,9 @@
 package com.pakpobox.cleanpro.ui.logon.register;
 
 import android.app.Activity;
-import android.text.TextUtils;
 
+import com.pakpobox.cleanpro.bean.Register;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
 import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
 import com.pakpobox.cleanpro.ui.mvp.model.IModel;
@@ -11,59 +12,40 @@ import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 /**
  * User:Sean.Wei
- * Date:2018/7/25
- * Time:11:57
+ * Date:2019/1/17
+ * Time:16:21
  */
 
 public class RegisterPresenter extends BasePresenter<RegisterContract.IRegisterView> implements RegisterContract.IRegisterPresenter {
     private IAccountModel mModel;
-    private int flag = 0;//0为注册，1为忘记密码
 
     private Activity activity;
 
-    public RegisterPresenter(Activity activity, int flag) {
+    public RegisterPresenter(Activity activity) {
         this.activity = activity;
-        this.flag = flag;
         mModel = new AccountModel();
         addModel((IModel) mModel);
     }
 
     @Override
-    public void getVerifyCode(String phoneNumber, String countryCode) {
+    public void checkInviteCode(String inviteCode) {
         BaseNetCallback<String> callback = new BaseNetCallback<String>(activity, this) {
             @Override
             protected void onSuccess(String data) {
-                getView().getSuccess(data);
+                getView().checkInviteCodeSuccess(data);
             }
         };
-        switch (flag) {
-            case 0:
-                mModel.getRegisterVerifyCode(phoneNumber, countryCode, callback);
-                break;
-
-            case 1:
-                mModel.getForgetPSWVerifyCode(phoneNumber, countryCode, callback);
-                break;
-        }
-
+        mModel.checkInviteCode(inviteCode, callback);
     }
 
     @Override
-    public void checkVerifyCode(String phoneNumber, String verifyCode) {
-        BaseNetCallback<String> callback = new BaseNetCallback<String>(activity, this) {
+    public void register(Register register) {
+        BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
             @Override
-            protected void onSuccess(String data) {
-                    getView().checkSuccess(data);
+            protected void onSuccess(UserBean data) {
+                getView().registerSuccess(data);
             }
         };
-        switch (flag) {
-            case 0:
-                mModel.checkRegisterVerifyCode(phoneNumber, verifyCode, callback);
-                break;
-
-            case 1:
-                mModel.checkForgetPSWVerifyCode(phoneNumber, verifyCode, callback);
-                break;
-        }
+        mModel.register(register, callback);
     }
 }
