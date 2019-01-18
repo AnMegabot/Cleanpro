@@ -159,16 +159,14 @@ public class MainFragment extends BaseFragment {
                         if (!TextUtils.isEmpty(decryptScanStr)) {
                             String[] actionData = decryptScanStr.split("#");
                             if (null != actionData && actionData.length >= 3) {
-                                if (getParentFragment() instanceof MainFragment) {
-                                    ((MainFragment) getParentFragment()).start(SelectPreferenceFragment.newInstance(actionData[0], actionData[1], actionData[2]));
-                                    return;
-                                }
+                                start(SelectPreferenceFragment.newInstance(actionData[0], actionData[1], actionData[2]));
+                                return;
                             }
                         }
 
                     }
                 }
-                ToastUtils.showToast(getContext(), R.string.app_unknown_error);
+                ToastUtils.showToast(getContext(), R.string.app_invalid_qrcode);
 
                 break;
             case LOGIN_REQUEST_CODE:

@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
-import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
@@ -28,22 +25,17 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 创建订单
  */
 public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresenter, CreateOrderContract.ICreateOrderView> implements CreateOrderContract.ICreateOrderView {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.order_create_order_type_tv)
     TextView mOrderTypeTv;

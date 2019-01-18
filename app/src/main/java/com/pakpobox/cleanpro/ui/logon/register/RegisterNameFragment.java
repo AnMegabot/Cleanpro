@@ -29,7 +29,7 @@ import butterknife.Unbinder;
  */
 public class RegisterNameFragment extends BaseFragment {
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.register_first_name_et)
     EditText mFirstNameEt;

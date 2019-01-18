@@ -3,20 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/windowBackground"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/register_toolbar"
+    <include
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@mipmap/ic_back_black"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:id="@+id/register_content_llt"
@@ -29,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
+            android:paddingLeft="@dimen/app_pading_horizontal"
+            android:paddingRight="@dimen/app_pading_horizontal"
             android:gravity="center_horizontal">
 
             <TextView
@@ -38,31 +31,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:text="@string/register_set_invitation"
-                android:textColor="@color/textColorPrimaryDark"
+                android:textColor="@color/textColorEdit"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
 
-            <com.pakpobox.cleanpro.ui.widget.PasswordView
+            <EditText
                 android:id="@+id/register_invitation_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:layout_centerInParent="true"
-                app:mode="underline"
-                app:passwordLength="6"
-                app:cipherEnable="false"/>
+                style="@style/AppEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="29dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="@string/register_set_invitation_hint" />
+
+            <Button
+                android:id="@+id/register_invitate_complete_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="154dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="96dp"
+                android:enabled="true"
+                android:text="@string/app_complete" />
 
             <Button
                 android:id="@+id/register_invitation_skip_btn"
                 style="@style/AppButtonBlue"
-                android:background="@drawable/shape_app_skip_btn"
-                android:textColor="@color/textColorPrimaryDark"
                 android:layout_width="154dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="98dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="35dp"
                 android:enabled="true"
+                android:background="@drawable/shape_app_skip_btn"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/register_skip" />
 
         </LinearLayout>

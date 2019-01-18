@@ -27,7 +27,7 @@ import butterknife.Unbinder;
 public class RegisterGenterFragment extends BaseFragment {
 
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.register_gender_rg)
     RadioGroup mGenderRg;
@@ -63,8 +63,8 @@ public class RegisterGenterFragment extends BaseFragment {
 
         if (null == mRegister)
             return;
-        mRegister.setGender("MALE");
-        mGenderRg.check(R.id.register_gender_male_rb);
+        mRegister.setGender("FEMALE");
+        mGenderRg.check(R.id.register_gender_female_rb);
         mGenderRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

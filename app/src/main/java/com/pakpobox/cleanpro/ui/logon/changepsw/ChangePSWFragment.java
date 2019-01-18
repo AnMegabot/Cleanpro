@@ -27,7 +27,7 @@ import butterknife.OnClick;
  */
 public class ChangePSWFragment extends BasePresenterFragment<ChangePSWPresenter, ChangePSWContract.IChangePSWView> implements ChangePSWContract.IChangePSWView {
 
-    @BindView(R.id.change_psw_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.change_psw_et)
     EditText mPswEt;

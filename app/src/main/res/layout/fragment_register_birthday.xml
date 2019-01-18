@@ -3,29 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/windowBackground"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/register_toolbar"
+    <include
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@mipmap/ic_back_black"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
+        android:gravity="center"
         android:text="@string/register_whats_birthday"
-        android:textColor="@color/textColorPrimaryDark"
+        android:textColor="@color/textColorEdit"
         android:textSize="17sp"
         android:textStyle="bold"/>
 
@@ -42,13 +34,11 @@
 
     </LinearLayout>
 
-
-
     <Button
         android:id="@+id/register_birthday_next_btn"
         style="@style/AppButtonBlue"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
         android:enabled="true"

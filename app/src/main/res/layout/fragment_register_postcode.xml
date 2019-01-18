@@ -3,20 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/windowBackground"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/register_toolbar"
+    <include
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@mipmap/ic_back_black"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:id="@+id/register_content_llt"
@@ -29,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:paddingLeft="14dp"
             android:paddingRight="14dp">
 
@@ -37,39 +31,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:text="@string/register_whats_postcode"
-                android:textColor="@color/textColorPrimaryDark"
+                android:textColor="@color/textColorEdit"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/register_postcode_et"
+                style="@style/AppEdittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:background="@null"
+                android:layout_height="46dp"
+                android:layout_marginTop="28dp"
                 android:digits="0123456789"
-                android:ems="10"
                 android:hint="@string/register_whats_postcode_hint"
-                android:inputType="number"
-                android:singleLine="true"
-                android:textColor="@color/textColorPrimaryDark"
-                android:textColorHint="@color/textColorEditHint"
-                android:textSize="13sp" />
+                android:inputType="number"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/colorLine_1"/>
 
             <Button
                 android:id="@+id/register_postcode_next_btn"
                 style="@style/AppButtonBlue"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginTop="98dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
                 android:enabled="true"
                 android:text="@string/login_next" />
 

@@ -7,8 +7,8 @@
     tools:context="com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment">
 
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/include_toolbar"
+        android:id="@+id/app_toolbar"
+        layout="@layout/app_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:textColor="@color/textColorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" />
 
     <com.pakpobox.cleanpro.ui.widget.tabbar.TabBarLayout
         android:id="@+id/credit_card_rc_tabbar_layout"

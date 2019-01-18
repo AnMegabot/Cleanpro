@@ -21,9 +21,9 @@ import butterknife.OnClick;
  */
 public class CreditCardRcFragment extends BaseFragment {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.credit_card_rc_tabbar_layout)
     TabBarLayout mTabbarLayout;

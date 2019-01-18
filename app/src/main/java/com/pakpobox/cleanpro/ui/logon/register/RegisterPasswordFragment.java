@@ -30,7 +30,7 @@ import butterknife.OnClick;
  */
 public class RegisterPasswordFragment extends BaseFragment {
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.register_password_et)
     EditText mPasswordEt;

@@ -1,6 +1,7 @@
 package com.pakpobox.cleanpro.ui.logon.register;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -31,7 +32,7 @@ import butterknife.OnClick;
 public class RegisterBirthdayFragment extends BaseFragment {
 
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.register_birthday_timepicker)
     LinearLayout mTimepicker;
@@ -90,11 +91,13 @@ public class RegisterBirthdayFragment extends BaseFragment {
 //                .setTextColorCenter(Color.LTGRAY)//设置选中项的颜色
 //                .setLineSpacingMultiplier(1.6f)//设置两横线之间的间隔倍数
 //                .setTitleBgColor(Color.DKGRAY)//标题背景颜色 Night mode
-//                .setBgColor(Color.BLACK)//滚轮背景颜色 Night mode
+                .setBgColor(getContext().getResources().getColor(R.color.windowBackground))//滚轮背景颜色 Night mode
 //                .setSubmitColor(Color.WHITE)
 //                .setCancelColor(Color.WHITE)
 //                .animGravity(Gravity.RIGHT)// default is center
                 .setDividerColor(getContext().getResources().getColor(R.color.time_picker_divider_color))
+                .setTextColorCenter(getContext().getResources().getColor(R.color.colorPrimary))
+                .setTextColorOut(getContext().getResources().getColor(R.color.textColorEditHint))
                 .setRangDate(startDate, endDate)
                 .setDate(selectedDate)
                 .setLayoutRes(R.layout.pickerview_custom_time, new CustomListener() {

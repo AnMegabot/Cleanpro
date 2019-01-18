@@ -7,11 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
-import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.Wallet;
-import com.pakpobox.cleanpro.ui.logon.changepsw.ChangePSWContract;
-import com.pakpobox.cleanpro.ui.logon.changepsw.ChangePSWPresenter;
 import com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment;
 import com.pakpobox.cleanpro.ui.wallet.scan.ScanRcFragment;
 import com.pakpobox.cleanpro.ui.wallet.trlist.TRListFragment;
@@ -26,11 +23,11 @@ import butterknife.OnClick;
  */
 public class WalletFragment extends BasePresenterFragment<WalletPresenter, WalletContract.IWalletView> implements WalletContract.IWalletView {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar_action_tv)
+    @BindView(R.id.app_toolbar_action_tv)
     TextView mActionTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.wallet_balance_tv)
     TextView mBalanceTv;
@@ -73,10 +70,10 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
         return new WalletPresenter(getActivity());
     }
 
-    @OnClick({R.id.toolbar_action_tv, R.id.wallet_rc_creditcard, R.id.wallet_rc_scan})
+    @OnClick({R.id.app_toolbar_action_tv, R.id.wallet_rc_creditcard, R.id.wallet_rc_scan})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.toolbar_action_tv:
+            case R.id.app_toolbar_action_tv:
                 start(TRListFragment.newInstance());
                 break;
             case R.id.wallet_rc_creditcard:

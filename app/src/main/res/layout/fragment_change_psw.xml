@@ -1,92 +1,62 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.logon.changepsw.ChangePSWFragment">
+    android:background="@color/windowBackground"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/change_psw_toolbar"
+    <include
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@mipmap/ic_back_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:id="@+id/change_psw_scrollview"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_psw_toolbar">
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp">
-
-            <ImageView
-                android:layout_width="254dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="32dp"
-                android:src="@mipmap/logo" />
+            android:paddingEnd="@dimen/app_pading_horizontal"
+            android:paddingStart="@dimen/app_pading_horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="44dp"
                 android:text="@string/login_change_psw_tips"
-                android:textColor="@color/textColorPrimaryDark"
-                android:textSize="16sp" />
+                android:textColor="@color/textColorEdit"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/change_psw_et"
+                style="@style/AppEdittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="38dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="@string/login_password_hint"
+                android:layout_height="46dp"
+                android:layout_marginTop="29dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/textColorPrimaryDark"
-                android:textColorHint="@color/textColorEditHint"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorLine_1" />
+                android:hint="@string/login_password_hint" />
 
             <Button
                 android:id="@+id/change_psw_complete_btn"
                 style="@style/AppButtonBlue"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="30dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="96dp"
                 android:enabled="true"
-                android:text="@string/app_complete"/>
+                android:text="@string/app_complete" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
 

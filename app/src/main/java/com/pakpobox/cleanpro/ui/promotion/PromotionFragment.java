@@ -4,15 +4,11 @@ package com.pakpobox.cleanpro.ui.promotion;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
-import com.pakpobox.cleanpro.ui.wallet.scan.ScanRcFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -22,9 +18,9 @@ import butterknife.BindView;
  */
 public class PromotionFragment extends BaseFragment {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
 
     public static PromotionFragment newInstance() {

@@ -22,9 +22,9 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class BookSuccessFragment extends BaseFragment {
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.book_success_im)
     ImageView imView;

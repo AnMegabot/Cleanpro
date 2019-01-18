@@ -10,7 +10,7 @@ import com.contrarywind.adapter.WheelAdapter;
 
 public class MonthNumericWheelAdapter implements WheelAdapter {
 
-    private static final String[] MONTH_NUM = {"Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."};
+    private static final String[] MONTH_NUM = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     private int minValue;
     private int maxValue;
 

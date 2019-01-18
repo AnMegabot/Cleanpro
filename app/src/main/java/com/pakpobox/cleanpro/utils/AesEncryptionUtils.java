@@ -142,6 +142,8 @@ public class AesEncryptionUtils {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

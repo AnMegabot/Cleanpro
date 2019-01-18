@@ -20,9 +20,9 @@ import butterknife.BindView;
  */
 public class SetPaymentPswFragment extends BasePresenterFragment<SetPaymentPswPresenter, SetPaymentPswContract.ISetPaymentPswView> implements SetPaymentPswContract.ISetPaymentPswView {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.set_payment_psw_tips_tv)
     TextView mTipsTv;

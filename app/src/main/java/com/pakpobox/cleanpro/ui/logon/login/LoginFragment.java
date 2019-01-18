@@ -2,14 +2,18 @@ package com.pakpobox.cleanpro.ui.logon.login;
 
 
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 
 import com.pakpobox.cleanpro.R;
@@ -30,7 +34,7 @@ import butterknife.OnClick;
  */
 public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginContract.ILoginView> implements LoginContract.ILoginView{
 
-    @BindView(R.id.login_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.app_mobile_et)
     EditText mMobileEt;
@@ -40,6 +44,10 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
     Button mSignInBtn;
     @BindView(R.id.login_scrollview)
     ScrollView mScrollview;
+    @BindView(R.id.app_country_code_btn)
+    CheckBox mCountryCodeBtn;
+
+    String countryCode = "86";
 
     private KeyBoardHelper keyBoardHelper;
 
@@ -79,6 +87,7 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
     @Override
     protected void initViews(View view) {
         StatusBarUtil.setHeight(getContext(), mToolbar);
+        mToolbar.setNavigationIcon(R.mipmap.nav_close);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,9 +140,35 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
         mSignInBtn.setEnabled(mPresenter.verifyAccount());
     }
 
-    @OnClick({R.id.login_register_btn, R.id.login_sign_in_btn, R.id.login_forget_password_btn})
+    @OnClick({R.id.app_country_code_btn, R.id.login_register_btn, R.id.login_sign_in_btn, R.id.login_forget_password_btn})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.app_country_code_btn:
+                final PopupMenu popupMenu;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    popupMenu = new PopupMenu(_mActivity, mCountryCodeBtn, GravityCompat.START);
+                } else {
+                    popupMenu = new PopupMenu(_mActivity, mCountryCodeBtn);
+                }
+                popupMenu.inflate(R.menu.country_code_pop);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        mCountryCodeBtn.setText(item.getTitle());
+                        switch (item.getItemId()) {
+                            case R.id.country_code_china:
+                                countryCode = "86";
+                                break;
+                            case R.id.country_code_malaysia:
+                                countryCode = "60";
+                                break;
+                        }
+                        popupMenu.dismiss();
+                        return true;
+                    }
+                });
+                popupMenu.show();
+                break;
             case R.id.login_register_btn:
                 start(RegisterStartFragment.newInstance());
                 break;

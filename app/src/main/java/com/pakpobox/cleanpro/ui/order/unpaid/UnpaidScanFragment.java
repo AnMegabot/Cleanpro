@@ -18,9 +18,9 @@ import butterknife.OnClick;
  */
 public class UnpaidScanFragment extends BaseFragment {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
 
     public static UnpaidScanFragment newInstance() {

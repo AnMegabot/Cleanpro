@@ -19,7 +19,7 @@
 
     <color name="orderPaidTextColor">#1cc23b</color>
     <color name="orderUnpaidTextColor">#E02872</color>
-    <color name="textColorSetPassworTitle">#666666</color>
+    <color name="textColorSetPassworTitle">#98A9B3</color>
     <color name="colorTemperatureSelected">#EE5475</color>
     <color name="textColorTemperature">#EE5475</color>
     <color name="price_item_laundry_title_bg">#43E1E7</color>
@@ -28,6 +28,7 @@
     <color name="map_info_title_icon_color">#D6D6D6</color>
 
     <color name="time_picker_divider_color">#DEDEDE</color>
+    <color name="time_picker_bg_color">#00000000</color>
     <color name="main_tab_disable_color">#98A9B3</color>
     <color name="home_tab_title_text_color">#8E8E8E</color>
     <color name="home_tab_value_text_color">#000000</color>

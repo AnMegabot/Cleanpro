@@ -48,9 +48,9 @@ public class LocationFragment extends BasePresenterFragment<LocationPresenter, L
         GoogleMap.OnMarkerClickListener,
         GoogleMap.OnMapClickListener{
     private static final int RC_LOCATION_PERM = 0x0011;
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.location_map_container)
     LinearLayout mMapContainer;

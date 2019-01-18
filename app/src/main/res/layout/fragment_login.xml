@@ -7,17 +7,10 @@
     android:background="@color/windowBackground"
     tools:context="com.pakpobox.cleanpro.ui.logon.login.LoginFragment">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/login_toolbar"
+    <include
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@mipmap/icon_close_black"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:id="@+id/login_scrollview"

@@ -19,9 +19,9 @@ import butterknife.BindView;
  * 充值记录
  */
 public class TRListFragment extends BaseListFragment<TRListPresenter, TRListContract.ITRListView, TradingRecort> implements TRListContract.ITRListView {
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.rc_details_containerLayout)
     FrameLayout mContainerLayout;

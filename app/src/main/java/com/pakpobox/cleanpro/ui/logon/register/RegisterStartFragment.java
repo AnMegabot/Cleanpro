@@ -17,7 +17,7 @@ import butterknife.OnClick;
  */
 public class RegisterStartFragment extends BaseFragment {
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
 
     public static RegisterStartFragment newInstance() {

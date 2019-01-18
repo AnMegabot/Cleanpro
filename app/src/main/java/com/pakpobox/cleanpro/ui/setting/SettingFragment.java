@@ -25,9 +25,9 @@ import butterknife.OnClick;
  */
 public class SettingFragment extends BaseFragment {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.setting_logout_btn)
     Button mLogoutBtn;

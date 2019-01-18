@@ -1,340 +1,350 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
+    android:orientation="vertical"
     tools:context="com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment">
 
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/include_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/select_pref_content_llt"
+        android:id="@+id/app_toolbar"
+        layout="@layout/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/app_pading_horizontal"
-        android:layout_marginStart="@dimen/app_pading_horizontal"
-        android:layout_marginTop="@dimen/app_pading_horizontal"
-        android:background="@android:color/white"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/select_pref_im"
-            android:layout_width="75dp"
-            android:layout_height="92dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/icon_laundry" />
-
-        <TextView
-            android:id="@+id/select_pref_machine_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="#01"
-            android:textColor="@color/textColorPrimaryDark"
-            android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorLine" />
-
-        <TextView
-            android:id="@+id/select_pref_tips_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="@string/booking_choose_temperature"
-            android:textColor="@color/textColorPrimaryDark"
-            android:textSize="16sp" />
-
-        <com.pakpobox.cleanpro.ui.widget.RadioGroupPro
-            android:id="@+id/select_pref_laundry_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/select_pref_temp_cold_lauout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/select_pref_temp_cold_rb"
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:background="@drawable/selector_temperature_rb"
-                    android:button="@null"
-                    android:checked="true" />
-
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/icon_cold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/booking_cold"
-                    android:textColor="@drawable/selector_temperature_text_color"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/booking_payment_unit"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/select_pref_temp_cold_pay_amount_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:text="3"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/select_pref_temp_warm_lauout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/select_pref_temp_warm_rb"
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:background="@drawable/selector_temperature_rb"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/icon_warm" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/booking_warm"
-                    android:textColor="@drawable/selector_temperature_text_color"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/booking_payment_unit"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/select_pref_temp_warm_pay_amount_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:text="3"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/select_pref_temp_hot_lauout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/select_pref_temp_hot_rb"
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:background="@drawable/selector_temperature_rb"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/icon_hot" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/booking_hot"
-                    android:textColor="@drawable/selector_temperature_text_color"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/booking_payment_unit"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/select_pref_temp_hot_pay_amount_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:text="3"
-                        android:textColor="@drawable/selector_temperature_text_color"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.pakpobox.cleanpro.ui.widget.RadioGroupPro>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:id="@+id/select_pref_dryer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/select_pref_content_llt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:orientation="horizontal">
+                android:layout_marginEnd="@dimen/app_pading_horizontal"
+                android:layout_marginStart="@dimen/app_pading_horizontal"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_card_info_bg_up"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:id="@+id/select_pref_im"
+                    android:layout_width="75dp"
+                    android:layout_height="92dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_laundry" />
 
                 <TextView
+                    android:id="@+id/select_pref_machine_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/booking_payment_unit"
-                    android:textColor="@color/textColorSetPassworTitle"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/select_pref_dryer_pay_amount_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="4"
-                    android:textColor="@color/textColorSetPassworTitle"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="#01"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/select_pref_dryer_less_btn"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginStart="40dp"
-                app:srcCompat="@mipmap/ic_less" />
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/app_pading_horizontal"
+                android:layout_marginStart="@dimen/app_pading_horizontal"
+                android:paddingLeft="@dimen/app_pading_horizontal"
+                android:paddingRight="@dimen/app_pading_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/shape_card_info_bg_down"
+                android:gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/select_pref_dryer_time_tv"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/select_pref_tips_tv"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="23"
-                    android:textColor="@color/textColorSetPassworTitle"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="19dp"
+                    android:text="@string/booking_choose_temperature"
+                    android:textColor="@color/textColorPrimaryDark"
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.pakpobox.cleanpro.ui.widget.RadioGroupPro
+                    android:id="@+id/select_pref_laundry_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/booking_time_unit"
-                    android:textColor="@color/textColorSetPassworTitle"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/select_pref_temp_cold_lauout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/select_pref_temp_cold_rb"
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/selector_temperature_rb"
+                            android:button="@null"
+                            android:checked="true" />
+
+                        <ImageView
+                            android:layout_width="21dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/icon_cold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/booking_cold"
+                            android:textColor="@drawable/selector_temperature_text_color"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/booking_payment_unit"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/select_pref_temp_cold_pay_amount_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:text="3"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/select_pref_temp_warm_lauout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/select_pref_temp_warm_rb"
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/selector_temperature_rb"
+                            android:button="@null"
+                            android:checked="false" />
+
+                        <ImageView
+                            android:layout_width="21dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/icon_warm" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/booking_warm"
+                            android:textColor="@drawable/selector_temperature_text_color"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/booking_payment_unit"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/select_pref_temp_warm_pay_amount_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:text="3"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/select_pref_temp_hot_lauout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/select_pref_temp_hot_rb"
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/selector_temperature_rb"
+                            android:button="@null"
+                            android:checked="false" />
+
+                        <ImageView
+                            android:layout_width="21dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/icon_hot" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/booking_hot"
+                            android:textColor="@drawable/selector_temperature_text_color"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/booking_payment_unit"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/select_pref_temp_hot_pay_amount_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:text="3"
+                                android:textColor="@drawable/selector_temperature_text_color"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.pakpobox.cleanpro.ui.widget.RadioGroupPro>
+
+                <LinearLayout
+                    android:id="@+id/select_pref_dryer_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="30dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/booking_payment_unit"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/select_pref_dryer_pay_amount_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:text="4"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="23sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/select_pref_dryer_less_btn"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginRight="20dp"
+                        app:srcCompat="@mipmap/ic_less" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/select_pref_dryer_time_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23"
+                            android:textColor="#8E8E8E"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/select_pref_dryer_pluss_btn"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@mipmap/ic_plus" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/select_pref_dryer_pluss_btn"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                app:srcCompat="@mipmap/ic_plus" />
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/select_pref_next_btn"
         style="@style/AppButtonBlue"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
         android:layout_marginEnd="@dimen/app_pading_horizontal"
         android:layout_marginStart="@dimen/app_pading_horizontal"
+        android:layout_marginBottom="57dp"
         android:enabled="true"
-        android:text="@string/login_next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/login_next"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

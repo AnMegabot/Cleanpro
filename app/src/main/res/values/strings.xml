@@ -17,6 +17,7 @@
     <string name="app_response_error">Response error：</string>
     <string name="app_response_empty">Response empty</string>
     <string name="app_system_error">System error:</string>
+    <string name="app_invalid_qrcode">Invalid qr code</string>
 
     <!--Main-->
     <string name="main_bottom_nav_home">Home</string>
@@ -87,7 +88,7 @@
 
     <!-- booking -->
     <string name="booking_choose_temperature">Choose water temperature</string>
-    <string name="booking_choose_time">Choose time</string>
+    <string name="booking_choose_time">Choose time (MIN)</string>
     <string name="booking_cold">Cold</string>
     <string name="booking_warm">Warm</string>
     <string name="booking_hot">Hot</string>
@@ -156,6 +157,7 @@
     <string name="register_set_psw_length_error">Please enter 6-digit password</string>
     <string name="register_set_psw_inconsistent_error">Inconsistent password, please enter again</string>
     <string name="register_set_invitation">Enter code from your friends!</string>
+    <string name="register_set_invitation_hint">Invitation code</string>
     <string name="register_set_invitation_valid_error">Please enter valid invitation code!</string>
     <string name="register_whats_postcode">Postcode</string>
     <string name="register_whats_postcode_hint">eg:14100</string>

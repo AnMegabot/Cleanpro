@@ -37,9 +37,9 @@ import butterknife.OnClick;
  */
 public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobilePresenter, RegisterContract.IVerifyMobileView> implements RegisterContract.IVerifyMobileView {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.forget_payment_psw_mobile_et)
     EditText mMobileEt;

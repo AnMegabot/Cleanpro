@@ -13,17 +13,15 @@ import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.price.Price;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
-import java.util.List;
-
 import butterknife.BindView;
 
 /**
  * 我的钱包
  */
 public class PriceFragment extends BaseListFragment<PricePresenter, PriceContract.IPriceView, Price> implements PriceContract.IPriceView {
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.price_containerLayout)
     FrameLayout mContainerLayout;

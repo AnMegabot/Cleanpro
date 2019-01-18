@@ -31,7 +31,7 @@ import butterknife.OnClick;
 public class RegisterPostcodeFragment extends BaseFragment {
 
 
-    @BindView(R.id.register_toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.register_postcode_et)
     EditText mPostcodeEt;

@@ -14,6 +14,8 @@
         android:checked="false"
         android:button="@android:color/transparent"
         android:drawableRight="@drawable/selector_country_code_dropdown_icon"
+        android:drawablePadding="8dp"
+        android:textColor="@color/textColorPrimaryDark"
         android:text="+86" />
 
     <EditText

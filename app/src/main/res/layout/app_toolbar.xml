@@ -1,7 +1,7 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/toolbar"
+    android:id="@+id/app_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
@@ -12,18 +12,18 @@
     app:titleTextAppearance="@style/Toolbar_TextAppearance_Black">
 
     <TextView
-        android:id="@+id/toolbar_title_tv"
+        android:id="@+id/app_toolbar_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/app_toolbar_title_textsize"
+        android:textSize="20sp"
         tools:text="标题" />
 
     <TextView
-        android:id="@+id/toolbar_action_tv"
+        android:id="@+id/app_toolbar_action_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

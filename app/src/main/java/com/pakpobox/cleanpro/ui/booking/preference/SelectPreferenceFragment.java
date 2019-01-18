@@ -39,9 +39,9 @@ import static com.pakpobox.cleanpro.common.Const.CLEAN_TYPE.LAUNDRY;
  */
 public class SelectPreferenceFragment extends BasePresenterFragment<SelectPreferencePresenter, SelectPreferenceContract.ISelectPreferenceView> implements SelectPreferenceContract.ISelectPreferenceView {
 
-    @BindView(R.id.toolbar_title_tv)
+    @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.select_pref_im)
     ImageView typeIm;
@@ -109,7 +109,8 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
             String type = bundle.getString("type");
             switch (type.toUpperCase()) {
                 case "LAUNDRY":
-                    mType = LAUNDRY;
+//                    mType = LAUNDRY;
+                    mType = DRYER;
                     break;
                 case "DRYER":
                     mType = DRYER;
@@ -177,6 +178,7 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                 mDryerTimeTv.setText(mTime + "");
                 break;
         }
+        mMachineTv.setText(mMachineNo);
         mLaundryLayout.check(R.id.select_pref_temp_cold_rb);
         setLayoutEnable(mTempColdLauout, true);
         setLayoutEnable(mTempWarmLauout, false);
