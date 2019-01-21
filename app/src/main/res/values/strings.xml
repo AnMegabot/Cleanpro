@@ -97,8 +97,13 @@
     <string name="booking_machine_no">Machine No. :</string>
     <string name="booking_temperature">Temperature :</string>
     <string name="booking_price">Price :</string>
-    <string name="booking_pay">Pay</string>
+    <string name="booking_pay">Pay RM%s</string>
     <string name="booking_pay_tips">Please enter payment password</string>
+    <string name="booking_payment_IPay88">IPay88</string>
+    <string name="booking_payment_Wallet">Wallet</string>
+    <string name="booking_Payment_method">Payment method</string>
+    <string name="booking_credits">Credits: %d</string>
+    <string name="booking_Discount">Discount %sRM</string>
     <string name="booking_success_tips">Please click start on the machine!</string>
 
     <!-- Wallet -->
@@ -143,7 +148,7 @@
     <string name="service">Service</string>
     <string name="service_title">SELF-SERVICE LAUNDRY MANAGEMENT</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Register -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register_join_cleanpro">Join Cleanpro</string>
     <string name="register_join_tips">We\'ll help you create a new account in a few easy step.</string>

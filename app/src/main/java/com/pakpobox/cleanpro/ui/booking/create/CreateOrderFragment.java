@@ -5,7 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
@@ -13,6 +20,7 @@ import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
+import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
 import com.timmy.tdialog.TDialog;
@@ -26,7 +34,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 创建订单
@@ -47,6 +57,17 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
     TextView mGoodsInfoTv;
     @BindView(R.id.order_create_amount_tv)
     TextView mAmountTv;
+    @BindView(R.id.order_create_payment_rg)
+    RadioGroupPro mPaymentRg;
+    @BindView(R.id.order_create_credits_tv)
+    TextView mCreditsTv;
+    @BindView(R.id.order_create_discount_tv)
+    TextView mDiscountTv;
+    @BindView(R.id.order_create_credits_switch)
+    Switch mCreditsSwitch;
+    @BindView(R.id.create_order_pay_btn)
+    Button mPayBtn;
+    Unbinder unbinder;
 
     private CreateOrderRequest mCreateOrderRequest = null;
 
@@ -83,6 +104,7 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
         });
         if (null == mCreateOrderRequest)
             return;
+
         switch (mCreateOrderRequest.getOrder_type()) {
             case "LAUNDRY":
                 mTitleTv.setText(getString(R.string.home_laundry));
@@ -94,28 +116,50 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
                 break;
         }
 
-        if (null != mCreateOrderRequest) {
-            mMachineNoTv.setText(mCreateOrderRequest.getMachine_no());
-            if ("LAUNDRY".equals(mCreateOrderRequest.getOrder_type())) {
-                mGoodsInfoTitleTv.setText(getString(R.string.orders_Temperature));
-                try {
-                    JSONObject laundryObj = new JSONObject(mCreateOrderRequest.getGoods_info());
-                    mGoodsInfoTv.setText(laundryObj.getString("temperature"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                mGoodsInfoTitleTv.setText(getString(R.string.orders_Time));
-                try {
-                    JSONObject laundryObj = new JSONObject(mCreateOrderRequest.getGoods_info());
-                    mGoodsInfoTv.setText(laundryObj.getString("time") + "min");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        mMachineNoTv.setText(mCreateOrderRequest.getMachine_no());
+        if ("LAUNDRY".equals(mCreateOrderRequest.getOrder_type())) {
+            mGoodsInfoTitleTv.setText(getString(R.string.orders_Temperature));
+            try {
+                JSONObject laundryObj = new JSONObject(mCreateOrderRequest.getGoods_info());
+                mGoodsInfoTv.setText(laundryObj.getString("temperature"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mGoodsInfoTitleTv.setText(getString(R.string.orders_Time));
+            try {
+                JSONObject laundryObj = new JSONObject(mCreateOrderRequest.getGoods_info());
+                mGoodsInfoTv.setText(laundryObj.getString("time") + "min");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        mAmountTv.setText(String.format(getString(R.string.orders_amount_format), SystemUtils.formatFloat2Str(mCreateOrderRequest.getTotal_amount())));
+        mPayBtn.setText(String.format(getString(R.string.booking_pay), SystemUtils.formatFloat2Str(mCreateOrderRequest.getTotal_amount())));
+        mCreditsTv.setText(String.format(getString(R.string.booking_credits), 10));
+        mDiscountTv.setText(String.format(getString(R.string.booking_Discount), SystemUtils.formatFloat2Str(mCreateOrderRequest.getTotal_amount())));
+        mPaymentRg.setOnCheckedChangeListener(new RadioGroupPro.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroupPro group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.order_create_ipy88_rb:
+                        mCreateOrderRequest.setPayment_platform("IPAY88");
+                        break;
+                    case R.id.order_create_wallet_rb:
+                        mCreateOrderRequest.setPayment_platform("WALLET");
+                        break;
                 }
             }
+        });
+        mPaymentRg.check(R.id.order_create_ipy88_rb);
 
-            mAmountTv.setText(String.format(getString(R.string.orders_amount_format), SystemUtils.formatFloat2Str(mCreateOrderRequest.getTotal_amount())));
-        }
+        mCreditsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mCreateOrderRequest.setCredits(b ? 1 : 0);
+            }
+        });
     }
 
     @Override
@@ -139,48 +183,58 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
         return new CreateOrderPresenter(getActivity());
     }
 
-    @OnClick(R.id.create_order_pay_btn)
-    public void onClick() {
-
-        new TDialog.Builder(getActivity().getSupportFragmentManager())
-                .setLayoutRes(R.layout.dialog_payment_psw)
-                .setScreenWidthAspect(getActivity(), 0.8f)
-                .setGravity(Gravity.CENTER)
-                .setCancelableOutside(false)
-                .setCancelable(true)
-                .addOnClickListener(R.id.dialog_payment_psw_close_btn)
-                .setOnBindViewListener(new OnBindViewListener() {
-                    @Override
-                    public void bindView(BindViewHolder viewHolder) {
-                        final View closeView = viewHolder.getView(R.id.dialog_payment_psw_close_btn);
-                        final VerificationCodeView pswView = viewHolder.getView(R.id.dialog_payment_psw_et);
-                        pswView.setInputCompleteListener(new VerificationCodeView.InputCompleteListener() {
+    @OnClick({R.id.order_create_ipy88_layout, R.id.order_create_wallet_layout, R.id.create_order_pay_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.order_create_ipy88_layout:
+                mPaymentRg.check(R.id.order_create_ipy88_rb);
+                break;
+            case R.id.order_create_wallet_layout:
+                mPaymentRg.check(R.id.order_create_wallet_rb);
+                break;
+            case R.id.create_order_pay_btn:
+                new TDialog.Builder(getActivity().getSupportFragmentManager())
+                        .setLayoutRes(R.layout.dialog_payment_psw)
+                        .setScreenWidthAspect(getActivity(), 0.8f)
+                        .setGravity(Gravity.CENTER)
+                        .setCancelableOutside(false)
+                        .setCancelable(true)
+                        .addOnClickListener(R.id.dialog_payment_psw_close_btn)
+                        .setOnBindViewListener(new OnBindViewListener() {
                             @Override
-                            public void inputComplete() {
-                                if (pswView.getInputContent().length() >= 6) {
-                                    closeView.callOnClick();
-                                    mPresenter.checkPayPsw(pswView.getInputContent());
+                            public void bindView(BindViewHolder viewHolder) {
+                                final View closeView = viewHolder.getView(R.id.dialog_payment_psw_close_btn);
+                                final VerificationCodeView pswView = viewHolder.getView(R.id.dialog_payment_psw_et);
+                                pswView.setInputCompleteListener(new VerificationCodeView.InputCompleteListener() {
+                                    @Override
+                                    public void inputComplete() {
+                                        if (pswView.getInputContent().length() >= 6) {
+                                            closeView.callOnClick();
+//                                            mPresenter.checkPayPsw(pswView.getInputContent());
+                                            mPresenter.createOrder();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void deleteContent() {
+
+                                    }
+                                });
+                            }
+                        })
+                        .setOnViewClickListener(new OnViewClickListener() {
+                            @Override
+                            public void onViewClick(BindViewHolder viewHolder, View view, TDialog tDialog) {
+                                switch (view.getId()) {
+                                    case R.id.dialog_payment_psw_close_btn:
+                                        tDialog.dismiss();
+                                        break;
                                 }
                             }
-
-                            @Override
-                            public void deleteContent() {
-
-                            }
-                        });
-                    }
-                })
-                .setOnViewClickListener(new OnViewClickListener() {
-                    @Override
-                    public void onViewClick(BindViewHolder viewHolder, View view, TDialog tDialog) {
-                        switch (view.getId()) {
-                            case R.id.dialog_payment_psw_close_btn:
-                                tDialog.dismiss();
-                                break;
-                        }
-                    }
-                })
-                .create()
-                .show();
+                        })
+                        .create()
+                        .show();
+                break;
+        }
     }
 }

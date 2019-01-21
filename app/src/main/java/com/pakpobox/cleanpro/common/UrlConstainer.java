@@ -75,10 +75,15 @@ public class UrlConstainer {
      */
     public static final String WALLET_QUERY = "member/walletLog/query?page=%d&maxCount=%d";
 
+//    /**
+//     * 创建订单
+//     */
+//    public static final String CTEATE_ORDER = "cleanpro/order/create";
+
     /**
      * 创建订单
      */
-    public static final String CTEATE_ORDER = "cleanpro/order/create";
+    public static final String CTEATE_ORDER = "cleanpro/order/checkout";
 
     /**
      * 订单列表

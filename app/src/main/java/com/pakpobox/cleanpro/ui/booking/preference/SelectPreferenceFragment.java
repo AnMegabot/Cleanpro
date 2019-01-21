@@ -109,8 +109,8 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
             String type = bundle.getString("type");
             switch (type.toUpperCase()) {
                 case "LAUNDRY":
-//                    mType = LAUNDRY;
-                    mType = DRYER;
+                    mType = LAUNDRY;
+//                    mType = DRYER;
                     break;
                 case "DRYER":
                     mType = DRYER;
@@ -176,6 +176,7 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                 mLaundryLayout.setVisibility(View.GONE);
                 mDryerLayout.setVisibility(View.VISIBLE);
                 mDryerTimeTv.setText(mTime + "");
+                mDryerPayAmountTv.setText(SystemUtils.formatFloat2Str(computeDryerAmount()));
                 break;
         }
         mMachineTv.setText(mMachineNo);
@@ -237,10 +238,11 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
 
     private double computeDryerAmount() {
         int extrTime = mTime - 23;
-        Logger.d("哈哈：" + extrTime);
         if (extrTime > 0) {
+            selectPrefDryerLessBtn.setEnabled(true);
             return dryerBasePrice + (extrTime/dryerExtraTime) * dryerExtraPrice;
         } else {
+            selectPrefDryerLessBtn.setEnabled(false);
             return dryerBasePrice;
         }
     }
@@ -317,8 +319,8 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
                         break;
                 }
                 createOrderRequest.setMachine_no(mOrderNo + "#" + mMachineNo);
-                createOrderRequest.setClient_type("ANDROID");
                 createOrderRequest.setTotal_amount(mAmount);
+                createOrderRequest.setPay_amount(mAmount);
                 createOrderRequest.setGoods_info(goodsObj.toString());
                 createOrderRequest.setClient_version(SystemUtils.getVersionName(getContext()));
                 start(CreateOrderFragment.newInstance(createOrderRequest));

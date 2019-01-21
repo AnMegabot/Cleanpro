@@ -148,7 +148,7 @@
             <LinearLayout
                 android:id="@+id/my_feedback"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="800dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"

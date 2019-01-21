@@ -12,23 +12,32 @@ import android.os.Parcelable;
 public class CreateOrderRequest implements Parcelable {
     private String machine_no;
     private double total_amount;
-    private String client_type;
+    private double pay_amount;
+    private String client_type = "ANDROID";
     private String order_type;
     private String goods_info;
     private String location;
     private String client_version;
+    private int credits = 0;//使用积分
+    private String coupon_code;//优惠券编码
+    private String payment_platform = "IPAY88";//支付平台。 钱包:WALLET, iPay88:IPAY88
 
     public CreateOrderRequest() {
+
     }
 
     protected CreateOrderRequest(Parcel in) {
         machine_no = in.readString();
         total_amount = in.readDouble();
+        pay_amount = in.readDouble();
         client_type = in.readString();
         order_type = in.readString();
         goods_info = in.readString();
         location = in.readString();
         client_version = in.readString();
+        credits = in.readInt();
+        coupon_code = in.readString();
+        payment_platform = in.readString();
     }
 
     public static final Creator<CreateOrderRequest> CREATOR = new Creator<CreateOrderRequest>() {
@@ -57,6 +66,14 @@ public class CreateOrderRequest implements Parcelable {
 
     public void setTotal_amount(double total_amount) {
         this.total_amount = total_amount;
+    }
+
+    public double getPay_amount() {
+        return pay_amount;
+    }
+
+    public void setPay_amount(double pay_amount) {
+        this.pay_amount = pay_amount;
     }
 
     public String getClient_type() {
@@ -99,6 +116,30 @@ public class CreateOrderRequest implements Parcelable {
         this.client_version = client_version;
     }
 
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public String getCoupon_code() {
+        return coupon_code;
+    }
+
+    public void setCoupon_code(String coupon_code) {
+        this.coupon_code = coupon_code;
+    }
+
+    public String getPayment_platform() {
+        return payment_platform;
+    }
+
+    public void setPayment_platform(String payment_platform) {
+        this.payment_platform = payment_platform;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -108,10 +149,14 @@ public class CreateOrderRequest implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(machine_no);
         parcel.writeDouble(total_amount);
+        parcel.writeDouble(pay_amount);
         parcel.writeString(client_type);
         parcel.writeString(order_type);
         parcel.writeString(goods_info);
         parcel.writeString(location);
         parcel.writeString(client_version);
+        parcel.writeInt(credits);
+        parcel.writeString(coupon_code);
+        parcel.writeString(payment_platform);
     }
 }
