@@ -44,6 +44,7 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
         StatusBarUtil.setHeight(getContext(), mToolbar);
         mTitleTv.setText(getString(R.string.wallet_my));
         mActionTv.setVisibility(View.VISIBLE);
+        mActionTv.setTextColor(getContext().getResources().getColor(R.color.my_mvp_bg_color));
         mActionTv.setText(R.string.wallet_details);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,8 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
 
     @Override
     public void getSuccess(Wallet data) {
-        mBalanceTv.setText(data.getCurrencyUnit() + SystemUtils.formatFloat2Str(data.getBalance()/100.0));
+//        mBalanceTv.setText(data.getCurrencyUnit() + SystemUtils.formatFloat2Str(data.getBalance()/100.0));
+        mBalanceTv.setText(SystemUtils.formatFloat2Str(data.getBalance()/100.0));
     }
 
     @Override
@@ -70,16 +72,16 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
         return new WalletPresenter(getActivity());
     }
 
-    @OnClick({R.id.app_toolbar_action_tv, R.id.wallet_rc_creditcard, R.id.wallet_rc_scan})
+    @OnClick({R.id.app_toolbar_action_tv, R.id.wallet_recharge, R.id.wallet_payment_setting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.app_toolbar_action_tv:
                 start(TRListFragment.newInstance());
                 break;
-            case R.id.wallet_rc_creditcard:
+            case R.id.wallet_recharge:
                 start(CreditCardRcFragment.newInstance());
                 break;
-            case R.id.wallet_rc_scan:
+            case R.id.wallet_payment_setting:
                 start(ScanRcFragment.newInstance());
                 break;
         }

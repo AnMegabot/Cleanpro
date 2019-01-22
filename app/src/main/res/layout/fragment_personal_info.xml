@@ -1,0 +1,257 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/windowBackground">
+
+    <include
+        android:id="@+id/app_toolbar"
+        layout="@layout/app_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/personal_portrait_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Profile_Picture"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/personal_portrait_im"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_avatar"/>
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/personal_name_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Name"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/personal_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    tools:text="Fandy"
+                    android:textColor="@color/textColorEditHint"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/personal_phone_number_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Phone_number"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/personal_phone_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    tools:text="123456789"
+                    android:textColor="@color/textColorEditHint"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/personal_gender_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Gender"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/personal_gender_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    tools:text="Female"
+                    android:textColor="@color/textColorEditHint"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/personal_birthday_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Birthday"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/personal_birthday_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    tools:text="01/7/1991"
+                    android:textColor="@color/textColorEditHint"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/personal_postcode_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/app_pading_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/personal_Post_code"
+                    android:textColor="@color/my_time_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/personal_postcode_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    tools:text="123465"
+                    android:textColor="@color/textColorEditHint"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="11dp"
+                    android:layout_marginEnd="@dimen/app_pading_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_lcome" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

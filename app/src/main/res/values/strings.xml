@@ -53,9 +53,24 @@
 
     <!-- my -->
     <string name="my_wallet">My Wallet</string>
+    <string name="my_coupons">Coupons</string>
+    <string name="my_get_rm2">Get RM2</string>
+    <string name="my_introduction">Introduction</string>
     <string name="my_settings">Settings</string>
     <string name="my_feedback">Feedback</string>
     <string name="my_no_login_tips">Click here to login</string>
+    <string name="my_credits">Credits %d</string>
+    <string name="my_wallet_info">RM %s</string>
+    <string name="my_coupons_info">x %d</string>
+
+    <!-- personal info -->
+    <string name="personal_Personal_Infomation">Personal Infomation</string>
+    <string name="personal_Profile_Picture">Profile Picture</string>
+    <string name="personal_Name">Name</string>
+    <string name="personal_Phone_number">Phone number</string>
+    <string name="personal_Gender">Gender</string>
+    <string name="personal_Birthday">Birthday</string>
+    <string name="personal_Post_code">Post code</string>
 
     <!-- login -->
     <string name="login_signIn">Sign in</string>
@@ -109,11 +124,11 @@
     <!-- Wallet -->
     <string name="wallet_my">My Wallet</string>
     <string name="wallet_details">Details</string>
-    <string name="wallet_balance">Account balance</string>
-    <string name="wallet_rc_creditcard">Recharge by credit card</string>
+    <string name="wallet_balance">Account balance (RM)</string>
     <string name="wallet_rc_scan">Scan to recharge</string>
     <string name="wallet_amount">Amount</string>
     <string name="wallet_recharge">Recharge</string>
+    <string name="wallet_payment_setting">Payment Setting</string>
     <string name="wallet_amount_10">RM10</string>
     <string name="wallet_amount_20">RM20</string>
     <string name="wallet_amount_30">RM30</string>

@@ -46,7 +46,7 @@ public class TRListAdapter extends BaseListAdapter<TradingRecort> {
         date.setTime(bean.getCreateTime());
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
         timeTv.setText(timeStamp);
-        amountTv.setTextColor("IN".equals(bean.getIncomeType()) ? mContext.getResources().getColor(R.color.orderPaidTextColor) : mContext.getResources().getColor(R.color.textColorPrimaryDark));
+        amountTv.setTextColor("IN".equals(bean.getIncomeType()) ? mContext.getResources().getColor(R.color.colorPrimary) : mContext.getResources().getColor(R.color.textColorEditHint));
         amountTv.setText(("IN".equals(bean.getIncomeType()) ? "+" : "-") + SystemUtils.formatFloat2Str(bean.getAmount()/100.0));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

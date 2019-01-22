@@ -1,149 +1,120 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:background="@color/windowBackground"
     tools:context="com.pakpobox.cleanpro.ui.wallet.WalletFragment">
 
     <include
         android:id="@+id/app_toolbar"
         layout="@layout/app_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/wallet_balance"
-        android:textColor="@color/textColorPrimaryDark"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" />
-
-    <TextView
-        android:id="@+id/wallet_balance_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="RM00.00"
-        android:textColor="@color/textColorPrimaryDark"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <View
-        android:id="@+id/line_1"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/windowBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_tv" />
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:id="@+id/wallet_llt"
+        android:id="@+id/wallet_balance_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@mipmap/my_wallet_bg"
+        android:paddingLeft="@dimen/app_pading_horizontal"
         android:orientation="vertical"
-        android:paddingBottom="32dp"
-        android:paddingTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_1">
+        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" >
 
-        <LinearLayout
-            android:id="@+id/wallet_rc_creditcard"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/wallet_balance"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="@dimen/app_pading_horizontal"
-                android:scaleType="fitXY"
-                android:src="@mipmap/icon_creditcard" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="@string/wallet_rc_creditcard"
-                android:textColor="@color/textColorPrimaryDark"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="@dimen/app_pading_horizontal"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_lcome" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/app_pading_horizontal"
-            android:background="@color/colorLine" />
-
-        <LinearLayout
-            android:id="@+id/wallet_rc_scan"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="@dimen/app_pading_horizontal"
-                android:scaleType="fitXY"
-                android:src="@mipmap/icon_qr" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="@string/wallet_rc_scan"
-                android:textColor="@color/textColorPrimaryDark"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="@dimen/app_pading_horizontal"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_lcome" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/app_pading_horizontal"
-            android:background="@color/colorLine" />
+        <TextView
+            android:id="@+id/wallet_balance_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="29dp"
+            android:text="RM00.00"
+            android:textColor="@android:color/white"
+            android:textSize="38sp"/>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/wallet_recharge"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="@dimen/app_pading_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/wallet_recharge" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/wallet_recharge"
+            android:textColor="@color/my_time_text_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="11dp"
+            android:layout_marginEnd="@dimen/app_pading_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_lcome" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wallet_payment_setting"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@android:color/white"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="@dimen/app_pading_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/wallet_payment_settings" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/wallet_payment_setting"
+            android:textColor="@color/my_time_text_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="11dp"
+            android:layout_marginEnd="@dimen/app_pading_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_lcome" />
+
+    </LinearLayout>
+
+</LinearLayout>

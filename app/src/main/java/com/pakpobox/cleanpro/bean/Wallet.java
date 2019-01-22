@@ -8,8 +8,26 @@ package com.pakpobox.cleanpro.bean;
  */
 
 public class Wallet {
+    private String id;
     private double balance;
+    private int credit;
     private String currencyUnit;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
 
     public double getBalance() {
         return balance;
