@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context="com.pakpobox.cleanpro.ui.logon.register.RegisterStartFragment">
+    tools:context="com.pakpobox.cleanpro.ui.account.register.RegisterStartFragment">
 
     <include
         layout="@layout/app_toolbar"
@@ -52,7 +52,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="20dp"
             android:enabled="true"
-            android:text="@string/login_next"/>
+            android:text="@string/app_next"/>
 
     </LinearLayout>
 

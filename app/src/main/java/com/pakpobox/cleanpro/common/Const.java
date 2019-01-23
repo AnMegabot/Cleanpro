@@ -20,4 +20,9 @@ public class Const {
         DRYER
     }
 
+    public enum GENDER{
+        MALE,
+        FEMALE
+    }
+
 }

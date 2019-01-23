@@ -1,6 +1,7 @@
 package com.pakpobox.cleanpro.ui.mvp.model;
 
 import com.pakpobox.cleanpro.bean.Register;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.net.callback.INetCallback;
 
 /**
@@ -109,4 +110,18 @@ public interface IAccountModel {
      * @param callback 回调
      */
     void getRechargeDetailList(int page, int maxCount, INetCallback callback);
+
+    /**
+     * 上传用户头像
+     * @param filePath 图片文件路径
+     * @param callback 回调
+     */
+    void uploadHeadImage(String filePath, INetCallback callback);
+
+    /**
+     * 修改个人信息
+     * @param userBeanStr 用户信息
+     * @param callback 回调
+     */
+    void updateProfile(String userBeanStr, INetCallback callback);
 }

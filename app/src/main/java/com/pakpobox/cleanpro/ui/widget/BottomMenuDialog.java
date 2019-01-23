@@ -5,11 +5,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -28,11 +26,13 @@ public class BottomMenuDialog extends Dialog implements DialogInterface.OnCancel
     private WeakReference<Context> mContext = new WeakReference<>(null);
     private volatile static BottomMenuDialog sDialog;
     private TextView firstBtn, secondBtn, cancelBtn;
+    private OnMenuClickListener mOnMenuClickListener;
 
-    private BottomMenuDialog(Context context, CharSequence... menus) {
+    private BottomMenuDialog(Context context, OnMenuClickListener onMenuClickListener, CharSequence... menus) {
         super(context, R.style.LoadingDialog);
 
         mContext = new WeakReference<>(context);
+        this.mOnMenuClickListener = onMenuClickListener;
 
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_menu_layout, null);
@@ -46,6 +46,31 @@ public class BottomMenuDialog extends Dialog implements DialogInterface.OnCancel
         if (menus.length > 2)
             cancelBtn.setText(menus[2]);
         setContentView(view);
+
+        firstBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopMenu();
+                if (null != mOnMenuClickListener)
+                    mOnMenuClickListener.onFirstBtnClick(view);
+            }
+        });
+        secondBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopMenu();
+                if (null != mOnMenuClickListener)
+                    mOnMenuClickListener.onSecondBtnClick(view);
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopMenu();
+                if (null != mOnMenuClickListener)
+                    mOnMenuClickListener.onCancelBtnClick(view);
+            }
+        });
 
         Window window = this.getWindow();
         if (window != null) {
@@ -70,7 +95,7 @@ public class BottomMenuDialog extends Dialog implements DialogInterface.OnCancel
         }
     }
 
-    public static synchronized void showMenu(Context context, CharSequence... menus) {
+    public static synchronized void showMenu(Context context, OnMenuClickListener onMenuClickListener, CharSequence... menus) {
         if (sDialog != null && sDialog.isShowing()) {
             sDialog.dismiss();
         }
@@ -78,9 +103,9 @@ public class BottomMenuDialog extends Dialog implements DialogInterface.OnCancel
         if (context == null || !(context instanceof Activity)) {
             return;
         }
-        sDialog = new BottomMenuDialog(context, menus);
+        sDialog = new BottomMenuDialog(context, onMenuClickListener, menus);
         sDialog.setCancelable(true);
-        sDialog.setCanceledOnTouchOutside(false);
+        sDialog.setCanceledOnTouchOutside(true);
 
         if (sDialog != null && !sDialog.isShowing() && !((Activity) context).isFinishing()) {
             sDialog.show();
@@ -92,5 +117,11 @@ public class BottomMenuDialog extends Dialog implements DialogInterface.OnCancel
             sDialog.dismiss();
         }
         sDialog = null;
+    }
+
+    public interface OnMenuClickListener{
+        void onFirstBtnClick(View v);
+        void onSecondBtnClick(View v);
+        void onCancelBtnClick(View v);
     }
 }

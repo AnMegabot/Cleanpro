@@ -23,6 +23,7 @@ import javax.net.ssl.SSLSocketFactory;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -152,14 +153,20 @@ public class HttpManager {
 	}
 
 	/**
-	 * 异步上传文件
+	 * 异步上传图片文件
 	 *
 	 * @param url 网络地址
-	 * @param file 文件对象
+	 * @param filePath 文件路径
 	 * @param netCallback 回调
 	 */
-	public void asyncPostFileByHttp(String url, HashMap<String, String> headerValues, File file, INetCallback netCallback) {
-		RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+	public void asyncPostFileByHttp(String url, HashMap<String, String> headerValues, String filePath, INetCallback netCallback) {
+		Logger.t(TAG).i("HTTP-request(POST): " + url + "\nupload-data: " + filePath + "\nHeader:" + headerValues);
+		File file = new File(filePath);
+		RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
+		RequestBody requestBody = new MultipartBody.Builder()
+				.setType(MultipartBody.FORM)
+				.addFormDataPart("file", filePath, image)
+				.build();
 		Call call = newHttpCall(url, headerValues, requestBody);
 		ResponseCallback callback = new ResponseCallback(url, netCallback);
 		mHttpCallMap.put(call, callback);

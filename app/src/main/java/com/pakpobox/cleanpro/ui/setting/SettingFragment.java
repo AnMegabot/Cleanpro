@@ -11,8 +11,8 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.ui.setting.forgetpsw.ForgetPaymentPswFragment;
-import com.pakpobox.cleanpro.ui.setting.setpsw.SetPaymentPswFragment;
+import com.pakpobox.cleanpro.ui.account.paypsw.ForgetPaymentPswFragment;
+import com.pakpobox.cleanpro.ui.account.paypsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -66,7 +66,7 @@ public class SettingFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_modify_pay_psw_btn:
-                start(SetPaymentPswFragment.newInstance(1, null, null, null));
+//                start(SetPaymentPswFragment.newInstance(1, null, null, null));
                 break;
             case R.id.setting_forget_pay_psw_btn:
                 start(ForgetPaymentPswFragment.newInstance());

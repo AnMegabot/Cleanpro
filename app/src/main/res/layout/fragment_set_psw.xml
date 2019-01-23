@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.pakpobox.cleanpro.ui.logon.setpsw.SetPSWFragment">
+    tools:context="com.pakpobox.cleanpro.ui.account.setpsw.SetPSWFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/set_psw_toolbar"

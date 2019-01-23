@@ -27,6 +27,7 @@ public class UserBean {
     private int couponCount;
     private String randomPassword;
     private String randomPasswordExpiryTime;
+    private String headImageUrl;
 
     public String getId() {
         return id;
@@ -186,5 +187,13 @@ public class UserBean {
 
     public void setRandomPasswordExpiryTime(String randomPasswordExpiryTime) {
         this.randomPasswordExpiryTime = randomPasswordExpiryTime;
+    }
+
+    public String getHeadImageUrl() {
+        return headImageUrl;
+    }
+
+    public void setHeadImageUrl(String headImageUrl) {
+        this.headImageUrl = headImageUrl;
     }
 }

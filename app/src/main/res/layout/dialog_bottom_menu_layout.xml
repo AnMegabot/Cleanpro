@@ -21,7 +21,9 @@
             android:background="@android:color/white"
             android:textSize="15sp"
             android:gravity="center"
-            android:text="Take New Profile Picture"/>
+            android:text="Take New Profile Picture"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <TextView
             android:id="@+id/dialog_bottom_menu_second_btn"
@@ -32,7 +34,9 @@
             android:background="@android:color/white"
             android:textSize="15sp"
             android:gravity="center"
-            android:text="Select Profile Picture"/>
+            android:text="Select Profile Picture"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <TextView
             android:id="@+id/dialog_bottom_menu_cancel_btn"
@@ -43,7 +47,9 @@
             android:background="@android:color/white"
             android:textSize="15sp"
             android:gravity="center"
-            android:text="Cancel"/>
+            android:text="Cancel"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 

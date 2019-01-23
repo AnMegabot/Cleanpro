@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.bean.Wallet;
+import com.pakpobox.cleanpro.ui.account.paypsw.ForgetPaymentPswFragment;
 import com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment;
 import com.pakpobox.cleanpro.ui.wallet.scan.ScanRcFragment;
 import com.pakpobox.cleanpro.ui.wallet.trlist.TRListFragment;
@@ -82,6 +83,7 @@ public class WalletFragment extends BasePresenterFragment<WalletPresenter, Walle
                 start(CreditCardRcFragment.newInstance());
                 break;
             case R.id.wallet_payment_setting:
+                start(ForgetPaymentPswFragment.newInstance());
                 start(ScanRcFragment.newInstance());
                 break;
         }

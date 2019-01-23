@@ -4,24 +4,26 @@ package com.pakpobox.cleanpro.ui.my;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pakpobox.cleanpro.GlideApp;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.UserBean;
-import com.pakpobox.cleanpro.ui.logon.LoginActivity;
+import com.pakpobox.cleanpro.common.UrlConstainer;
+import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
+import com.pakpobox.cleanpro.ui.mvp.model.impl.BaseModel;
 import com.pakpobox.cleanpro.ui.my.personal.PersonalInfoFragment;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.ui.setting.feedback.FeedbackFragment;
 import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
+import com.pakpobox.cleanpro.ui.widget.GlideCircleTransform;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
 
@@ -29,9 +31,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 我的
@@ -139,6 +139,12 @@ public class MyFragment extends BaseFragment {
             mCouponsTv.setVisibility(View.VISIBLE);
             mCouponsTv.setText(String.format(getString(R.string.my_coupons_info), data.getCouponCount()));
             mVipLayout.setVisibility(View.VISIBLE);
+            GlideApp.with(getContext())
+                    .load(new BaseModel().getApiUrl(UrlConstainer.GET_HEAD_IMAGE, data.getHeadImageUrl()))
+                    .skipMemoryCache(true)
+                    .placeholder(R.mipmap.icon_avatar)
+                    .transform(new GlideCircleTransform())
+                    .into(mPortraitIm);
             clickClickingView();
         } else {
             mAccountTv.setText(getString(R.string.my_no_login_tips));

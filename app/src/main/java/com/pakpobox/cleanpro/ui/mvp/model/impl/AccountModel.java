@@ -4,12 +4,16 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.pakpobox.cleanpro.bean.Register;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.UrlConstainer;
+import com.pakpobox.cleanpro.net.HttpManager;
 import com.pakpobox.cleanpro.net.callback.INetCallback;
 import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 
 /**
  * User:Sean.Wei
@@ -155,5 +159,17 @@ public class AccountModel extends BaseModel implements IAccountModel {
     @Override
     public void getRechargeDetailList(int page, int maxCount, INetCallback callback) {
         getRequest(getApiUrl(UrlConstainer.WALLET_QUERY, page, maxCount), getBaseHttpHeader(),callback);
+    }
+
+    @Override
+    public void uploadHeadImage(String filePath, INetCallback callback) {
+        HttpManager httpManager = getHttpRequest();
+        if (null != httpManager)
+            httpManager.asyncPostFileByHttp(getApiUrl(UrlConstainer.UPLOAD_HEAD_IMAGE), getBaseHttpHeader(), filePath, callback);
+    }
+
+    @Override
+    public void updateProfile(String userBeanStr, INetCallback callback) {
+        postRequest(getApiUrl(UrlConstainer.UPDATE_PROFILE), getBaseHttpHeader(), userBeanStr, callback);
     }
 }

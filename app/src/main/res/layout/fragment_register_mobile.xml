@@ -54,7 +54,7 @@
                 android:layout_height="46dp"
                 android:layout_marginTop="35dp"
                 android:enabled="true"
-                android:text="@string/login_next"/>
+                android:text="@string/app_next"/>
 
         </LinearLayout>
 

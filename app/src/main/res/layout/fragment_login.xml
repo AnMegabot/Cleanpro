@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/windowBackground"
-    tools:context="com.pakpobox.cleanpro.ui.logon.login.LoginFragment">
+    tools:context="com.pakpobox.cleanpro.ui.account.login.LoginFragment">
 
     <include
         layout="@layout/app_toolbar"

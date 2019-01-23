@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cleanpro</string>
+    <string name="app_next">Next</string>
     <string name="app_complete">Complete</string>
+    <string name="app_cancel">Cancel</string>
+    <string name="app_confirm">Confirm</string>
     <string name="app_success">Success!</string>
     <string name="app_coming_soon">Coming soon</string>
     <string name="app_press_again_exit">Press again to exit</string>
@@ -71,6 +74,8 @@
     <string name="personal_Gender">Gender</string>
     <string name="personal_Birthday">Birthday</string>
     <string name="personal_Post_code">Post code</string>
+    <string name="photo_open_album">Select Profile Picture</string>
+    <string name="photo_open_camera">Take New Profile Picture</string>
 
     <!-- login -->
     <string name="login_signIn">Sign in</string>
@@ -89,7 +94,6 @@
     <string name="login_getCode">Get code</string>
     <string name="login_verifycation">Verifycation</string>
     <string name="login_next_step">Next step</string>
-    <string name="login_next">Next</string>
     <string name="login_change_psw_tips">Please set your login password</string>
     <string name="login_set_password_title">Set login password</string>
     <string name="login_set_password">Login password</string>
@@ -136,6 +140,10 @@
     <string name="wallet_amount_100">RM100</string>
     <string name="wallet_amount_200">RM200</string>
     <string name="wallet_scan_rc_tips">Please show this QR code to the staff</string>
+    <string name="wallet_payment_check_title">Please enter original password</string>
+    <string name="wallet_payment_set_title">Please set 6 digits password</string>
+    <string name="wallet_payment_confirm_title">Please enter again</string>
+    <string name="wallet_payment_forget_title">Verify Phone Number:</string>
 
     <!-- Setting -->
     <string name="setting">Setting</string>

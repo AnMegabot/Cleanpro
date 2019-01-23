@@ -73,7 +73,7 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".ui.logon.LoginActivity"
+            android:name=".ui.account.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".ui.scanner.QRCodeScanActivity"/>
 

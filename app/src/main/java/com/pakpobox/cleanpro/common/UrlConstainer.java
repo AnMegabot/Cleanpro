@@ -75,6 +75,21 @@ public class UrlConstainer {
      */
     public static final String WALLET_QUERY = "member/walletLog/query?page=%d&maxCount=%d";
 
+    /**
+     * 修改个人信息
+     */
+    public static final String UPDATE_PROFILE = "/member/updateProfile";
+
+    /**
+     * 修改用户头像
+     */
+    public static final String UPLOAD_HEAD_IMAGE = "member/uploadHeadImage";
+
+    /**
+     * 获取用户头像
+     */
+    public static final String GET_HEAD_IMAGE = "member/downloadHeadImage/%s";
+
 //    /**
 //     * 创建订单
 //     */

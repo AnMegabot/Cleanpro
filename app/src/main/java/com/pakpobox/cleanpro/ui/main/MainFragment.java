@@ -12,9 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.pakpobox.cleanpro.R;
@@ -22,11 +20,7 @@ import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment;
-import com.pakpobox.cleanpro.ui.home.HomeFragment;
-import com.pakpobox.cleanpro.ui.location.LocationFragment;
-import com.pakpobox.cleanpro.ui.logon.LoginActivity;
-import com.pakpobox.cleanpro.ui.my.MyFragment;
-import com.pakpobox.cleanpro.ui.order.OrdersFragment;
+import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.scanner.QRCodeScanActivity;
 import com.pakpobox.cleanpro.ui.widget.viewpager.NoSlideViewPager;
 import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
@@ -36,9 +30,7 @@ import com.pakpobox.logger.Logger;
 import javax.crypto.spec.SecretKeySpec;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**

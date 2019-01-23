@@ -345,6 +345,6 @@
         android:layout_marginStart="@dimen/app_pading_horizontal"
         android:layout_marginBottom="57dp"
         android:enabled="true"
-        android:text="@string/login_next"/>
+        android:text="@string/app_next"/>
 
 </LinearLayout>
