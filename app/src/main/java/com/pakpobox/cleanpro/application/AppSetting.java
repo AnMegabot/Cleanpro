@@ -4,8 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
@@ -27,6 +25,7 @@ public class AppSetting {
     private static final String PREFER_FILE_NAME = "Creanpro_config";
 
     private Context mContext = null;
+    private UserBean userBean;
 
     private AppSetting(){
     }
@@ -53,27 +52,22 @@ public class AppSetting {
 
     //用户信息
     public static UserBean getUserInfo() {
-        UserBean userBean = null;
-        String userInfo = getVelueWithDecrypt(Const.USERINFO_KEY.USER_INFO);
-        if (TextUtils.isEmpty(userInfo)) return null;
-        try {
-            userBean = new Gson().fromJson(userInfo, UserBean.class);
-        } catch (JsonSyntaxException e) {
-            e.printStackTrace();
-        }
-        return userBean;
+        return getInstance().userBean;
     }
     public static void saveUserInfo(UserBean userBean){
-        String userInfo = new Gson().toJson(userBean);
-        saveVelueWithEncrypt(Const.USERINFO_KEY.USER_INFO, userInfo);
+        getInstance().userBean = userBean;
     }
 
     //是否已登录
     public static boolean isLogin() {
-        return (boolean) PreUtils.get(Const.USERINFO_KEY.IS_LOGIN, false);
+        return !TextUtils.isEmpty(getLoginToken());
     }
-    public static void saveIsLogin(boolean isLogin){
-        PreUtils.put(Const.USERINFO_KEY.IS_LOGIN,isLogin);
+
+    public static String getLoginToken() {
+        return (String) PreUtils.get(Const.USERINFO_KEY.USER_TOKEN, "");
+    }
+    public static void saveLoginToken(String userToken){
+        PreUtils.put(Const.USERINFO_KEY.USER_TOKEN, userToken);
     }
 
     //上一次登录成功的手机号码

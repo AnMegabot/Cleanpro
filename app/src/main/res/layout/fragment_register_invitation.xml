@@ -36,7 +36,7 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/register_invitation_password"
+                android:id="@+id/register_invitation_code"
                 style="@style/AppEdittext"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -47,20 +47,20 @@
             <Button
                 android:id="@+id/register_invitate_complete_btn"
                 style="@style/AppButtonBlue"
-                android:layout_width="154dp"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
-                android:layout_marginTop="96dp"
+                android:layout_marginTop="48dp"
                 android:enabled="true"
                 android:text="@string/app_complete" />
 
             <Button
                 android:id="@+id/register_invitation_skip_btn"
                 style="@style/AppButtonBlue"
-                android:layout_width="154dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="35dp"
-                android:enabled="true"
-                android:background="@drawable/shape_app_skip_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="8dp"
+                android:background="@android:color/transparent"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/register_skip" />
 

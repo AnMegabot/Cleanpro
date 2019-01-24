@@ -41,8 +41,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginView> impl
                 @Override
                 protected void onSuccess(UserBean data) {
                     if (null != data) {
+                        AppSetting.saveLoginToken(data.getToken());
                         AppSetting.saveUserInfo(data);
-                        AppSetting.saveIsLogin(true);
                         AppSetting.saveLastPhoneNumb(userName);
                         EventBus.getDefault().post(data);
                         mLoginView.loginSuccess();

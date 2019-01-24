@@ -82,20 +82,20 @@ public interface IAccountModel {
     void checkInviteCode(String inviteCode, INetCallback callback);
 
     /**
-     * 重置支付密码
+     * 更换支付密码
      * @param oldPayPassword 旧支付密码
      * @param newPayPassword 新支付密码
      * @param callback 回调
      */
-    void resetPayPsw(String oldPayPassword, String newPayPassword, INetCallback callback);
+    void changePayPsw(String oldPayPassword, String newPayPassword, INetCallback callback);
 
     /**
-     * 修改支付密码
+     * 重置支付密码
      * @param token token
      * @param newPaymentPassword 新支付密码
      * @param callback 回调
      */
-    void changePayPSW(String token, String newPaymentPassword, INetCallback callback);
+    void resetPayPSW(String token, String newPaymentPassword, INetCallback callback);
 
     /**
      * 获取钱包
@@ -124,4 +124,10 @@ public interface IAccountModel {
      * @param callback 回调
      */
     void updateProfile(String userBeanStr, INetCallback callback);
+
+    /**
+     * 修改个人信息
+     * @param callback 回调
+     */
+    void getUserInfo(INetCallback callback);
 }

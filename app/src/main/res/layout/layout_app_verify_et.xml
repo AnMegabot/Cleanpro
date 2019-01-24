@@ -29,6 +29,6 @@
         android:foreground="?attr/selectableItemBackground"
         android:background="@android:color/transparent"
         android:text="@string/login_getCode"
-        android:textColor="@drawable/selector_main_tab_text_color"
+        android:textColor="@drawable/selector_app_btn_text_color"
         android:textSize="13sp" />
 </LinearLayout>

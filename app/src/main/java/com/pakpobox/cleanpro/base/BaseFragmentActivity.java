@@ -101,14 +101,6 @@ public abstract class BaseFragmentActivity extends SupportActivity {
         }
     }
 
-    @Override
-    public void pop() {
-        if (!hasPop) {
-            super.pop();
-            hasPop = true;
-        }
-    }
-
     /**
      * 是否注册消息分发
      * @return boolean

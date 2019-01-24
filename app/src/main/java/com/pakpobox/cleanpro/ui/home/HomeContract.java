@@ -1,7 +1,6 @@
 package com.pakpobox.cleanpro.ui.home;
 
-import com.pakpobox.cleanpro.bean.PageListDataBean;
-import com.pakpobox.cleanpro.bean.Promos;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.bean.location.Site;
 import com.pakpobox.cleanpro.ui.mvp.view.IListDataView;
 
@@ -17,8 +16,14 @@ public interface HomeContract {
          * 获取订单列表
          */
         void getPromosList();
+
+        /**
+         * 获取用户信息
+         */
+        void getUserInfo();
     }
 
     interface IHomeView extends IListDataView<Site> {
+        void getUserInfoSuccess(UserBean userBean);
     }
 }

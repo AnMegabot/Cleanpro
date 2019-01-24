@@ -27,6 +27,10 @@ public interface PersonalInfoContract {
         void updatePostcode(String postcode);
     }
 
+    interface IUpdateNamePresenter {
+        void updateName(String firstName, String lastName);
+    }
+
     interface IPersonalInfoView extends IView {
         void uploadHeadImageSuccess(ResultBean result);
 
@@ -35,5 +39,9 @@ public interface PersonalInfoContract {
 
     interface IUpdatePostcodeInfoView extends IView {
         void updatePostcodeSuccess(UserBean userBean);
+    }
+
+    interface IUpdateNameView extends IView {
+        void updateNameSuccess(UserBean userBean);
     }
 }

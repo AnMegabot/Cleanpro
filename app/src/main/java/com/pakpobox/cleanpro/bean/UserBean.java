@@ -28,6 +28,7 @@ public class UserBean {
     private String randomPassword;
     private String randomPasswordExpiryTime;
     private String headImageUrl;
+    private Wallet wallet;
 
     public String getId() {
         return id;
@@ -195,5 +196,13 @@ public class UserBean {
 
     public void setHeadImageUrl(String headImageUrl) {
         this.headImageUrl = headImageUrl;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 }

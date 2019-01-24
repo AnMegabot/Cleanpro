@@ -2,8 +2,10 @@ package com.pakpobox.cleanpro.ui.account.paypsw;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,8 +20,10 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
+import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,11 +50,27 @@ public class SetPaymentPswFragment extends BaseFragment {
 
     private KeyBoardHelper keyBoardHelper;
 
-    public static SetPaymentPswFragment newInstance() {
+    private String token;
+    private String oldPsw;
+
+    public static SetPaymentPswFragment newInstance(String token, String oldPsw) {
         Bundle args = new Bundle();
+        args.putString("token", token);
+        args.putString("oldPsw", oldPsw);
         SetPaymentPswFragment fragment = new SetPaymentPswFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (null != bundle) {
+            token = bundle.getParcelable("token");
+            oldPsw = bundle.getParcelable("oldPsw");
+        }
     }
 
     @Override
@@ -69,6 +89,7 @@ public class SetPaymentPswFragment extends BaseFragment {
 
         mPswTitleTv.setText(getString(R.string.wallet_payment_set_title));
         mCompleteBtn.setText(getString(R.string.app_next));
+        InputUtils.setEditFilter(mPswEt, new InputFilter.LengthFilter(6));
         mPswEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,6 +121,12 @@ public class SetPaymentPswFragment extends BaseFragment {
 
     @OnClick(R.id.change_psw_complete_btn)
     public void onClick() {
+        String newPsw = mPswEt.getText().toString().trim();
+        if ( 6 != newPsw.length()) {
+            ToastUtils.showToast(getContext(), R.string.wallet_payment_set_title);
+            return;
+        }
 
+        start(ConfirmPaymentPswFragment.newInstance(token, oldPsw, newPsw));
     }
 }

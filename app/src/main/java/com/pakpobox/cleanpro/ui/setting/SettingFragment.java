@@ -3,7 +3,9 @@ package com.pakpobox.cleanpro.ui.setting;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,13 +14,15 @@ import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.account.paypsw.ForgetPaymentPswFragment;
-import com.pakpobox.cleanpro.ui.account.paypsw.SetPaymentPswFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
+import com.pakpobox.cleanpro.utils.SystemUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 设置
@@ -31,6 +35,8 @@ public class SettingFragment extends BaseFragment {
     Toolbar mToolbar;
     @BindView(R.id.setting_logout_btn)
     Button mLogoutBtn;
+    @BindView(R.id.setting_version_tv)
+    TextView mVersionTv;
 
     public static SettingFragment newInstance() {
         Bundle args = new Bundle();
@@ -49,7 +55,7 @@ public class SettingFragment extends BaseFragment {
                 pop();
             }
         });
-
+        mVersionTv.setText(SystemUtils.getVersionName(getContext()));
         if (AppSetting.isLogin()) {
             mLogoutBtn.setVisibility(View.VISIBLE);
         } else {
@@ -62,21 +68,11 @@ public class SettingFragment extends BaseFragment {
         return R.layout.fragment_setting;
     }
 
-    @OnClick({R.id.setting_modify_pay_psw_btn, R.id.setting_forget_pay_psw_btn, R.id.setting_logout_btn})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.setting_modify_pay_psw_btn:
-//                start(SetPaymentPswFragment.newInstance(1, null, null, null));
-                break;
-            case R.id.setting_forget_pay_psw_btn:
-                start(ForgetPaymentPswFragment.newInstance());
-                break;
-            case R.id.setting_logout_btn:
-                AppSetting.saveIsLogin(false);
-                AppSetting.saveUserInfo(null);
-                EventBus.getDefault().post(new UserBean());
-                pop();
-                break;
-        }
+    @OnClick(R.id.setting_logout_btn)
+    public void onClick() {
+        AppSetting.saveLoginToken(null);
+        AppSetting.saveUserInfo(null);
+        EventBus.getDefault().post(new UserBean());
+        pop();
     }
 }

@@ -233,6 +233,7 @@ public class PersonalInfoFragment extends BasePresenterFragment<PersonalInfoPres
                 });
                 break;
             case R.id.personal_name_btn:
+                start(UpdateNameFragment.newInstance());
                 break;
             case R.id.personal_phone_number_btn:
                 break;
@@ -258,7 +259,7 @@ public class PersonalInfoFragment extends BasePresenterFragment<PersonalInfoPres
                     Calendar selectedDate = Calendar.getInstance();//系统当前时间
                     selectedDate.set(1991, 10, 29);
                     Calendar startDate = Calendar.getInstance();
-                    startDate.set(1990, 1, 1);
+                    startDate.set(1900, 1, 1);
                     Calendar endDate = Calendar.getInstance();
                     birthPickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
                         @Override

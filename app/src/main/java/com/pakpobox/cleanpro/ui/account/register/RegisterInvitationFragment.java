@@ -4,7 +4,11 @@ package com.pakpobox.cleanpro.ui.account.register;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
@@ -27,14 +31,17 @@ public class RegisterInvitationFragment extends BasePresenterFragment<RegisterPr
 
     @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.register_invitation_password)
-    EditText mPasswordEt;
+    @BindView(R.id.register_invitation_code)
+    EditText mCodeEt;
     @BindView(R.id.register_content_llt)
     ScrollView mContentLlt;
+    @BindView(R.id.register_invitate_complete_btn)
+    Button mNextBtn;
 
     private KeyBoardHelper keyBoardHelper;
 
     private Register mRegister;
+    private String invitateCode;
 
     public static RegisterInvitationFragment newInstance(Register register) {
         Bundle args = new Bundle();
@@ -66,6 +73,26 @@ public class RegisterInvitationFragment extends BasePresenterFragment<RegisterPr
 
         keyBoardHelper = new KeyBoardHelper(getActivity());
         keyBoardHelper.setKeyboardListener(mContentLlt, null);
+
+        mCodeEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mNextBtn.setEnabled(verifyPostcode());
+                String code = mCodeEt.getText().toString().trim();
+                if (6==code.length() && !verifyPostcode()) {
+                    mPresenter.checkInviteCode(code);
+                }
+            }
+        });
+        mNextBtn.setEnabled(verifyPostcode());
     }
 
     @Override
@@ -75,9 +102,15 @@ public class RegisterInvitationFragment extends BasePresenterFragment<RegisterPr
 
     @Override
     public void checkInviteCodeSuccess(String result) {
-        String invitateCode = mPasswordEt.getText().toString().trim();
-        mRegister.setInviteCode(invitateCode);
-        mPresenter.register(mRegister);
+        invitateCode = result;
+        mNextBtn.setEnabled(verifyPostcode());
+    }
+
+    private boolean verifyPostcode() {
+        String code = mCodeEt.getText().toString().trim();
+        if (!TextUtils.isEmpty(code) && code.equals(invitateCode))
+            return true;
+        return false;
     }
 
     @Override
@@ -94,10 +127,11 @@ public class RegisterInvitationFragment extends BasePresenterFragment<RegisterPr
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_invitate_complete_btn:
-                String invitateCode = mPasswordEt.getText().toString().trim();
-                mPresenter.checkInviteCode(invitateCode);
+                mRegister.setInviteCode(invitateCode);
+                mPresenter.register(mRegister);
                 break;
             case R.id.register_invitation_skip_btn:
+                mRegister.setInviteCode(null);
                 mPresenter.register(mRegister);
                 break;
         }

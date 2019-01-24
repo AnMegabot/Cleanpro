@@ -4,6 +4,7 @@ package com.pakpobox.cleanpro.ui.my;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
 import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
@@ -80,18 +82,18 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        setAccountText(AppSetting.getUserInfo());
+        setAccountText();
     }
 
-    @OnClick({R.id.my_vip_layout, R.id.my_account_layout, R.id.my_wallet, R.id.my_coupons, R.id.my_get_rm2, R.id.my_introduction, R.id.my_feedback, R.id.my_settings, R.id.my_info_btn})
+    @OnClick({R.id.my_vip_layout, R.id.my_account_tv, R.id.my_portrait_im, R.id.my_wallet, R.id.my_coupons, R.id.my_get_rm2, R.id.my_introduction, R.id.my_feedback, R.id.my_settings, R.id.my_info_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.my_vip_layout:
                 break;
-            case R.id.my_account_layout:
+            case R.id.my_account_tv:
+            case R.id.my_portrait_im:
                 if (!AppSetting.isLogin()) {
                     getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
-                    setClickingView(view);
                 } else {
                     if (getParentFragment() instanceof MainFragment) {
                         ((MainFragment) getParentFragment()).start(PersonalInfoFragment.newInstance());
@@ -129,35 +131,45 @@ public class MyFragment extends BaseFragment {
         }
     }
 
-    public void setAccountText(UserBean data) {
-        if (AppSetting.isLogin() && null != data) {
-            mAccountTv.setText(data.getLoginName());
+    public void setAccountText() {
+        UserBean userBean = AppSetting.getUserInfo();
+        if (AppSetting.isLogin() && null != userBean) {
+            mAccountTv.setText(userBean.getLoginName());
+            mCreditsTv.setText(String.format(getString(R.string.my_credits), userBean.getCredit()));
+            mCouponsTv.setText(String.format(getString(R.string.my_coupons_info), userBean.getCouponCount()));
+            if (TextUtils.isEmpty(userBean.getHeadImageUrl())) {
+                GlideApp.with(getContext())
+                        .load(new BaseModel().getApiUrl(UrlConstainer.GET_HEAD_IMAGE, userBean.getHeadImageUrl()))
+                        .skipMemoryCache(true)
+                        .placeholder(R.mipmap.icon_avatar)
+                        .transform(new GlideCircleTransform())
+                        .into(mPortraitIm);
+            } else {
+                mPortraitIm.setImageResource(R.mipmap.icon_avatar);
+            }
+
+            Wallet wallet = userBean.getWallet();
+            if (null != wallet) {
+                mWalletTv.setText(String.format(getString(R.string.my_wallet_info), SystemUtils.formatFloat2Str(wallet.getBalance())));
+            }
             mCreditsTv.setVisibility(View.VISIBLE);
-            mCreditsTv.setText(String.format(getString(R.string.my_credits), data.getCredit()));
             mWalletTv.setVisibility(View.VISIBLE);
-            mWalletTv.setText(String.format(getString(R.string.my_wallet_info), SystemUtils.formatFloat2Str(45.00)));
             mCouponsTv.setVisibility(View.VISIBLE);
-            mCouponsTv.setText(String.format(getString(R.string.my_coupons_info), data.getCouponCount()));
             mVipLayout.setVisibility(View.VISIBLE);
-            GlideApp.with(getContext())
-                    .load(new BaseModel().getApiUrl(UrlConstainer.GET_HEAD_IMAGE, data.getHeadImageUrl()))
-                    .skipMemoryCache(true)
-                    .placeholder(R.mipmap.icon_avatar)
-                    .transform(new GlideCircleTransform())
-                    .into(mPortraitIm);
             clickClickingView();
         } else {
             mAccountTv.setText(getString(R.string.my_no_login_tips));
             mCreditsTv.setVisibility(View.GONE);
             mWalletTv.setVisibility(View.GONE);
             mCouponsTv.setVisibility(View.GONE);
-            mVipLayout.setVisibility(View.GONE);}
+            mVipLayout.setVisibility(View.GONE);
+            mPortraitIm.setImageResource(R.mipmap.icon_avatar);
+        }
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginEvent(UserBean event) {
-        setAccountText(event);
+        setAccountText();
     }
-
 }

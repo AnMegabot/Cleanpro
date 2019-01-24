@@ -69,6 +69,11 @@ public class PriceFragment extends BaseListFragment<PricePresenter, PriceContrac
     }
 
     @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
+    }
+
+    @Override
     protected BaseListAdapter getListAdapter() {
         return new PriceAdapter(getContext(), new PriceAdapter.OnItemClickListener() {
             @Override

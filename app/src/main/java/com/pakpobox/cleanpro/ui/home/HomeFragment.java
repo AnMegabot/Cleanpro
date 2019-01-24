@@ -18,10 +18,13 @@ import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.location.Site;
 import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
+import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
+import com.pakpobox.cleanpro.utils.SystemUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -74,6 +77,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initListView(mContainerLayout);
+        mPresenter.getUserInfo();
     }
 
     @Override
@@ -102,6 +106,19 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
     }
 
     @Override
+    public void getUserInfoSuccess(UserBean userBean) {
+        if (null != userBean) {
+            mCouponsTv.setText(String.format(getString(R.string.my_coupons_info), userBean.getCouponCount()));
+            mPointsTv.setText(userBean.getCredit() + "");
+            Wallet wallet = userBean.getWallet();
+            if (null != wallet) {
+                mBalanceTv.setText(SystemUtils.formatFloat2Str(wallet.getBalance()));
+            }
+        }
+
+    }
+
+    @Override
     protected View initHeaderView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home_header, null, false);
         homeBanner = view.findViewById(R.id.home_banner);
@@ -125,7 +142,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
         //设置图片加载器
         homeBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        Integer[] sh_images = {R.mipmap.banner, R.mipmap.banner, R.mipmap.banner_1};
+        Integer[] sh_images = {R.mipmap.banner, R.mipmap.banner_1};
         homeBanner.setImages(Arrays.asList(sh_images));
         //设置banner动画效果
 //        homeBanner.setBannerAnimation(Transformer.ForegroundToBackground);
@@ -191,11 +208,30 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
                     getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
                     setClickingView(view);
                 } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(WalletFragment.newInstance());
+                    }
                 }
                 break;
             case R.id.home_coupons_btn:
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
+                    setClickingView(view);
+                } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(WalletFragment.newInstance());
+                    }
+                }
                 break;
             case R.id.home_points_btn:
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class), LOGIN_REQUEST_CODE);
+                    setClickingView(view);
+                } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(WalletFragment.newInstance());
+                    }
+                }
                 break;
             case R.id.home_view_all_btn:
                 if (getParentFragment() instanceof MainFragment) {

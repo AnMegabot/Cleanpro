@@ -240,8 +240,13 @@ public class SelectPreferenceFragment extends BasePresenterFragment<SelectPrefer
         int extrTime = mTime - 23;
         if (extrTime > 0) {
             selectPrefDryerLessBtn.setEnabled(true);
+            if (extrTime >= 50)
+                selectPrefDryerPlussBtn.setEnabled(false);
+            else
+                selectPrefDryerPlussBtn.setEnabled(true);
             return dryerBasePrice + (extrTime/dryerExtraTime) * dryerExtraPrice;
         } else {
+            selectPrefDryerPlussBtn.setEnabled(true);
             selectPrefDryerLessBtn.setEnabled(false);
             return dryerBasePrice;
         }

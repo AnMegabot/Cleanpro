@@ -147,6 +147,7 @@
 
     <!-- Setting -->
     <string name="setting">Setting</string>
+    <string name="setting_version">Version</string>
     <string name="setting_modify_pay_psw">Modify payment password</string>
     <string name="setting_forget_pay_psw">Forget payment password</string>
     <string name="setting_logout">Log out</string>

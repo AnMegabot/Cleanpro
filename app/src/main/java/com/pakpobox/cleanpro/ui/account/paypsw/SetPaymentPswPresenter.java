@@ -44,25 +44,25 @@ public class SetPaymentPswPresenter extends BasePresenter<PaymentPswContract.IPa
     }
 
     @Override
-    public void changePayPsw(String token, String newPsw) {
-        BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
-            @Override
-            protected void onSuccess(UserBean data) {
-                getView().changePayPswSuccess(data.getToken());
-            }
-        };
-        mModel.changePayPSW(token, newPsw, callback);
-    }
-
-    @Override
-    public void resetPayPsw(String oldPsw, String newPsw) {
+    public void resetPayPsw(String token, String newPsw) {
         BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
             @Override
             protected void onSuccess(UserBean data) {
                 getView().resetPayPswSuccess(data.getToken());
             }
         };
-        mModel.resetPayPsw(oldPsw, newPsw, callback);
+        mModel.resetPayPSW(token, newPsw, callback);
+    }
+
+    @Override
+    public void changePayPsw(String oldPsw, String newPsw) {
+        BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
+            @Override
+            protected void onSuccess(UserBean data) {
+                getView().changePayPswSuccess(data.getToken());
+            }
+        };
+        mModel.changePayPsw(oldPsw, newPsw, callback);
     }
 
 }

@@ -100,7 +100,7 @@ public class LoginFragment extends BasePresenterFragment<LoginPresenter, LoginCo
 
         InputUtils.setEditFilter(mMobileEt, new InputFilter.LengthFilter(11));
         //填充上次登录账号
-        String lastPhoneNumb = AppSetting.getInstance().getLastPhoneNumb();
+        String lastPhoneNumb = AppSetting.getLastPhoneNumb();
         if (!TextUtils.isEmpty(lastPhoneNumb)) {
             mMobileEt.setText(lastPhoneNumb);
             mMobileEt.setSelection(mMobileEt.getText().toString().trim().length());

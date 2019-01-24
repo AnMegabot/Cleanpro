@@ -1,5 +1,7 @@
 package com.pakpobox.cleanpro.ui.mvp.model.impl;
 
+import android.text.TextUtils;
+
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.net.HttpManager;
@@ -64,8 +66,8 @@ public class BaseModel implements IModel {
     public HashMap<String, String> getBaseHttpHeader(){
 
         HashMap<String, String> headerMap = new HashMap<>();
-        if (null!=AppSetting.getUserInfo())
-            headerMap.put("userToken", AppSetting.getUserInfo().getToken());
+        if (!TextUtils.isEmpty(AppSetting.getLoginToken()))
+            headerMap.put("userToken", AppSetting.getLoginToken());
 
         return headerMap;
     }

@@ -1,7 +1,5 @@
 package com.pakpobox.cleanpro.ui.account.paypsw;
 
-import com.pakpobox.cleanpro.bean.Result;
-import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
 /**
@@ -18,14 +16,14 @@ public interface PaymentPswContract {
         void checkPayPsw(String oldPsw);
 
         /**
-         * 修改支付密码
-         */
-        void changePayPsw(String token, String newPsw);
-
-        /**
          * 重置支付密码
          */
-        void resetPayPsw(String oldPsw, String newPsw);
+        void resetPayPsw(String token, String newPsw);
+
+        /**
+         * 更换支付密码
+         */
+        void changePayPsw(String oldPsw, String newPsw);
 
     }
 
@@ -39,11 +37,11 @@ public interface PaymentPswContract {
         /**
          * 重置支付密码成功
          */
-        void changePayPswSuccess(String result);
+        void resetPayPswSuccess(String result);
 
         /**
-         * 重置支付密码成功
+         * 更换支付密码成功
          */
-        void resetPayPswSuccess(String result);
+        void changePayPswSuccess(String result);
     }
 }

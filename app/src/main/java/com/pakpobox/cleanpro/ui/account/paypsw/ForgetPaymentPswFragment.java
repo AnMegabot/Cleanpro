@@ -147,8 +147,7 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobile
     public void checkSuccess(String result) {
         try {
             ChangePSWToken tokenBean = new Gson().fromJson(result, ChangePSWToken.class);
-//            start(ChangePSWFragment.newInstance(tokenBean.getToken()));
-//            start(SetPaymentPswFragment.newInstance(2, null, null, tokenBean.getToken()));
+            start(SetPaymentPswFragment.newInstance(tokenBean.getToken(), null));
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
             showFail(MyApplication.getContext().getString(R.string.app_unknown_error));

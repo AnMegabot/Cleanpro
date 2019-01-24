@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.pakpobox.cleanpro.bean.Register;
-import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.net.HttpManager;
 import com.pakpobox.cleanpro.net.callback.INetCallback;
@@ -12,8 +11,6 @@ import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
 
 /**
  * User:Sean.Wei
@@ -126,7 +123,7 @@ public class AccountModel extends BaseModel implements IAccountModel {
     }
 
     @Override
-    public void resetPayPsw(String oldPayPassword, String newPayPassword, INetCallback callback) {
+    public void changePayPsw(String oldPayPassword, String newPayPassword, INetCallback callback) {
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("payPassword", newPayPassword);
@@ -135,11 +132,11 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.RESET_PAY_PSW), getBaseHttpHeader(), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.CHANGE_PAY_PSW), getBaseHttpHeader(), requestObj.toString(), callback);
     }
 
     @Override
-    public void changePayPSW(String token, String newPaymentPassword, INetCallback callback) {
+    public void resetPayPSW(String token, String newPaymentPassword, INetCallback callback) {
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("token", token);
@@ -148,7 +145,7 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.CHANGE_PAY_PASSWORD), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.RESET_PAY_PSW), requestObj.toString(), callback);
     }
 
     @Override
@@ -171,5 +168,10 @@ public class AccountModel extends BaseModel implements IAccountModel {
     @Override
     public void updateProfile(String userBeanStr, INetCallback callback) {
         postRequest(getApiUrl(UrlConstainer.UPDATE_PROFILE), getBaseHttpHeader(), userBeanStr, callback);
+    }
+
+    @Override
+    public void getUserInfo(INetCallback callback) {
+        getRequest(getApiUrl(UrlConstainer.GET_USER_INFO), getBaseHttpHeader(), callback);
     }
 }

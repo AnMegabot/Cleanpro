@@ -36,6 +36,10 @@ public class PreUtils {
      * @param value
      */
     public static void put(String key, Object value) {
+        if (null == value) {
+            remove(key);
+            return;
+        }
         SharedPreferences sp = getSharedPreferences();
         SharedPreferences.Editor et = sp.edit();
         if (value instanceof String) {

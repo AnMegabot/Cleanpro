@@ -3,6 +3,7 @@ package com.pakpobox.cleanpro.ui.account.paypsw;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
@@ -65,6 +67,7 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
 
         mPswTitleTv.setText(getString(R.string.wallet_payment_check_title));
         mCompleteBtn.setText(getString(R.string.app_next));
+        InputUtils.setEditFilter(mPswEt, new InputFilter.LengthFilter(6));
         mPswEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,16 +99,18 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
 
     @Override
     public void checkPayPswSuccess() {
+        String oldPsw = mPswEt.getText().toString().trim();
+        if (!TextUtils.isEmpty(oldPsw))
+            start(SetPaymentPswFragment.newInstance(null, oldPsw));
+    }
+
+    @Override
+    public void resetPayPswSuccess(String result) {
 
     }
 
     @Override
     public void changePayPswSuccess(String result) {
-
-    }
-
-    @Override
-    public void resetPayPswSuccess(String result) {
 
     }
 

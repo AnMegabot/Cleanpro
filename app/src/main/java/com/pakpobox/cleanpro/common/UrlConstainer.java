@@ -53,7 +53,7 @@ public class UrlConstainer {
     /**
      * 重置支付密码
      */
-    public static final String CHANGE_PAY_PASSWORD = "member/resetPayPassword";
+    public static final String RESET_PAY_PSW = "member/resetPayPassword";
 
     /**
      * 校验支付密码
@@ -61,9 +61,9 @@ public class UrlConstainer {
     public static final String CHECK_PAY_PSW = "member/checkPayPassword";
 
     /**
-     * 修改支付密码
+     * 更换支付密码
      */
-    public static final String RESET_PAY_PSW = "member/updatePayPassword";
+    public static final String CHANGE_PAY_PSW = "member/updatePayPassword";
 
     /**
      * 获取钱包
@@ -76,9 +76,14 @@ public class UrlConstainer {
     public static final String WALLET_QUERY = "member/walletLog/query?page=%d&maxCount=%d";
 
     /**
+     * 获取个人信息
+     */
+    public static final String GET_USER_INFO = "member/userInfo";
+
+    /**
      * 修改个人信息
      */
-    public static final String UPDATE_PROFILE = "/member/updateProfile";
+    public static final String UPDATE_PROFILE = "member/updateProfile";
 
     /**
      * 修改用户头像

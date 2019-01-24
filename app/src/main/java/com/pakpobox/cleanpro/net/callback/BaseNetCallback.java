@@ -8,6 +8,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.bean.BaseErrorBean;
 import com.pakpobox.cleanpro.ui.mvp.presenter.IPresenter;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
@@ -110,6 +111,10 @@ public abstract class BaseNetCallback<T> implements INetCallback, ParameterizedT
     }
 
     protected void onStatusError(int statusCode, String statusMsg) {
+        if (401 == statusCode && AppSetting.isLogin()) {
+            //token过期
+            AppSetting.saveLoginToken(null);
+        }
         showError(statusMsg);
     }
 
