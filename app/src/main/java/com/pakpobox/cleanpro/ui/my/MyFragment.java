@@ -21,6 +21,8 @@ import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.mvp.model.impl.BaseModel;
+import com.pakpobox.cleanpro.ui.my.introduction.IntroductionFragment;
+import com.pakpobox.cleanpro.ui.my.invite.InviteFragment;
 import com.pakpobox.cleanpro.ui.my.personal.PersonalInfoFragment;
 import com.pakpobox.cleanpro.ui.setting.SettingFragment;
 import com.pakpobox.cleanpro.ui.setting.feedback.FeedbackFragment;
@@ -113,8 +115,24 @@ public class MyFragment extends BaseFragment {
             case R.id.my_coupons:
                 break;
             case R.id.my_get_rm2:
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                    setClickingView(view);
+                } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(InviteFragment.newInstance());
+                    }
+                }
                 break;
             case R.id.my_introduction:
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                    setClickingView(view);
+                } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(IntroductionFragment.newInstance());
+                    }
+                }
                 break;
             case R.id.my_feedback:
                 if (getParentFragment() instanceof MainFragment) {
@@ -150,7 +168,8 @@ public class MyFragment extends BaseFragment {
 
             Wallet wallet = userBean.getWallet();
             if (null != wallet) {
-                mWalletTv.setText(String.format(getString(R.string.my_wallet_info), SystemUtils.formatFloat2Str(wallet.getBalance())));
+//                mWalletTv.setText(String.format(getString(R.string.my_wallet_info), SystemUtils.formatFloat2Str(wallet.getBalance())));
+                mWalletTv.setText(wallet.getCurrencyUnit() + " " + wallet.getBalance());
             }
             mCreditsTv.setVisibility(View.VISIBLE);
             mWalletTv.setVisibility(View.VISIBLE);
