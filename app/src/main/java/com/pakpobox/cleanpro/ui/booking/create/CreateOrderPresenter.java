@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.bean.PayResult;
 import com.pakpobox.cleanpro.bean.Result;
 import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
 import com.pakpobox.cleanpro.ui.mvp.model.IAccountModel;
@@ -53,9 +54,9 @@ public class CreateOrderPresenter extends BasePresenter<CreateOrderContract.ICre
     @Override
     public void createOrder() {
         mCreateOrderView = getView();
-        BaseNetCallback<Order> callback = new BaseNetCallback<Order>(activity, this) {
+        BaseNetCallback<PayResult> callback = new BaseNetCallback<PayResult>(activity, this) {
             @Override
-            protected void onSuccess(Order data) {
+            protected void onSuccess(PayResult data) {
                 if (null != data)
                     mCreateOrderView.createSuccess(data);
                 else

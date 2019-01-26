@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -46,12 +50,14 @@ public class ConfirmPaymentPswFragment extends BasePresenterFragment<SetPaymentP
 
     private KeyBoardHelper keyBoardHelper;
 
+    private String validateCode;
     private String token;
     private String oldPsw;
     private String newPsw;
 
-    public static ConfirmPaymentPswFragment newInstance(String token, String oldPsw, String newPsw) {
+    public static ConfirmPaymentPswFragment newInstance(String validateCode, String token, String oldPsw, String newPsw) {
         Bundle args = new Bundle();
+        args.putString("validateCode", validateCode);
         args.putString("token", token);
         args.putString("oldPsw", oldPsw);
         args.putString("newPsw", newPsw);
@@ -66,9 +72,10 @@ public class ConfirmPaymentPswFragment extends BasePresenterFragment<SetPaymentP
 
         Bundle bundle = getArguments();
         if (null != bundle) {
-            token = bundle.getParcelable("token");
-            oldPsw = bundle.getParcelable("oldPsw");
-            newPsw = bundle.getParcelable("newPsw");
+            validateCode = bundle.getString("validateCode");
+            token = bundle.getString("token");
+            oldPsw = bundle.getString("oldPsw");
+            newPsw = bundle.getString("newPsw");
         }
     }
     @Override
@@ -87,6 +94,9 @@ public class ConfirmPaymentPswFragment extends BasePresenterFragment<SetPaymentP
 
         mPswTitleTv.setText(getString(R.string.wallet_payment_confirm_title));
         mCompleteBtn.setText(getString(R.string.app_complete));
+
+        mPswEt.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+        mPswEt.setInputType(InputType.TYPE_CLASS_NUMBER);
         InputUtils.setEditFilter(mPswEt, new InputFilter.LengthFilter(6));
         mPswEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,13 +133,8 @@ public class ConfirmPaymentPswFragment extends BasePresenterFragment<SetPaymentP
     }
 
     @Override
-    public void resetPayPswSuccess(String result) {
-
-    }
-
-    @Override
-    public void changePayPswSuccess(String result) {
-
+    public void setPayPswSuccess(UserBean userBean) {
+        popTo(WalletFragment.class, false);
     }
 
     @Override
@@ -145,7 +150,9 @@ public class ConfirmPaymentPswFragment extends BasePresenterFragment<SetPaymentP
             return;
         }
 
-        if (!TextUtils.isEmpty(token))
+        if (!TextUtils.isEmpty(validateCode)) {
+            mPresenter.setPayPsw(validateCode, confirmPsw);
+        }else if (!TextUtils.isEmpty(token))
             mPresenter.resetPayPsw(token, confirmPsw);
         else
             mPresenter.changePayPsw(oldPsw, confirmPsw);

@@ -33,4 +33,6 @@
     <color name="home_tab_value_text_color">#000000</color>
     <color name="my_mvp_bg_color">#FFCF06</color>
     <color name="my_time_text_color">#000000</color>
+
+    <color name="vip_bg">#FE3B81</color>
 </resources>

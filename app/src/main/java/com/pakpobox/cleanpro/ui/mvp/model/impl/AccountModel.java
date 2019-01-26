@@ -62,7 +62,7 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.GET_VERIFYCODE), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.GET_REGISTER_VERIFYCODE), requestObj.toString(), callback);
     }
 
     @Override
@@ -76,7 +76,12 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.GET_VERIFYCODE_REPSW), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.GET_REPSW_VERIFYCODE), requestObj.toString(), callback);
+    }
+
+    @Override
+    public void getCurrentAccountVerifyCode(INetCallback callback) {
+        postRequest(getApiUrl(UrlConstainer.GET_CURRENT_VERIFYCODE), getBaseHttpHeader(), "{}", callback);
     }
 
     @Override
@@ -89,7 +94,7 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.CHECK_VERIFYCODE), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.CHECK_REGISTER_VERIFYCODE), requestObj.toString(), callback);
     }
 
     @Override
@@ -102,7 +107,19 @@ public class AccountModel extends BaseModel implements IAccountModel {
             e.printStackTrace();
         }
 
-        postRequest(getApiUrl(UrlConstainer.CHECK_VERIFYCODE_REPSW), requestObj.toString(), callback);
+        postRequest(getApiUrl(UrlConstainer.CHECK_REPSW_VERIFYCODE), requestObj.toString(), callback);
+    }
+
+    @Override
+    public void checkCurrentAccountVerifyCode(String verifyCode, INetCallback callback) {
+        JSONObject requestObj = new JSONObject();
+        try {
+            requestObj.put("code", verifyCode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        postRequest(getApiUrl(UrlConstainer.CHECK_CURRENT_VERIFYCODE), getBaseHttpHeader(), requestObj.toString(), callback);
     }
 
     @Override
@@ -120,6 +137,19 @@ public class AccountModel extends BaseModel implements IAccountModel {
         }
 
         postRequest(getApiUrl(UrlConstainer.CHECK_PAY_PSW), getBaseHttpHeader(), requestObj.toString(), callback);
+    }
+
+    @Override
+    public void setPayPsw(String validateCode, String newPayPassword, INetCallback callback) {
+        JSONObject requestObj = new JSONObject();
+        try {
+            requestObj.put("validateCode", validateCode);
+            requestObj.put("payPassword", newPayPassword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        postRequest(getApiUrl(UrlConstainer.SET_PAYMENT_PASSWORD), getBaseHttpHeader(), requestObj.toString(), callback);
     }
 
     @Override

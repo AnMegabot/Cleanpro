@@ -2,7 +2,10 @@ package com.pakpobox.cleanpro.ui.home;
 
 import android.app.Activity;
 
+import com.google.gson.Gson;
 import com.pakpobox.cleanpro.application.AppSetting;
+import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.bean.Promos;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.bean.location.Site;
 import com.pakpobox.cleanpro.net.callback.BaseNetCallback;
@@ -15,6 +18,9 @@ import com.pakpobox.cleanpro.ui.mvp.model.impl.CommonModel;
 import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User:Sean.Wei
@@ -37,14 +43,21 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
 
     @Override
     public void getPromosList() {
-        BaseNetCallback<String> callback = new BaseNetCallback<String>(activity, this){
-            @Override
-            protected void onSuccess(String data) {
-                super.onSuccess(data);
-            }
-        };
-        mModel.getLocations(getView().getPage(), 20, new PageListNetCallback<Site>(activity, this){});
-//        mModel.getLocations(getView().getPage(), 20, callback);
+        PageListNetCallback<Promos> callback = new PageListNetCallback<Promos>(activity, this){};
+        PageListDataBean<Promos> datas = new PageListDataBean<>();
+        datas.setMaxCount(10);
+        datas.setPage(0);
+        datas.setTotalPage(1);
+        List<Promos> list = new ArrayList<>();
+        for (int i=0; i<3; i++) {
+            Promos promos = new Promos();
+            promos.setUrl("collections_" + i);
+            list.add(promos);
+        }
+        datas.setResultList(list);
+        datas.setTotalCount(list.size());
+        String dataStr = new Gson().toJson(datas);
+        callback.onNext(dataStr.getBytes());
     }
 
     @Override

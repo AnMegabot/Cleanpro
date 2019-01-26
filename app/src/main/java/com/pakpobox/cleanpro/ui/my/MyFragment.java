@@ -91,6 +91,13 @@ public class MyFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.my_vip_layout:
+                if (!AppSetting.isLogin()) {
+                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                } else {
+                    if (getParentFragment() instanceof MainFragment) {
+                        ((MainFragment) getParentFragment()).start(CreditFragment.newInstance());
+                    }
+                }
                 break;
             case R.id.my_account_tv:
             case R.id.my_portrait_im:
@@ -169,7 +176,7 @@ public class MyFragment extends BaseFragment {
             Wallet wallet = userBean.getWallet();
             if (null != wallet) {
 //                mWalletTv.setText(String.format(getString(R.string.my_wallet_info), SystemUtils.formatFloat2Str(wallet.getBalance())));
-                mWalletTv.setText(wallet.getCurrencyUnit() + " " + wallet.getBalance());
+                mWalletTv.setText(wallet.getCurrencyUnit() + " " + SystemUtils.formatFloat2Str(wallet.getBalance()));
             }
             mCreditsTv.setVisibility(View.VISIBLE);
             mWalletTv.setVisibility(View.VISIBLE);

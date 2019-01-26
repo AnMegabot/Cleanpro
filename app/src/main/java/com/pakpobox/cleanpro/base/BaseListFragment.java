@@ -187,7 +187,7 @@ public abstract class BaseListFragment<P extends BasePresenter<V>, V extends IVi
     @Override
     public void showEmpty() {
         if (isStatusLayoutEnable())
-            mStatusLayout.showEmpty();
+            mStatusLayout.setEmpty();
     }
 
     @Override

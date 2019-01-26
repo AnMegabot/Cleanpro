@@ -21,7 +21,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.bean.Feedback;
+import com.pakpobox.cleanpro.bean.FeedbackReq;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.ui.widget.tabbar.TabBarItem;
 import com.pakpobox.cleanpro.ui.widget.tabbar.TabBarLayout;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -33,7 +38,7 @@ import butterknife.OnClick;
 /**
  * Feedback
  */
-public class FeedbackFragment extends BaseFragment {
+public class FeedbackFragment extends BasePresenterFragment<FeedbackPresenter, FeedbackContract.IFeedbackView> implements FeedbackContract.IFeedbackView {
     private static final int RC_LOCATION_PERM = 0x0011;
     @BindView(R.id.app_toolbar_title_tv)
     TextView mTitleTv;
@@ -49,6 +54,7 @@ public class FeedbackFragment extends BaseFragment {
     TextView mHotlineTv;
 
     private String hotling = "12345678";
+    private String feedbackType;
 
     public static FeedbackFragment newInstance() {
         Bundle args = new Bundle();
@@ -68,10 +74,30 @@ public class FeedbackFragment extends BaseFragment {
             }
         });
 
+        feedbackType = getString(R.string.feedback_option_laundry);
         mTabbarLayout.setOnItemSelectedListener(new TabBarLayout.OnItemSelectedListener() {
             @Override
             public void onItemSelected(TabBarItem bottomBarItem, int previousPosition, int currentPosition) {
-
+                switch (currentPosition) {
+                    case 0:
+                        feedbackType = getString(R.string.feedback_option_laundry);
+                        break;
+                    case 1:
+                        feedbackType = getString(R.string.feedback_option_dryer);
+                        break;
+                    case 2:
+                        feedbackType = getString(R.string.feedback_option_price);
+                        break;
+                    case 3:
+                        feedbackType = getString(R.string.feedback_option_quality);
+                        break;
+                    case 4:
+                        feedbackType = getString(R.string.feedback_option_useprocess);
+                        break;
+                    case 5:
+                        feedbackType = getString(R.string.feedback_option_others);
+                        break;
+                }
             }
         });
 
@@ -101,11 +127,27 @@ public class FeedbackFragment extends BaseFragment {
         return R.layout.fragment_feedback;
     }
 
+    @Override
+    protected FeedbackPresenter createPresenter() {
+        return new FeedbackPresenter(getActivity());
+    }
+
+    @Override
+    public void feedbackSuccess(Feedback data) {
+        ToastUtils.showToast(getContext(), getString(R.string.feedback_success));
+    }
+
     @OnClick({R.id.feedback_submit_btn, R.id.feedback_hotline_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.feedback_submit_btn:
-                ToastUtils.showToast(getContext(), R.string.app_coming_soon);
+                FeedbackReq feedbackReq = new FeedbackReq();
+                UserBean userBean = AppSetting.getUserInfo();
+                if (null != userBean)
+                    feedbackReq.setLoginName(userBean.getLoginName());
+                feedbackReq.setType(feedbackType);
+                feedbackReq.setContent(mCommentEt.getText().toString());
+                mPresenter.createFeedback(feedbackReq);
                 break;
             case R.id.feedback_hotline_tv:
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

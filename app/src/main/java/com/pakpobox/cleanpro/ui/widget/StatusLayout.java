@@ -23,6 +23,7 @@ public class StatusLayout extends FrameLayout {
     private View mErrorView;
     private View mEmptyView;
     private View mContentView;
+    private View mCustomerView;
 
 
     public StatusLayout(Context context, @Nullable AttributeSet attrs) {
@@ -76,13 +77,25 @@ public class StatusLayout extends FrameLayout {
             mContentView.setVisibility(GONE);
     }
 
+    public void setError(View view) {
+        removeView(mErrorView);
+        mErrorView = view;
+        addView(mErrorView);
+    }
+
     //empty
-    public void showEmpty() {
+    public void setEmpty() {
         mEmptyView.setVisibility(VISIBLE);
         mLoadingView.setVisibility(GONE);
         mErrorView.setVisibility(GONE);
         if (mContentView != null)
             mContentView.setVisibility(GONE);
+    }
+
+    public void setEmpty(View view) {
+        removeView(mEmptyView);
+        mEmptyView = view;
+        addView(mEmptyView);
     }
 
     //content

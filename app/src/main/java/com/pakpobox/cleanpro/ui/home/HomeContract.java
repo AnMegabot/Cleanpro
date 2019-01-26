@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.ui.home;
 
+import com.pakpobox.cleanpro.bean.Promos;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.bean.location.Site;
 import com.pakpobox.cleanpro.ui.mvp.view.IListDataView;
@@ -23,7 +24,7 @@ public interface HomeContract {
         void getUserInfo();
     }
 
-    interface IHomeView extends IListDataView<Site> {
+    interface IHomeView extends IListDataView<Promos> {
         void getUserInfoSuccess(UserBean userBean);
     }
 }

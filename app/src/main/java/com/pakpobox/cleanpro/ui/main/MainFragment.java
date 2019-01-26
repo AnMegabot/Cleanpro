@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseFragment;
+import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.ui.booking.preference.SelectPreferenceFragment;
 import com.pakpobox.cleanpro.ui.account.LoginActivity;
@@ -26,6 +27,9 @@ import com.pakpobox.cleanpro.ui.widget.viewpager.NoSlideViewPager;
 import com.pakpobox.cleanpro.utils.AesEncryptionUtils;
 import com.pakpobox.cleanpro.utils.ToastUtils;
 import com.pakpobox.logger.Logger;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.crypto.spec.SecretKeySpec;
 
@@ -61,6 +65,11 @@ public class MainFragment extends BaseFragment {
     @Override
     protected void initViews(View view) {
 
+    }
+
+    @Override
+    protected boolean isRegisterEvent() {
+        return true;
     }
 
     @Override
@@ -128,7 +137,7 @@ public class MainFragment extends BaseFragment {
             mFragmentPagerAdapter = new MainFragmentPagerAdapter(getChildFragmentManager());
 
         mViewPager.setAdapter(mFragmentPagerAdapter);
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(1);
         mViewPager.setNoScroll(true);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -224,5 +233,10 @@ public class MainFragment extends BaseFragment {
                 break;
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(UserBean event) {
+        clickClickingView();
     }
 }

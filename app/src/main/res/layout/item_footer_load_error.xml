@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="14sp"
-        android:text="加载失败,点击重新加载" />
+        android:text="@string/lm_recycler_reload" />
 
 </FrameLayout>

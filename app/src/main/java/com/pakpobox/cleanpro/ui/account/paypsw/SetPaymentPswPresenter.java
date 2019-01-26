@@ -3,6 +3,7 @@ package com.pakpobox.cleanpro.ui.account.paypsw;
 import android.app.Activity;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.application.MyApplication;
 import com.pakpobox.cleanpro.bean.Result;
 import com.pakpobox.cleanpro.bean.UserBean;
@@ -44,11 +45,24 @@ public class SetPaymentPswPresenter extends BasePresenter<PaymentPswContract.IPa
     }
 
     @Override
+    public void setPayPsw(String code, String newPsw) {
+        BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
+            @Override
+            protected void onSuccess(UserBean userBean) {
+                AppSetting.saveUserInfo(userBean);
+                getView().setPayPswSuccess(userBean);
+            }
+        };
+        mModel.setPayPsw(code, newPsw, callback);
+    }
+
+    @Override
     public void resetPayPsw(String token, String newPsw) {
         BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
             @Override
-            protected void onSuccess(UserBean data) {
-                getView().resetPayPswSuccess(data.getToken());
+            protected void onSuccess(UserBean userBean) {
+                AppSetting.saveUserInfo(userBean);
+                getView().setPayPswSuccess(userBean);
             }
         };
         mModel.resetPayPSW(token, newPsw, callback);
@@ -58,8 +72,9 @@ public class SetPaymentPswPresenter extends BasePresenter<PaymentPswContract.IPa
     public void changePayPsw(String oldPsw, String newPsw) {
         BaseNetCallback<UserBean> callback = new BaseNetCallback<UserBean>(activity, this) {
             @Override
-            protected void onSuccess(UserBean data) {
-                getView().changePayPswSuccess(data.getToken());
+            protected void onSuccess(UserBean userBean) {
+                AppSetting.saveUserInfo(userBean);
+                getView().setPayPswSuccess(userBean);
             }
         };
         mModel.changePayPsw(oldPsw, newPsw, callback);

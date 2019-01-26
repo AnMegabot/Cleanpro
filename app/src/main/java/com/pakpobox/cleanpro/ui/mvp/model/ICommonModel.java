@@ -1,5 +1,6 @@
 package com.pakpobox.cleanpro.ui.mvp.model;
 
+import com.pakpobox.cleanpro.bean.FeedbackReq;
 import com.pakpobox.cleanpro.net.callback.INetCallback;
 
 /**
@@ -29,4 +30,11 @@ public interface ICommonModel {
      * @param callback 回调
      */
     void getLocations(int page, int maxCount, INetCallback callback);
+
+    /**
+     * 获取门店列表
+     * @param feedbackReq 反馈参数
+     * @param callback 回调
+     */
+    void createFeedback(FeedbackReq feedbackReq, INetCallback callback);
 }

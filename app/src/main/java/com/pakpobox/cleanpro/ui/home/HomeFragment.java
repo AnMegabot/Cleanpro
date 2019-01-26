@@ -17,11 +17,13 @@ import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
+import com.pakpobox.cleanpro.bean.Promos;
 import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.bean.location.Site;
 import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
+import com.pakpobox.cleanpro.ui.my.CreditFragment;
 import com.pakpobox.cleanpro.ui.price.PriceFragment;
 import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
 import com.pakpobox.cleanpro.utils.SystemUtils;
@@ -40,7 +42,7 @@ import butterknife.BindView;
 /**
  * 首页
  */
-public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.IHomeView, Site> implements HomeContract.IHomeView, View.OnClickListener {
+public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.IHomeView, Promos> implements HomeContract.IHomeView, View.OnClickListener {
     public static final int LOGIN_REQUEST_CODE = 0x0011;
 
     @BindView(R.id.home_containerLayout)
@@ -99,7 +101,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
     protected BaseListAdapter getListAdapter() {
         return new PromosListAdapter(getContext(), new PromosListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Site order) {
+            public void onItemClick(Promos order) {
 
             }
         });
@@ -229,7 +231,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
                     setClickingView(view);
                 } else {
                     if (getParentFragment() instanceof MainFragment) {
-                        ((MainFragment) getParentFragment()).start(WalletFragment.newInstance());
+                        ((MainFragment) getParentFragment()).start(CreditFragment.newInstance());
                     }
                 }
                 break;

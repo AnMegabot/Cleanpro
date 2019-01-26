@@ -2,6 +2,7 @@ package com.pakpobox.cleanpro.ui.booking.create;
 
 import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
+import com.pakpobox.cleanpro.bean.PayResult;
 import com.pakpobox.cleanpro.bean.Result;
 import com.pakpobox.cleanpro.ui.mvp.view.IView;
 
@@ -39,8 +40,8 @@ public interface CreateOrderContract {
 
         /**
          * 获取成功
-         * @param data 钱包
+         * @param data 支付结果
          */
-        void createSuccess(Order data);
+        void createSuccess(PayResult data);
     }
 }

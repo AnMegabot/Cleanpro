@@ -16,7 +16,7 @@ import com.pakpobox.cleanpro.ui.mvp.presenter.BasePresenter;
 
 public class VerifyMobilePresenter extends BasePresenter<RegisterContract.IVerifyMobileView> implements RegisterContract.IVerifyMobilePresenter {
     private IAccountModel mModel;
-    private int flag = 0;//0为注册，1为忘记密码
+    private int flag = 0;//0为注册，1为忘记密码，2为当前账号
 
     private Activity activity;
 
@@ -43,6 +43,10 @@ public class VerifyMobilePresenter extends BasePresenter<RegisterContract.IVerif
             case 1:
                 mModel.getForgetPSWVerifyCode(phoneNumber, countryCode, callback);
                 break;
+
+            case 2:
+                mModel.getCurrentAccountVerifyCode(callback);
+                break;
         }
 
     }
@@ -62,6 +66,10 @@ public class VerifyMobilePresenter extends BasePresenter<RegisterContract.IVerif
 
             case 1:
                 mModel.checkForgetPSWVerifyCode(phoneNumber, verifyCode, callback);
+                break;
+
+            case 2:
+                mModel.checkCurrentAccountVerifyCode(verifyCode, callback);
                 break;
         }
     }

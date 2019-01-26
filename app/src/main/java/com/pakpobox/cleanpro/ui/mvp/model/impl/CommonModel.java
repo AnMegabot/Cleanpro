@@ -1,5 +1,7 @@
 package com.pakpobox.cleanpro.ui.mvp.model.impl;
 
+import com.google.gson.Gson;
+import com.pakpobox.cleanpro.bean.FeedbackReq;
 import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.net.callback.INetCallback;
 import com.pakpobox.cleanpro.ui.mvp.model.ICommonModel;
@@ -24,5 +26,10 @@ public class CommonModel extends BaseModel implements ICommonModel {
     @Override
     public void getLocations(int page, int maxCount, INetCallback callback) {
         getRequest(getApiUrl(UrlConstainer.LOCATION, page, maxCount), getBaseHttpHeader(),callback);
+    }
+
+    @Override
+    public void createFeedback(FeedbackReq feedbackReq, INetCallback callback) {
+        postRequest(getApiUrl(UrlConstainer.CREATE_FEEDBACK), getBaseHttpHeader(), new Gson().toJson(feedbackReq), callback);
     }
 }

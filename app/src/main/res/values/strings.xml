@@ -7,9 +7,16 @@
     <string name="app_success">Success!</string>
     <string name="app_coming_soon">Coming soon</string>
     <string name="app_press_again_exit">Press again to exit</string>
+
+    <!--============= Status string =================-->
     <string name="tip_no_data">No Record!</string>
     <string name="tip_load_data">Data loading&#8230;</string>
     <string name="tip_load_error">Error loading!\n\nClick retry&#8230;</string>
+
+    <!--============= LMRecyclerView string =================-->
+    <string name="lm_recycler_reload">Failed to load, click reload</string>
+    <string name="lm_recycler_no_more">No more data</string>
+    <string name="lm_recycler_load_more">Load more</string>
 
     <!--============= Net string =================-->
     <string name="app_connect_error">Network error</string>
@@ -53,6 +60,7 @@
     <string name="orders_Time">Time :</string>
     <string name="orders_Price">Price :</string>
     <string name="orders_unpaid_scan_tips">Please scan the QR code  on the machine</string>
+    <string name="orders_empty_tips">You have no orders for now!</string>
 
     <!-- my -->
     <string name="my_wallet">My Wallet</string>
@@ -144,6 +152,7 @@
     <string name="wallet_payment_set_title">Please set 6 digits password</string>
     <string name="wallet_payment_confirm_title">Please enter again</string>
     <string name="wallet_payment_forget_title">Verify Phone Number:</string>
+    <string name="wallet_payment_check_forget">Forget password?</string>
 
     <!-- Setting -->
     <string name="setting">Setting</string>
@@ -167,6 +176,7 @@
     <string name="feedback_option_others">Others</string>
     <string name="feedback_comment_hint">Add a comment</string>
     <string name="feedback_submit">Submit</string>
+    <string name="feedback_success">Feedback success</string>
 
     <!-- Service -->
     <string name="service">Service</string>
@@ -202,7 +212,7 @@
     <string name="invite_title">Invite your friends to Cleanpro &amp; get\nfree incentives</string>
     <string name="invite_tips">Invite friends to Cleanpro - give your friend RM11,\nand you will get RM2/1st time, RM2/2nd time,\nRM7/3rd time after your friend uses your\ninvitation code to register! </string>
 
-    !-- Invite -->
+    !-- Introduction -->
     <string name="introduction">Introduction</string>
     <string name="introduction_q1">Q1: How to use machine?</string>
     <string name="introduction_a1">There is a QR code attached on the machine, click"scan"function at the bottom of HomePage, just scan the QR code.</string>
@@ -213,4 +223,6 @@
     <string name="introduction_q4">Q4: How to add extra time for dryer machine?</string>
     <string name="introduction_a4">In  orders, click the order of dryer, there is a button that you can add time.</string>
 
+    !-- VIP -->
+    <string name="vip">VIP</string>
 </resources>

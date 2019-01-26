@@ -112,6 +112,8 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobile
         keyBoardHelper = new KeyBoardHelper(getActivity());
         keyBoardHelper.setKeyboardListener(mContentLlt, null);
 
+        if (null != AppSetting.getUserInfo())
+            mMobileTv.setText(AppSetting.getUserInfo().getPhoneNumber());
         //限制输入最大个数
         InputUtils.setEditFilter(mVerifycationEt, new InputFilter.LengthFilter(6));
 
@@ -147,7 +149,7 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobile
     public void checkSuccess(String result) {
         try {
             ChangePSWToken tokenBean = new Gson().fromJson(result, ChangePSWToken.class);
-            start(SetPaymentPswFragment.newInstance(tokenBean.getToken(), null));
+            start(SetPaymentPswFragment.newInstance(mVerifycationEt.getText().toString().trim(), tokenBean.getToken(), null));
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
             showFail(MyApplication.getContext().getString(R.string.app_unknown_error));
@@ -156,7 +158,7 @@ public class ForgetPaymentPswFragment extends BasePresenterFragment<VerifyMobile
 
     @Override
     protected VerifyMobilePresenter createPresenter() {
-        return new VerifyMobilePresenter(getActivity(), 1);
+        return new VerifyMobilePresenter(getActivity(), 2);
     }
 
     public boolean verifyCode() {

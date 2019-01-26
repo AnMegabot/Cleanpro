@@ -22,6 +22,6 @@
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"
             android:textSize="14sp"
-            android:text="加载更多" />
+            android:text="@string/lm_recycler_load_more" />
     </LinearLayout>
 </FrameLayout>

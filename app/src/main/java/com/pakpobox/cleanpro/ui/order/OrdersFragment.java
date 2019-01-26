@@ -1,17 +1,21 @@
 package com.pakpobox.cleanpro.ui.order;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BaseListFragment;
 import com.pakpobox.cleanpro.base.list.BaseListAdapter;
 import com.pakpobox.cleanpro.bean.Order;
-import com.pakpobox.cleanpro.bean.PageListDataBean;
+import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.ui.account.LoginActivity;
 import com.pakpobox.cleanpro.ui.main.MainFragment;
 import com.pakpobox.cleanpro.ui.order.detail.OrderDetailFragment;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
@@ -52,6 +56,24 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initListView(mContainerLayout);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_orders_empty_view, mStatusLayout, false);
+        mStatusLayout.setEmpty(view);
+    }
+
+    private void setErrorView() {
+        if (!AppSetting.isLogin()) {
+            View loginView = LayoutInflater.from(getContext()).inflate(R.layout.layout_not_login_view, mStatusLayout, false);
+            loginView.findViewById(R.id.not_login_layout_login_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+            });
+            mStatusLayout.setError(loginView);
+        } else {
+            View errorView = LayoutInflater.from(getContext()).inflate(R.layout.status_error_layout, mStatusLayout, false);
+            mStatusLayout.setError(errorView);
+        }
     }
 
     @Override
@@ -66,6 +88,7 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
 
     @Override
     protected void loadDatas() {
+        setErrorView();
         mPresenter.getOrdersList();
     }
 
@@ -102,6 +125,11 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginEvent(Order event) {
+        refreshData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(UserBean event) {
         refreshData();
     }
 }

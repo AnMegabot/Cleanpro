@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
@@ -30,6 +31,10 @@ public class OrderDetailFragment extends BaseFragment {
     TextView mTitleTv;
     @BindView(R.id.app_toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.order_detail_type_im)
+    ImageView mTypeIm;
+    @BindView(R.id.order_detail_type_tv)
+    TextView mOTypeTv;
     @BindView(R.id.order_detail_order_no_tv)
     TextView mOrderNoTv;
     @BindView(R.id.order_detail_location_tv)
@@ -81,6 +86,8 @@ public class OrderDetailFragment extends BaseFragment {
             mLocationTv.setText(mOrder.getLocation());
             mMachineNoTv.setText(mOrder.getMachine_no());
             if ("LAUNDRY".equals(mOrder.getOrder_type())) {
+                mTypeIm.setImageResource(R.mipmap.icon_laundry_1);
+                mOTypeTv.setText("Laundry");
                 mGoodsInfoTitleTv.setText(getString(R.string.orders_Temperature));
                 try {
                     JSONObject laundryObj = new JSONObject(mOrder.getGoods_info());
@@ -89,6 +96,8 @@ public class OrderDetailFragment extends BaseFragment {
                     e.printStackTrace();
                 }
             } else {
+                mTypeIm.setImageResource(R.mipmap.icon_dryer_1);
+                mOTypeTv.setText("Dryer");
                 mGoodsInfoTitleTv.setText(getString(R.string.orders_Duration));
                 try {
                     JSONObject laundryObj = new JSONObject(mOrder.getGoods_info());

@@ -35,10 +35,10 @@ public class SystemUtils {
      */
     public static String formatFloat2Str(double f) {
         DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-//        if ((f*100)%100 == 0)
-//            decimalFormat=new DecimalFormat("#");
-//        else if ((f*100)%10 == 0)
-//            decimalFormat=new DecimalFormat("0.0");
+        if ((f*100)%100 == 0)
+            decimalFormat=new DecimalFormat("#");
+        else if ((f*100)%10 == 0)
+            decimalFormat=new DecimalFormat("0.0");
 
         return decimalFormat.format(f);//format 返回的是字符串
     }

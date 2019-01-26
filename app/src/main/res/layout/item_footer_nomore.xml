@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="14sp"
-        android:text="没有更多数据了" />
+        android:text="@string/lm_recycler_no_more" />
 
 </FrameLayout>

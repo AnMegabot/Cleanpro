@@ -4,22 +4,31 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
+import com.pakpobox.cleanpro.application.AppSetting;
 import com.pakpobox.cleanpro.base.BasePresenterFragment;
+import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.ui.wallet.WalletFragment;
 import com.pakpobox.cleanpro.utils.InputUtils;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * User:Sean.Wei
@@ -41,6 +50,8 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
     Button mCompleteBtn;
     @BindView(R.id.change_psw_scrollview)
     ScrollView mScrollview;
+    @BindView(R.id.change_psw_forget_btn)
+    TextView mForgetBtn;
 
     private KeyBoardHelper keyBoardHelper;
 
@@ -67,7 +78,14 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
 
         mPswTitleTv.setText(getString(R.string.wallet_payment_check_title));
         mCompleteBtn.setText(getString(R.string.app_next));
+
+        UserBean userBean = AppSetting.getUserInfo();
+        if (null != userBean && !TextUtils.isEmpty(userBean.getPayPassword()))
+            mForgetBtn.setVisibility(View.VISIBLE);
+
         InputUtils.setEditFilter(mPswEt, new InputFilter.LengthFilter(6));
+        mPswEt.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+        mPswEt.setInputType(InputType.TYPE_CLASS_NUMBER);
         mPswEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,16 +119,11 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
     public void checkPayPswSuccess() {
         String oldPsw = mPswEt.getText().toString().trim();
         if (!TextUtils.isEmpty(oldPsw))
-            start(SetPaymentPswFragment.newInstance(null, oldPsw));
+            start(SetPaymentPswFragment.newInstance(null, null, oldPsw));
     }
 
     @Override
-    public void resetPayPswSuccess(String result) {
-
-    }
-
-    @Override
-    public void changePayPswSuccess(String result) {
+    public void setPayPswSuccess(UserBean userBean) {
 
     }
 
@@ -121,6 +134,18 @@ public class CheckOldPaymentPswFragment extends BasePresenterFragment<SetPayment
 
     @OnClick(R.id.change_psw_complete_btn)
     public void onClick() {
-        mPresenter.checkPayPsw(mPswEt.getText().toString().trim());
+
+    }
+
+    @OnClick({R.id.change_psw_forget_btn, R.id.change_psw_complete_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.change_psw_forget_btn:
+                start(ForgetPaymentPswFragment.newInstance());
+                break;
+            case R.id.change_psw_complete_btn:
+                mPresenter.checkPayPsw(mPswEt.getText().toString().trim());
+                break;
+        }
     }
 }

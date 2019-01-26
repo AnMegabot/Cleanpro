@@ -23,12 +23,32 @@ public class UrlConstainer {
     /**
      * 获取验证码-注册
      */
-    public static final String GET_VERIFYCODE = "member/sendVerifyCode";
+    public static final String GET_REGISTER_VERIFYCODE = "member/sendVerifyCode";
 
     /**
      * 校验验证码-注册
      */
-    public static final String CHECK_VERIFYCODE = "member/checkVerifyCode";
+    public static final String CHECK_REGISTER_VERIFYCODE = "member/checkVerifyCode";
+
+    /**
+     * 获取验证码-当前账号
+     */
+    public static final String GET_CURRENT_VERIFYCODE = "member/sendAccountVerifyCode";
+
+    /**
+     * 校验验证码-当前账号
+     */
+    public static final String CHECK_CURRENT_VERIFYCODE = "member/checkAccountVerifyCode";
+
+    /**
+     * 获取验证码-找回密码
+     */
+    public static final String GET_REPSW_VERIFYCODE = "member/retrievePassword";
+
+    /**
+     * 校验验证码-找回密码
+     */
+    public static final String CHECK_REPSW_VERIFYCODE = "member/retrievePasswordVerify";
 
     /**
      * 校验邀请码
@@ -36,19 +56,14 @@ public class UrlConstainer {
     public static final String GET_INVITECODE = "member/getInviteCode?inviteCode=%s";
 
     /**
-     * 获取验证码-找回密码
-     */
-    public static final String GET_VERIFYCODE_REPSW = "member/retrievePassword";
-
-    /**
-     * 校验验证码-找回密码
-     */
-    public static final String CHECK_VERIFYCODE_REPSW = "member/retrievePasswordVerify";
-
-    /**
      * 重置登录密码
      */
     public static final String CHANGE_PASSWORD = "member/resetPassword";
+
+    /**
+     * 设置支付密码
+     */
+    public static final String SET_PAYMENT_PASSWORD = "member/setPayPassword";
 
     /**
      * 重置支付密码
@@ -56,14 +71,14 @@ public class UrlConstainer {
     public static final String RESET_PAY_PSW = "member/resetPayPassword";
 
     /**
-     * 校验支付密码
-     */
-    public static final String CHECK_PAY_PSW = "member/checkPayPassword";
-
-    /**
      * 更换支付密码
      */
     public static final String CHANGE_PAY_PSW = "member/updatePayPassword";
+
+    /**
+     * 校验支付密码
+     */
+    public static final String CHECK_PAY_PSW = "member/checkPayPassword";
 
     /**
      * 获取钱包
@@ -124,5 +139,10 @@ public class UrlConstainer {
      * 门店列表
      */
     public static final String LOCATION = "cleanpro/location?page=%d&maxCount=%d";
+
+    /**
+     * 门店列表
+     */
+    public static final String CREATE_FEEDBACK = "help/createFeedback";
 
 }

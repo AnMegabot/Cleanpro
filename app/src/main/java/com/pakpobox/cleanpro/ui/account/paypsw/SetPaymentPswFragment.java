@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,11 +52,13 @@ public class SetPaymentPswFragment extends BaseFragment {
 
     private KeyBoardHelper keyBoardHelper;
 
+    private String validateCode;
     private String token;
     private String oldPsw;
 
-    public static SetPaymentPswFragment newInstance(String token, String oldPsw) {
+    public static SetPaymentPswFragment newInstance(String validateCode, String token, String oldPsw) {
         Bundle args = new Bundle();
+        args.putString("validateCode", validateCode);
         args.putString("token", token);
         args.putString("oldPsw", oldPsw);
         SetPaymentPswFragment fragment = new SetPaymentPswFragment();
@@ -68,8 +72,8 @@ public class SetPaymentPswFragment extends BaseFragment {
 
         Bundle bundle = getArguments();
         if (null != bundle) {
-            token = bundle.getParcelable("token");
-            oldPsw = bundle.getParcelable("oldPsw");
+            validateCode = bundle.getString("validateCode");
+            oldPsw = bundle.getString("oldPsw");
         }
     }
 
@@ -89,6 +93,9 @@ public class SetPaymentPswFragment extends BaseFragment {
 
         mPswTitleTv.setText(getString(R.string.wallet_payment_set_title));
         mCompleteBtn.setText(getString(R.string.app_next));
+
+        mPswEt.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+        mPswEt.setInputType(InputType.TYPE_CLASS_NUMBER);
         InputUtils.setEditFilter(mPswEt, new InputFilter.LengthFilter(6));
         mPswEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -127,6 +134,6 @@ public class SetPaymentPswFragment extends BaseFragment {
             return;
         }
 
-        start(ConfirmPaymentPswFragment.newInstance(token, oldPsw, newPsw));
+        start(ConfirmPaymentPswFragment.newInstance(validateCode, token, oldPsw, newPsw));
     }
 }

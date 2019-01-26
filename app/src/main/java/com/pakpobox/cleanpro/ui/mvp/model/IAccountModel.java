@@ -27,14 +27,6 @@ public interface IAccountModel {
     void login(String username, String password, INetCallback callback);
 
     /**
-     * 重置密码
-     * @param token token
-     * @param newPassword 新登录密码
-     * @param callback 回调
-     */
-    void changePSW(String token, String newPassword, INetCallback callback);
-
-    /**
      * 获取注册验证码
      * @param phoneNumber 手机号码
      * @param countryCode 国家代码
@@ -49,6 +41,12 @@ public interface IAccountModel {
      * @param callback 回调
      */
     void getForgetPSWVerifyCode(String phoneNumber, String countryCode, INetCallback callback);
+
+    /**
+     * 获取当前账号验证码
+     * @param callback 回调
+     */
+    void getCurrentAccountVerifyCode(INetCallback callback);
 
     /**
      * 校验注册验证码
@@ -67,6 +65,21 @@ public interface IAccountModel {
     void checkForgetPSWVerifyCode(String phoneNumber, String verifyCode, INetCallback callback);
 
     /**
+     * 校验当前账号验证码
+     * @param verifyCode 验证码
+     * @param callback 回调
+     */
+    void checkCurrentAccountVerifyCode(String verifyCode, INetCallback callback);
+
+    /**
+     * 重置密码
+     * @param token token
+     * @param newPassword 新登录密码
+     * @param callback 回调
+     */
+    void changePSW(String token, String newPassword, INetCallback callback);
+
+    /**
      * 校验支付密码
      * @param payPassword 支付密码
      * @param callback 回调
@@ -80,6 +93,14 @@ public interface IAccountModel {
      * @param callback 回调
      */
     void checkInviteCode(String inviteCode, INetCallback callback);
+
+    /**
+     * 设置支付密码
+     * @param validateCode 验证码
+     * @param newPayPassword 新支付密码
+     * @param callback 回调
+     */
+    void setPayPsw(String validateCode, String newPayPassword, INetCallback callback);
 
     /**
      * 更换支付密码

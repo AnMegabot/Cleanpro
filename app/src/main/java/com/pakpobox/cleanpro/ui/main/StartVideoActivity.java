@@ -123,6 +123,8 @@ public class StartVideoActivity extends BaseFragmentActivity
         mHasPaused = true;
     }
 
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mVideoView != null) {
