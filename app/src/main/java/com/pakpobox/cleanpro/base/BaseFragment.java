@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pakpobox.cleanpro.ui.widget.LoadingDialog;
+import com.pakpobox.cleanpro.ui.widget.dialog.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 

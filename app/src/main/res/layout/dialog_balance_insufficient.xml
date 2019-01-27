@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="230dp"
+        android:layout_height="144dp"
+        android:padding="19dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_card_info_bg_all">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="You balance is insufficient, please recharge"
+            android:textSize="15sp"
+            android:textColor="@color/textColorPrimaryDark"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/dialog_balance_insufficient_canel_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="86dp"
+                android:layout_height="35dp"
+                android:text="@string/app_cancel"
+                android:textColor="@color/textColorEditHint"
+                android:textSize="13sp"
+                android:background="@drawable/shape_app_cancel_btn"/>
+
+            <Button
+                android:id="@+id/dialog_balance_insufficient_recharge_btn"
+                style="@style/AppButtonBlue"
+                android:layout_width="86dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:enabled="true"
+                android:textSize="13sp"
+                android:text="Recharge" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

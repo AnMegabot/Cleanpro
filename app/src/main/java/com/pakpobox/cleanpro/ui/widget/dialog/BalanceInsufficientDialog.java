@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.widget;
+package com.pakpobox.cleanpro.ui.widget.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.pakpobox.cleanpro.R;
@@ -17,32 +18,35 @@ import java.lang.ref.WeakReference;
 
 /**
  * User:Sean.Wei
- * Date:2018/12/4
- * Time:17:39
+ * Date:2019/1/27
+ * Time:10:27
  */
 
-public class LoadingDialog extends Dialog implements DialogInterface.OnCancelListener {
+public class BalanceInsufficientDialog extends Dialog implements DialogInterface.OnCancelListener, View.OnClickListener {
     private WeakReference<Context> mContext = new WeakReference<>(null);
-    private volatile static LoadingDialog sDialog;
-
-    private LoadingDialog(Context context, CharSequence message) {
+    private volatile static BalanceInsufficientDialog sDialog;
+    private View.OnClickListener mOnClickListener;
+    private BalanceInsufficientDialog(Context context, View.OnClickListener onClickListener) {
         super(context, R.style.LoadingDialog);
 
         mContext = new WeakReference<>(context);
+        mOnClickListener = onClickListener;
 
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading_layout, null);
-        TextView tvMessage = (TextView) view.findViewById(R.id.tv_message);
-        if (!TextUtils.isEmpty(message)) {
-            tvMessage.setText(message);
-            tvMessage.setVisibility(View.VISIBLE);
-        } else {
-            tvMessage.setVisibility(View.GONE);
-        }
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_balance_insufficient, null);
+        view.findViewById(R.id.dialog_balance_insufficient_canel_btn).setOnClickListener(this);
+        view.findViewById(R.id.dialog_balance_insufficient_recharge_btn).setOnClickListener(this);
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addContentView(view, lp);
 
         setOnCancelListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        stop();
+        if (null != mOnClickListener)
+            mOnClickListener.onClick(view);
     }
 
     @Override
@@ -55,15 +59,11 @@ public class LoadingDialog extends Dialog implements DialogInterface.OnCancelLis
         }
     }
 
-    public static synchronized void showLoading(Context context) {
-        showLoading(context, "loading...");
+    public static synchronized void show(Context context, View.OnClickListener onClickListener) {
+        show(context, true, onClickListener);
     }
 
-    public static synchronized void showLoading(Context context, CharSequence message) {
-        showLoading(context, message, true);
-    }
-
-    public static synchronized void showLoading(Context context, CharSequence message, boolean cancelable) {
+    public static synchronized void show(Context context, boolean cancelable, View.OnClickListener onClickListener) {
         if (sDialog != null && sDialog.isShowing()) {
             sDialog.dismiss();
         }
@@ -71,7 +71,7 @@ public class LoadingDialog extends Dialog implements DialogInterface.OnCancelLis
         if (context == null || !(context instanceof Activity)) {
             return;
         }
-        sDialog = new LoadingDialog(context, message);
+        sDialog = new BalanceInsufficientDialog(context, onClickListener);
         sDialog.setCancelable(cancelable);
         sDialog.setCanceledOnTouchOutside(false);
 
@@ -80,7 +80,7 @@ public class LoadingDialog extends Dialog implements DialogInterface.OnCancelLis
         }
     }
 
-    public static synchronized void stopLoading() {
+    public static synchronized void stop() {
         if (sDialog != null && sDialog.isShowing()) {
             sDialog.dismiss();
         }

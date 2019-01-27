@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.pakpobox.cleanpro.ui.widget.LoadingDialog;
+import com.pakpobox.cleanpro.ui.widget.dialog.LoadingDialog;
 import com.pakpobox.cleanpro.utils.KeyBoardHelper;
 import com.pakpobox.cleanpro.utils.language.LanguageUtil;
 import com.pakpobox.cleanpro.utils.language.MyContextWrapper;

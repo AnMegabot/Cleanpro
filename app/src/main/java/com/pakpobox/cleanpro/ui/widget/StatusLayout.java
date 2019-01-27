@@ -78,9 +78,12 @@ public class StatusLayout extends FrameLayout {
     }
 
     public void setError(View view) {
-        removeView(mErrorView);
-        mErrorView = view;
-        addView(mErrorView);
+        if (null != view && null != mErrorView) {
+            view.setVisibility(mErrorView.getVisibility());
+            removeView(mErrorView);
+            mErrorView = view;
+            addView(mErrorView);
+        }
     }
 
     //empty
@@ -93,9 +96,12 @@ public class StatusLayout extends FrameLayout {
     }
 
     public void setEmpty(View view) {
-        removeView(mEmptyView);
-        mEmptyView = view;
-        addView(mEmptyView);
+        if (null != view && null != mEmptyView) {
+            view.setVisibility(mEmptyView.getVisibility());
+            removeView(mEmptyView);
+            mEmptyView = view;
+            addView(mEmptyView);
+        }
     }
 
     //content

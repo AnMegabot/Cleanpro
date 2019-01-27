@@ -35,7 +35,6 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.pakpobox.cleanpro.GlideApp;
 import com.pakpobox.cleanpro.R;
 import com.pakpobox.cleanpro.application.AppSetting;
@@ -45,7 +44,7 @@ import com.pakpobox.cleanpro.bean.UserBean;
 import com.pakpobox.cleanpro.common.Const;
 import com.pakpobox.cleanpro.common.UrlConstainer;
 import com.pakpobox.cleanpro.ui.mvp.model.impl.BaseModel;
-import com.pakpobox.cleanpro.ui.widget.BottomMenuDialog;
+import com.pakpobox.cleanpro.ui.widget.dialog.BottomMenuDialog;
 import com.pakpobox.cleanpro.ui.widget.GlideCircleTransform;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 
@@ -424,7 +423,7 @@ public class PersonalInfoFragment extends BasePresenterFragment<PersonalInfoPres
         GlideApp.with(getContext())
                 .load(new BaseModel().getApiUrl(UrlConstainer.GET_HEAD_IMAGE, result.getResult()))
                 .skipMemoryCache(true)
-                .placeholder(R.mipmap.icon_avatar)
+//                .placeholder(R.mipmap.icon_avatar)
                 .transform(new GlideCircleTransform())
                 .into(mPortraitIm);
     }

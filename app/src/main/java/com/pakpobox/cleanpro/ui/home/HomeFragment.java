@@ -236,9 +236,9 @@ public class HomeFragment extends BaseListFragment<HomePresenter, HomeContract.I
                 }
                 break;
             case R.id.home_view_all_btn:
-                if (getParentFragment() instanceof MainFragment) {
-                    ((MainFragment) getParentFragment()).start(PriceFragment.newInstance());
-                }
+//                if (getParentFragment() instanceof MainFragment) {
+//                    ((MainFragment) getParentFragment()).start(PriceFragment.newInstance());
+//                }
                 break;
         }
     }

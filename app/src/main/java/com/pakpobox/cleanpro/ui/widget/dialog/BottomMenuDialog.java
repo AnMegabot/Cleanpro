@@ -1,4 +1,4 @@
-package com.pakpobox.cleanpro.ui.widget;
+package com.pakpobox.cleanpro.ui.widget.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

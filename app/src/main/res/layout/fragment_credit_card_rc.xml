@@ -149,7 +149,7 @@
         android:layout_marginEnd="@dimen/app_pading_horizontal"
         android:layout_marginStart="@dimen/app_pading_horizontal"
         android:enabled="true"
-        android:text="@string/booking_pay"
+        android:text="Pay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

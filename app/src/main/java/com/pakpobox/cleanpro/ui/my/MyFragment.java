@@ -162,11 +162,11 @@ public class MyFragment extends BaseFragment {
             mAccountTv.setText(userBean.getLoginName());
             mCreditsTv.setText(String.format(getString(R.string.my_credits), userBean.getCredit()));
             mCouponsTv.setText(String.format(getString(R.string.my_coupons_info), userBean.getCouponCount()));
-            if (TextUtils.isEmpty(userBean.getHeadImageUrl())) {
+            if (!TextUtils.isEmpty(userBean.getHeadImageUrl())) {
                 GlideApp.with(getContext())
                         .load(new BaseModel().getApiUrl(UrlConstainer.GET_HEAD_IMAGE, userBean.getHeadImageUrl()))
                         .skipMemoryCache(true)
-                        .placeholder(R.mipmap.icon_avatar)
+//                        .placeholder(R.mipmap.icon_avatar)
                         .transform(new GlideCircleTransform())
                         .into(mPortraitIm);
             } else {

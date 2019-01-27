@@ -177,7 +177,7 @@ public class StartVideoActivity extends BaseFragmentActivity
 
     @OnClick(R.id.start_video_skip_btn)
     public void onClick() {
-        startActivity(new Intent(StartVideoActivity.this, MainActivity.class));
         finish();
+        startActivity(new Intent(StartVideoActivity.this, MainActivity.class));
     }
 }

@@ -60,22 +60,6 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
         mStatusLayout.setEmpty(view);
     }
 
-    private void setErrorView() {
-        if (!AppSetting.isLogin()) {
-            View loginView = LayoutInflater.from(getContext()).inflate(R.layout.layout_not_login_view, mStatusLayout, false);
-            loginView.findViewById(R.id.not_login_layout_login_btn).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
-                }
-            });
-            mStatusLayout.setError(loginView);
-        } else {
-            View errorView = LayoutInflater.from(getContext()).inflate(R.layout.status_error_layout, mStatusLayout, false);
-            mStatusLayout.setError(errorView);
-        }
-    }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_orders;
@@ -88,8 +72,21 @@ public class OrdersFragment extends BaseListFragment<OrdersPresenter, OrdersCont
 
     @Override
     protected void loadDatas() {
-        setErrorView();
-        mPresenter.getOrdersList();
+        if (!AppSetting.isLogin()) {
+            View loginView = LayoutInflater.from(getContext()).inflate(R.layout.layout_not_login_view, mStatusLayout, false);
+            loginView.findViewById(R.id.not_login_layout_login_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+            });
+            mStatusLayout.setError(loginView);
+            mStatusLayout.showError();
+        } else {
+            View errorView = LayoutInflater.from(getContext()).inflate(R.layout.status_error_layout, mStatusLayout, false);
+            mStatusLayout.setError(errorView);
+            mPresenter.getOrdersList();
+        }
     }
 
     @Override

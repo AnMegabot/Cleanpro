@@ -1,6 +1,8 @@
 package com.pakpobox.cleanpro.ui.booking.create;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -22,8 +24,11 @@ import com.pakpobox.cleanpro.bean.CreateOrderRequest;
 import com.pakpobox.cleanpro.bean.Order;
 import com.pakpobox.cleanpro.bean.PayResult;
 import com.pakpobox.cleanpro.bean.UserBean;
+import com.pakpobox.cleanpro.bean.Wallet;
 import com.pakpobox.cleanpro.ui.booking.BookSuccessFragment;
+import com.pakpobox.cleanpro.ui.wallet.creditcard.CreditCardRcFragment;
 import com.pakpobox.cleanpro.ui.widget.RadioGroupPro;
+import com.pakpobox.cleanpro.ui.widget.dialog.BalanceInsufficientDialog;
 import com.pakpobox.cleanpro.utils.StatusBarUtil;
 import com.pakpobox.cleanpro.utils.SystemUtils;
 import com.pakpobox.logger.Logger;
@@ -214,6 +219,26 @@ public class CreateOrderFragment extends BasePresenterFragment<CreateOrderPresen
                 mPaymentRg.check(R.id.order_create_wallet_rb);
                 break;
             case R.id.create_order_pay_btn:
+                if ("WALLET".equals(mCreateOrderRequest.getPayment_platform())) {
+                    UserBean userBean = AppSetting.getUserInfo();
+                    if (null != userBean) {
+                        Wallet wallet = userBean.getWallet();
+                        if (null == wallet || wallet.getBalance() < mCreateOrderRequest.getPay_amount()) {
+                            BalanceInsufficientDialog.show(getContext(), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    switch (view.getId()) {
+                                        case R.id.dialog_balance_insufficient_recharge_btn:
+                                            start(CreditCardRcFragment.newInstance());
+                                            break;
+                                    }
+                                }
+                            });
+                            return;
+                        }
+                    }
+                }
+
                 new TDialog.Builder(getActivity().getSupportFragmentManager())
                         .setLayoutRes(R.layout.dialog_payment_psw)
                         .setScreenWidthAspect(getActivity(), 0.8f)
